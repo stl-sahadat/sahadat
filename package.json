@@ -2,5 +2,12 @@
   "name": "my-portfolio-for-pinterest",
   "version": "1.0.0",
   "private": true,
-  "description": "Futuristic OLED and Electric Violet Developer Portfolio for Md Sahadat Hossain"
+  "description": "Futuristic OLED and Electric Violet Developer Portfolio for Md Sahadat Hossain",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "start": "python3 server.py"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
 }

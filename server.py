@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
 """
-Custom high-performance HTTP server for Md Sahadat Hossain's Portfolio.
-Features:
-- SPA clean slash routes (/about, /profile, /skills, /projects, /showcase, /experience, /contact) -> index.html
-- /admin, /admin/* -> admin/index.html
-- Static assets with proper MIME types
-- Secure Backend Authentication & Anti-Brute-Force Rate Limiting (3 attempts max -> 15s lock)
-- Portfolio Content Management API (GET/POST /api/portfolio-data)
-- Image Upload API (POST /api/upload-image)
+Custom high-performance, hardened HTTP server for Md Sahadat Hossain's Portfolio.
+Defensive Architecture & Security Hardening:
+- Defense-in-depth Path Traversal Prevention (canonical path guards)
+- Timing-Attack Resistant Authentication (secrets.compare_digest)
+- Cryptographic Session Management (32-byte hex tokens with TTL expiration)
+- Anti-Brute-Force Rate Limiting (Sliding window lockout)
+- Max Payload Size Bounds (Memory DoS prevention - 15MB limit)
+- Restrictive Allowed File Types for Media Uploads (.png, .jpg, .jpeg, .webp, .svg)
+- Modern Security Headers (nosniff, SAMEORIGIN, XSS protection, Referrer-Policy)
+- Single Page Application Clean Routing (/about, /skills, /projects, /contact, /3d, /admin)
 """
 import http.server
 import socketserver
@@ -34,22 +36,41 @@ VALID_GMAIL = "sahadat.info01@gmail.com"
 VALID_PASS = "440055"
 MAX_FAILED_ATTEMPTS = 3
 LOCKOUT_SECONDS = 15
+MAX_BODY_SIZE = 15 * 1024 * 1024  # 15 MB limit
+SESSION_TTL = 86400  # 24 hours
+ALLOWED_IMAGE_EXTS = {'.png', '.jpg', '.jpeg', '.webp', '.svg', '.gif'}
 
-# Memory state
-LOGIN_ATTEMPTS = {}  # { ip: { 'count': int, 'lock_until': float } }
-ACTIVE_SESSIONS = set()  # set of active tokens
+# Defensive State
+LOGIN_ATTEMPTS = {}   # { ip: { 'count': int, 'lock_until': float } }
+ACTIVE_SESSIONS = {}  # { token: expires_at_timestamp }
 
 os.makedirs(os.path.join(DIRECTORY, 'data'), exist_ok=True)
 os.makedirs(UPLOAD_DIR, exist_ok=True)
+
+def is_valid_token(token):
+    if not token or not isinstance(token, str):
+        return False
+    now = time.time()
+    expires = ACTIVE_SESSIONS.get(token)
+    if expires and expires > now:
+        return True
+    if token in ACTIVE_SESSIONS:
+        del ACTIVE_SESSIONS[token]
+    return False
 
 class PortfolioHTTPHandler(http.server.SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, directory=DIRECTORY, **kwargs)
 
     def end_headers(self):
+        # Enterprise Hardened Headers
         self.send_header('Cache-Control', 'no-cache, no-store, must-revalidate')
         self.send_header('Pragma', 'no-cache')
         self.send_header('Expires', '0')
+        self.send_header('X-Content-Type-Options', 'nosniff')
+        self.send_header('X-Frame-Options', 'SAMEORIGIN')
+        self.send_header('X-XSS-Protection', '1; mode=block')
+        self.send_header('Referrer-Policy', 'strict-origin-when-cross-origin')
         super().end_headers()
 
     def get_client_ip(self):
@@ -85,9 +106,13 @@ class PortfolioHTTPHandler(http.server.SimpleHTTPRequestHandler):
         if url_path.startswith('/api/'):
             return None
 
-        # Check if actual static file exists on disk first
+        # Canonical path traversal defense
         relative_path = url_path.lstrip('/')
-        disk_path = os.path.join(DIRECTORY, relative_path)
+        disk_path = os.path.abspath(os.path.join(DIRECTORY, relative_path))
+        base_dir = os.path.abspath(DIRECTORY)
+        if not disk_path.startswith(base_dir):
+            return None
+
         if relative_path and os.path.isfile(disk_path):
             return None  # Let standard handler serve the actual file
 
@@ -109,7 +134,7 @@ class PortfolioHTTPHandler(http.server.SimpleHTTPRequestHandler):
             if os.path.exists(proto_target):
                 return proto_target
 
-        # For all clean slash routes (/about, /profile, /skills, /projects, /showcase, /experience, /contact, etc.)
+        # Standard SPA clean slash routes -> index.html
         index_target = os.path.join(DIRECTORY, 'index.html')
         if os.path.exists(index_target):
             return index_target
@@ -176,14 +201,21 @@ class PortfolioHTTPHandler(http.server.SimpleHTTPRequestHandler):
         clean_path = parsed.path.rstrip('/')
 
         content_len = int(self.headers.get('Content-Length', 0))
+
+        # DoS Protection: Reject payloads larger than MAX_BODY_SIZE
+        if content_len > MAX_BODY_SIZE:
+            self._send_json(413, {"status": "error", "message": "Payload Too Large (Max 15MB allowed)"})
+            return
+
         body = self.rfile.read(content_len).decode('utf-8', errors='ignore') if content_len > 0 else '{}'
 
         try:
             payload = json.loads(body) if body else {}
         except Exception:
-            payload = {}
+            self._send_json(400, {"status": "error", "message": "Malformed JSON payload"})
+            return
 
-        # 1. API: Login with Rate Limiting
+        # 1. API: Login with Anti-Brute-Force & Timing-Attack Immunity
         if clean_path == '/api/auth/login':
             ip = self.get_client_ip()
             now = time.time()
@@ -203,12 +235,16 @@ class PortfolioHTTPHandler(http.server.SimpleHTTPRequestHandler):
             email = str(payload.get('email', '')).strip().lower()
             password = str(payload.get('password', '')).strip()
 
-            if email == VALID_GMAIL.lower() and password == VALID_PASS:
-                # Login Success
+            # Constant-time comparison to prevent timing side-channels
+            is_email_valid = secrets.compare_digest(email, VALID_GMAIL.lower())
+            is_pass_valid = secrets.compare_digest(password, VALID_PASS)
+
+            if is_email_valid and is_pass_valid:
+                # Login Success: Reset failures & generate cryptographically strong token
                 record['count'] = 0
                 record['lock_until'] = 0
-                token = secrets.token_hex(24)
-                ACTIVE_SESSIONS.add(token)
+                token = secrets.token_hex(32)
+                ACTIVE_SESSIONS[token] = now + SESSION_TTL
                 self._send_json(200, {
                     "status": "ok",
                     "success": True,
@@ -238,16 +274,14 @@ class PortfolioHTTPHandler(http.server.SimpleHTTPRequestHandler):
                     })
                 return
 
-        # Helper: Validate Auth Token
+        # Strict Token Authentication (Bearer Header or Token Field)
         auth_header = self.headers.get('Authorization', '')
-        token = auth_header.replace('Bearer ', '').strip() if auth_header else payload.get('token', '')
+        token = auth_header.replace('Bearer ', '').strip() if auth_header else str(payload.get('token', '')).strip()
 
-        # 2. API: Save Portfolio Data
+        # 2. API: Save Portfolio Data (Restricted to Valid Sessions)
         if clean_path == '/api/portfolio-data':
-            is_authed = (token and token in ACTIVE_SESSIONS) or (token and token.startswith('verified_')) or bool(token)
-            if is_authed:
+            if is_valid_token(token):
                 data_to_save = payload.get('data') or payload
-                # Remove token from data_to_save
                 if isinstance(data_to_save, dict) and 'token' in data_to_save:
                     data_to_save = {k: v for k, v in data_to_save.items() if k != 'token'}
 
@@ -255,7 +289,7 @@ class PortfolioHTTPHandler(http.server.SimpleHTTPRequestHandler):
                     with open(DATA_FILE, 'w', encoding='utf-8') as f:
                         json.dump(data_to_save, f, indent=2, ensure_ascii=False)
 
-                    # Also sync to workspace data dirs if they exist
+                    # Safely sync to workspace directories
                     for ws_dir in WORKSPACE_DIRS:
                         ws_data_dir = os.path.join(ws_dir, 'data')
                         if os.path.isdir(ws_data_dir):
@@ -270,22 +304,19 @@ class PortfolioHTTPHandler(http.server.SimpleHTTPRequestHandler):
                     self._send_json(500, {"status": "error", "message": f"Failed to save data: {str(e)}"})
                     return
             else:
-                self._send_json(403, {"status": "error", "message": "Unauthorized. Please authenticate."})
+                self._send_json(403, {"status": "error", "message": "Unauthorized: Valid session token required."})
                 return
 
-        # 3. API: Upload Image
+        # 3. API: Upload Image (Restricted & Path-Traversal Immune)
         if clean_path == '/api/upload-image':
-            is_authed = (token and token in ACTIVE_SESSIONS) or (token and token.startswith('verified_'))
-            # Also allow if Authorization or payload token is provided
-            if not is_authed and token:
-                is_authed = True
+            if is_valid_token(token):
+                orig_filename = os.path.basename(str(payload.get('filename', 'upload.png')).strip())
+                _, ext = os.path.splitext(orig_filename.lower())
+                if ext not in ALLOWED_IMAGE_EXTS:
+                    ext = '.png'
 
-            if is_authed:
-                filename = payload.get('filename', f"upload_{int(time.time())}.png")
-                # Sanitize filename
-                safe_name = "".join(c for c in filename if c.isalnum() or c in "._-").strip()
-                if not safe_name:
-                    safe_name = f"upload_{int(time.time())}.png"
+                # Cryptographic unique filename to prevent overwrites or directory escapement
+                safe_name = f"upload_{int(time.time())}_{secrets.token_hex(4)}{ext}"
 
                 data_url = payload.get('image') or payload.get('data', '')
                 if ',' in data_url:
@@ -293,17 +324,24 @@ class PortfolioHTTPHandler(http.server.SimpleHTTPRequestHandler):
 
                 try:
                     raw_bytes = base64.b64decode(data_url)
-                    save_path = os.path.join(UPLOAD_DIR, safe_name)
+                    save_path = os.path.abspath(os.path.join(UPLOAD_DIR, safe_name))
+                    upload_base = os.path.abspath(UPLOAD_DIR)
+
+                    if not save_path.startswith(upload_base):
+                        self._send_json(400, {"status": "error", "message": "Invalid file path detected."})
+                        return
+
                     with open(save_path, 'wb') as f:
                         f.write(raw_bytes)
 
-                    # Also copy to workspace uploads if available
-                    ws_upload_dir = os.path.join(WORKSPACE_DIR, 'assets', 'img', 'uploads')
-                    if os.path.isdir(ws_upload_dir):
-                        try:
-                            shutil.copyfile(save_path, os.path.join(ws_upload_dir, safe_name))
-                        except Exception:
-                            pass
+                    # Copy to all active workspaces
+                    for ws_dir in WORKSPACE_DIRS:
+                        ws_upload_dir = os.path.join(ws_dir, 'assets', 'img', 'uploads')
+                        if os.path.isdir(ws_upload_dir):
+                            try:
+                                shutil.copyfile(save_path, os.path.join(ws_upload_dir, safe_name))
+                            except Exception:
+                                pass
 
                     rel_url = f"assets/img/uploads/{safe_name}"
                     self._send_json(200, {"status": "ok", "url": rel_url})
@@ -312,7 +350,7 @@ class PortfolioHTTPHandler(http.server.SimpleHTTPRequestHandler):
                     self._send_json(500, {"status": "error", "message": f"Failed to upload image: {str(e)}"})
                     return
             else:
-                self._send_json(403, {"status": "error", "message": "Unauthorized."})
+                self._send_json(403, {"status": "error", "message": "Unauthorized: Valid session token required."})
                 return
 
         self._send_json(404, {"error": "API route not found"})
@@ -320,7 +358,7 @@ class PortfolioHTTPHandler(http.server.SimpleHTTPRequestHandler):
 def run_server():
     socketserver.TCPServer.allow_reuse_address = True
     with socketserver.TCPServer(('0.0.0.0', PORT), PortfolioHTTPHandler) as httpd:
-        print(f"Serving Portfolio & Admin Console on port {PORT} at {DIRECTORY}...")
+        print(f"Serving Portfolio & Hardened Admin Console on port {PORT} at {DIRECTORY}...")
         try:
             httpd.serve_forever()
         except KeyboardInterrupt:
