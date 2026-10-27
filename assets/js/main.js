@@ -272,7 +272,8 @@ const ROUTE_ALIASES = {
 };
 
 const navLinks = document.querySelectorAll(".nav__menu a, .nav__logo");
-const initialLandingPath = window.location.pathname.replace(/\/$/, "") || "/";
+const pathWithoutRepo = window.location.pathname.replace(/^\/sahadat/, "");
+const initialLandingPath = pathWithoutRepo.replace(/\/$/, "") || "/";
 let isSmoothScrolling = initialLandingPath !== "/" && !initialLandingPath.startsWith("/admin");
 let scrollTimeout = null;
 
@@ -292,7 +293,7 @@ const updateActiveNavLink = (activePath) => {
 navLinks.forEach((link) => {
   link.addEventListener("click", (e) => {
     const href = link.getAttribute("href");
-    if (href === "/3d" || (href && href.startsWith("/3d")) || link.target === "_blank") {
+    if (href === "/3d" || href === "3d/" || href === "3d" || (href && href.includes("3d")) || link.target === "_blank") {
       return; // allow default browser navigation to /3d
     }
     const dataPath = link.getAttribute("data-path");
@@ -319,16 +320,18 @@ navLinks.forEach((link) => {
           behavior: "smooth",
         });
 
-        const canonicalPath = targetPath.startsWith("/")
+        const basePrefix = window.location.pathname.startsWith("/sahadat") ? "/sahadat" : "";
+        const cleanPath = targetPath.startsWith("/")
           ? targetPath
           : "/" + (targetId === "home" ? "" : targetId);
+        const canonicalPath = basePrefix + (cleanPath === "/" ? (basePrefix ? "/" : "/") : cleanPath);
 
         if (window.location.pathname !== canonicalPath) {
           try {
             window.history.pushState(null, "", canonicalPath);
           } catch (err) {}
         }
-        updateActiveNavLink(canonicalPath);
+        updateActiveNavLink(cleanPath);
 
         if (window.PortfolioAnalytics) {
           const trackKey =
