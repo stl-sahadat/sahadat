@@ -396,7 +396,7 @@
   </head>
   <body>
     <!-- TOP-LEFT PORTFOLIO RETURN LINK -->
-    <a href="../#projects" class="hud-portfolio-link" title="Return to Main Portfolio">
+    <a href="./#projects" class="hud-portfolio-link" id="hud-back-btn" title="Return to Main Portfolio">
       <i class="ri-arrow-left-line" style="margin-right: 6px;"></i> Back to Portfolio
     </a>
 
@@ -2096,7 +2096,7 @@ void main(){
                 tag: 'ARCHITECT IDENTITY & PC',
                 desc: 'Lead Software Architect & Full Stack Developer dedicated to high-concurrency microservices, sub-millisecond response latency, and bulletproof web applications.',
                 tags: ['Full Stack', 'System Architecture', 'PostgreSQL', 'Redis', 'Docker', 'Kubernetes'],
-                demo: 'assets/pdf/Md-Sahadat-Hossain-Resume.pdf',
+                demo: '../assets/pdf/Md-Sahadat-Hossain-Resume.pdf',
                 git: 'https://github.com/stl-sahadat'
               });
               moveCamera(new THREE.Vector3(-5.5, 5.35, -3.4), new THREE.Vector3(-5.5, 5.35, -8.05), 1.2);
@@ -2205,6 +2205,16 @@ void main(){
           renderer.setSize(window.innerWidth, window.innerHeight);
           renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         });
+
+        // Safe return navigation
+        const backBtn = document.getElementById('hud-back-btn');
+        if (backBtn) {
+          backBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const isSubpath = window.location.pathname.startsWith('/sahadat') || window.location.hostname.includes('github.io');
+            window.location.href = isSubpath ? '/sahadat/#projects' : '../#projects';
+          });
+        }
       })();
     </script>
   </body>

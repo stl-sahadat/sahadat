@@ -321,17 +321,13 @@ navLinks.forEach((link) => {
         });
 
         const basePrefix = window.location.pathname.startsWith("/sahadat") ? "/sahadat" : "";
-        const cleanPath = targetPath.startsWith("/")
-          ? targetPath
-          : "/" + (targetId === "home" ? "" : targetId);
-        const canonicalPath = basePrefix + (cleanPath === "/" ? (basePrefix ? "/" : "/") : cleanPath);
+        const hashTarget = targetId === "home" ? "" : "#" + targetId;
+        const targetUrl = basePrefix + "/" + hashTarget;
 
-        if (window.location.pathname !== canonicalPath) {
-          try {
-            window.history.pushState(null, "", canonicalPath);
-          } catch (err) {}
-        }
-        updateActiveNavLink(cleanPath);
+        try {
+          window.history.pushState(null, "", targetUrl);
+        } catch (err) {}
+        updateActiveNavLink(targetPath);
 
         if (window.PortfolioAnalytics) {
           const trackKey =
@@ -414,29 +410,40 @@ const getRepoBase = () => {
   return window.location.pathname.startsWith("/sahadat") ? "/sahadat" : "";
 };
 
+// Explicit safe handler for 3D Studio button
+const btn3d = document.getElementById("btn-projects-3d");
+if (btn3d) {
+  btn3d.addEventListener("click", (e) => {
+    e.preventDefault();
+    const isSubpath = window.location.pathname.startsWith("/sahadat") || window.location.hostname.includes("github.io");
+    window.location.href = isSubpath ? "/sahadat/3d/" : "3d/";
+  });
+}
+
 const applyPathUpdate = (newPath, recordAnalytics = true) => {
   if (isSmoothScrolling || window.location.pathname.startsWith("/admin")) return;
   const basePrefix = getRepoBase();
-  const fullPath = basePrefix + (newPath === "/" ? (basePrefix ? "/" : "/") : newPath);
-  if (window.location.pathname !== fullPath) {
+  const matched = SECTION_PATH_MAP.find((m) => m.path === newPath);
+  const targetId = matched ? matched.id : "";
+  const targetHash = targetId === "home" || !targetId ? "" : "#" + targetId;
+  const targetUrl = basePrefix + "/" + targetHash;
+
+  if (window.location.hash !== (targetHash ? targetHash : "") && (window.location.hash || targetHash)) {
     try {
-      window.history.replaceState(null, "", fullPath);
+      window.history.replaceState(null, "", targetUrl);
     } catch (e) {}
-    updateActiveNavLink(newPath);
-    if (recordAnalytics && window.PortfolioAnalytics) {
-      const matched = SECTION_PATH_MAP.find((m) => m.path === newPath);
-      if (matched) {
-        const trackKey =
-          matched.id === "services" || matched.id === "tech-stack"
-            ? "skills"
-            : matched.id === "gallery"
-            ? "showcase"
-            : matched.id === "work"
-            ? "experience"
-            : matched.id;
-        window.PortfolioAnalytics.trackSection(trackKey);
-      }
-    }
+  }
+  updateActiveNavLink(newPath);
+  if (recordAnalytics && window.PortfolioAnalytics && matched) {
+    const trackKey =
+      matched.id === "services" || matched.id === "tech-stack"
+        ? "skills"
+        : matched.id === "gallery"
+        ? "showcase"
+        : matched.id === "work"
+        ? "experience"
+        : matched.id;
+    window.PortfolioAnalytics.trackSection(trackKey);
   }
 };
 
@@ -501,18 +508,33 @@ window.addEventListener(
 
 const navigateToInitialRoute = () => {
   if (window.location.pathname.startsWith("/admin")) return;
-  const currentPath = window.location.pathname.replace(/\/$/, "") || "/";
+
+  // 1. Check hash first (e.g. #projects, #about, #contact)
+  const hash = window.location.hash.replace(/^#/, "");
+
+  // 2. Extract clean path stripped of repo base
+  const repoBase = getRepoBase();
+  let currentPath = window.location.pathname;
+  if (repoBase && currentPath.startsWith(repoBase)) {
+    currentPath = currentPath.substring(repoBase.length);
+  }
+  currentPath = currentPath.replace(/\/$/, "") || "/";
+
   let targetId = null;
-  const matched = SECTION_PATH_MAP.find((m) => m.path === currentPath);
-  if (matched) {
-    targetId = matched.id;
-  } else if (ROUTE_ALIASES[currentPath]) {
-    targetId = ROUTE_ALIASES[currentPath];
+  if (hash) {
+    targetId = hash;
+  } else {
+    const matched = SECTION_PATH_MAP.find((m) => m.path === currentPath);
+    if (matched) {
+      targetId = matched.id;
+    } else if (ROUTE_ALIASES[currentPath]) {
+      targetId = ROUTE_ALIASES[currentPath];
+    }
   }
 
   if (targetId && targetId !== "home") {
     isSmoothScrolling = true;
-    updateActiveNavLink(currentPath);
+    updateActiveNavLink(currentPath !== "/" ? currentPath : "/" + targetId);
 
     let attempts = 0;
     const performScroll = () => {
@@ -527,9 +549,9 @@ const navigateToInitialRoute = () => {
         scrollTimeout = setTimeout(() => {
           isSmoothScrolling = false;
         }, 1100);
-      } else if (attempts < 10) {
+      } else if (attempts < 15) {
         attempts++;
-        setTimeout(performScroll, 60);
+        setTimeout(performScroll, 80);
       } else {
         isSmoothScrolling = false;
       }
@@ -547,9 +569,17 @@ if (document.readyState === "loading") {
   navigateToInitialRoute();
 }
 
+window.addEventListener("hashchange", navigateToInitialRoute);
+
 window.addEventListener("popstate", () => {
   if (window.location.pathname.startsWith("/admin")) return;
-  const currentPath = window.location.pathname.replace(/\/$/, "") || "/";
+  const repoBase = getRepoBase();
+  let currentPath = window.location.pathname;
+  if (repoBase && currentPath.startsWith(repoBase)) {
+    currentPath = currentPath.substring(repoBase.length);
+  }
+  currentPath = currentPath.replace(/\/$/, "") || "/";
+
   let targetId = null;
   const matched = SECTION_PATH_MAP.find((m) => m.path === currentPath);
   if (matched) {
@@ -767,8 +797,15 @@ if (typeof ScrollReveal !== "undefined") {
 /*=============== LIVE PORTFOLIO DYNAMIC HYDRATION (CMS SYNC) ===============*/
 async function hydratePortfolioFromAPI() {
   try {
-    const res = await fetch("/api/portfolio-data");
-    if (!res.ok) return;
+    const repoBase = window.location.pathname.startsWith("/sahadat") ? "/sahadat" : "";
+    let res = null;
+    if (window.location.protocol === "http:" && (window.location.port === "8000" || window.location.port === "5000")) {
+      res = await fetch("/api/portfolio-data").catch(() => null);
+    }
+    if (!res || !res.ok) {
+      res = await fetch(repoBase ? `${repoBase}/data/portfolio.json` : "data/portfolio.json").catch(() => null);
+    }
+    if (!res || !res.ok) return;
     const data = await res.json();
 
     // 1. Profile & Hero
