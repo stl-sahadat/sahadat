@@ -410,11 +410,17 @@ if (navToggle && navMenu) {
   });
 }
 
+const getRepoBase = () => {
+  return window.location.pathname.startsWith("/sahadat") ? "/sahadat" : "";
+};
+
 const applyPathUpdate = (newPath, recordAnalytics = true) => {
   if (isSmoothScrolling || window.location.pathname.startsWith("/admin")) return;
-  if (window.location.pathname !== newPath) {
+  const basePrefix = getRepoBase();
+  const fullPath = basePrefix + (newPath === "/" ? (basePrefix ? "/" : "/") : newPath);
+  if (window.location.pathname !== fullPath) {
     try {
-      window.history.replaceState(null, "", newPath);
+      window.history.replaceState(null, "", fullPath);
     } catch (e) {}
     updateActiveNavLink(newPath);
     if (recordAnalytics && window.PortfolioAnalytics) {
