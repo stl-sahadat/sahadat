@@ -1,0 +1,1997 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- FAVICON -->
+    <link rel="shortcut icon" href="assets/img/Icon.png" type="image/png" />
+
+    <!-- REMIXICONS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css"
+    />
+
+    <!-- DEVICON -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
+    />
+
+    <!-- SWIPER CSS -->
+    <link rel="stylesheet" href="assets/css/swiper-bundle.min.css" />
+
+    <!-- FONTS (SELF-HOSTED OPEN-FONTS) -->
+    <link rel="stylesheet" href="assets/fonts/fonts.css" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/styles.css" />
+
+    <title>Md Sahadat Hossain | AI Agent Architect &amp; Prompt Engineer</title>
+    <meta
+      name="description"
+      content="AI Agent Architect &amp; Prompt Engineer specializing in autonomous multi-agent orchestration, custom AI web-builders, and production full-stack systems."
+    />
+  </head>
+  <body>
+    <!-- CONSTELLATION FIELD & PARTICLE DRIFT BACKGROUND (ThreeUI Replicated) -->
+    <div id="constellation-bg-container" class="constellation-bg-container" aria-hidden="true">
+      <canvas id="particle-canvas" class="constellation-canvas"></canvas>
+      <div class="constellation-noise-overlay"></div>
+      <div class="constellation-ambient-glow"></div>
+    </div>
+
+    <!-- HEADER -->
+    <header class="header" id="header">
+      <div class="blob-animate"></div>
+      <nav class="nav container">
+        <a href="/" class="nav__logo" data-path="/">Md Sahadat Hossain</a>
+
+        <div class="nav__menu" id="nav-menu">
+          <!-- Animated Top Dock (ThreeUI Liquid Glass Replication) -->
+          <div class="atd-glass__rail">
+            <!-- Brand / Mark Header -->
+            <div class="atd-glass__brand">
+              <span class="atd-glass__mark" aria-hidden="true">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <rect width="24" height="24" rx="5" fill="#E8E8E3"></rect>
+                  <path d="M6 6h8.6L18 9.35v8.15H9.15L6 14.35V6Z" fill="#111"></path>
+                  <path d="M9 9h5.15L15 9.85V15H9.85L9 14.15V9Z" fill="#E8E8E3"></path>
+                  <path d="M12 9v6M9 12h6" stroke="#111" stroke-width=".7"></path>
+                </svg>
+              </span>
+              <span class="atd-glass__word">Md Sahadat Hossain</span>
+            </div>
+
+            <span class="atd-glass__hairline" aria-hidden="true"></span>
+
+            <!-- Dock Navigation Links with Icons -->
+            <ul class="nav__list atd-glass__dock">
+              <li>
+                <a href="/about" class="nav__link atd-glass__item" data-path="/about" aria-label="About Me" title="About Me">
+                  <span class="atd-glass__icon" aria-hidden="true">
+                    <svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.8"></circle><path d="M2.4 8c2.4-3.5 9-3.5 11.3 0"></path></svg>
+                  </span>
+                  <span>About Me</span>
+                </a>
+              </li>
+              <li>
+                <a href="/projects" class="nav__link atd-glass__item" data-path="/projects" aria-label="Projects" title="Projects">
+                  <span class="atd-glass__icon" aria-hidden="true">
+                    <svg viewBox="0 0 16 16"><rect x="2.2" y="2.2" width="11.6" height="11.6" rx="3.6"></rect><circle cx="8" cy="8" r="2.5"></circle></svg>
+                  </span>
+                  <span>Projects</span>
+                </a>
+              </li>
+              <li>
+                <a href="/showcase" class="nav__link atd-glass__item" data-path="/showcase" aria-label="Showcase" title="Showcase">
+                  <span class="atd-glass__icon" aria-hidden="true">
+                    <svg viewBox="0 0 16 16"><rect x="2.1" y="2.6" width="3" height="10.8" rx="1"></rect><rect x="6.4" y="2.6" width="3" height="10.8" rx="1"></rect><path d="m10.9 3.7 2.9 1-2.4 8.6-2.2-.8"></path></svg>
+                  </span>
+                  <span>Showcase</span>
+                </a>
+              </li>
+              <li>
+                <a href="/experience" class="nav__link atd-glass__item" data-path="/experience" aria-label="Experience" title="Experience">
+                  <span class="atd-glass__icon" aria-hidden="true">
+                    <svg viewBox="0 0 16 16"><path d="M1.8 10.6c2.6 0 3-5.2 6.2-5.2s3.6 5.2 6.2 5.2"></path><circle cx="8" cy="5.4" r=".9"></circle></svg>
+                  </span>
+                  <span>Experience</span>
+                </a>
+              </li>
+              <li>
+                <a href="/skills" class="nav__link atd-glass__item" data-path="/skills" aria-label="Skills" title="Skills">
+                  <span class="atd-glass__icon" aria-hidden="true">
+                    <svg viewBox="0 0 16 16"><path d="M6.4 2.2v4L3 12.1a1.3 1.3 0 0 0 1.1 2h7.8a1.3 1.3 0 0 0 1.1-2L9.6 6.2v-4"></path><path d="M5.6 2.2h4.8M4.9 9.6h6.2"></path></svg>
+                  </span>
+                  <span>Skills</span>
+                </a>
+              </li>
+              <li>
+                <a href="/contact" class="nav__link atd-glass__item" data-path="/contact" aria-label="Contact" title="Contact">
+                  <span class="atd-glass__icon" aria-hidden="true">
+                    <svg viewBox="0 0 16 16"><path d="M2.5 3.5h11a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1h-11a1 1 0 0 1-1-1v-7a1 1 0 0 1 1-1z"></path><polyline points="2.5 4.5 8 8.5 13.5 4.5"></polyline></svg>
+                  </span>
+                  <span>Contact</span>
+                </a>
+              </li>
+            </ul>
+
+            <span class="atd-glass__hairline" aria-hidden="true"></span>
+
+            <!-- Bottom CTA: Get the app / Let's Talk -->
+            <a
+              href="https://wa.me/8801944576159?text=Hi%20Sahadat%20vai%2C%20I%20would%20like%20to%20discuss%20a%20project."
+              target="_blank"
+              rel="noopener noreferrer"
+              class="atd-glass__cta"
+              aria-label="Let's Talk"
+              title="Let's Talk"
+            >
+              <span>Let's Talk</span>
+              <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.4 8h9.2M8.8 4.2 12.6 8l-3.8 3.8"></path></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- 3D GEM "LET'S TALK" CTA (Strictly Replicated from Sahadat vai Reference Portfolio) -->
+        <div class="nav__cta">
+          <a
+            href="https://wa.me/8801944576159?text=Hi%20Sahadat%20vai%2C%20I%20would%20like%20to%20discuss%20a%20project."
+            target="_blank"
+            rel="noopener noreferrer"
+            class="gem-btn gem-btn--navbar"
+            id="navbar-talk-btn"
+            title="Talk to me on WhatsApp"
+            aria-label="Talk to me"
+          >
+            <span class="gem-shimmer"></span>
+            <span class="gem-icon-wrap">
+              <span class="gem-icon-ambient gem-ambient-cyan"></span>
+              <svg class="gem-icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+                <defs>
+                  <linearGradient id="navGemCrown" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#ffffff" />
+                    <stop offset="50%" stop-color="#e0f2fe" />
+                    <stop offset="100%" stop-color="#7dd3fc" />
+                  </linearGradient>
+                  <linearGradient id="navGemLeft" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#38bdf8" />
+                    <stop offset="100%" stop-color="#0284c7" />
+                  </linearGradient>
+                  <linearGradient id="navGemCenter" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#ffffff" />
+                    <stop offset="40%" stop-color="#a5f3fc" />
+                    <stop offset="100%" stop-color="#38bdf8" />
+                  </linearGradient>
+                  <linearGradient id="navGemRight" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#60a5fa" />
+                    <stop offset="50%" stop-color="#818cf8" />
+                    <stop offset="100%" stop-color="#a855f7" />
+                  </linearGradient>
+                </defs>
+                <polygon points="6,5 18,5 22,10 2,10" fill="url(#navGemCrown)" stroke="#ffffff" stroke-width="0.6" stroke-linejoin="round" />
+                <polygon points="6,5 18,5 15,10 9,10" fill="#ffffff" opacity="0.9" />
+                <polygon points="2,10 12,21 7,10" fill="url(#navGemLeft)" stroke="#7dd3fc" stroke-width="0.5" stroke-linejoin="round" />
+                <polygon points="7,10 12,21 17,10" fill="url(#navGemCenter)" stroke="#ffffff" stroke-width="0.6" stroke-linejoin="round" />
+                <polygon points="17,10 12,21 22,10" fill="url(#navGemRight)" stroke="#818cf8" stroke-width="0.5" stroke-linejoin="round" />
+                <path d="M17.5 2 L18.2 4.2 L20.5 5 L18.2 5.8 L17.5 8 L16.8 5.8 L14.5 5 L16.8 4.2 Z" fill="#ffffff" class="gem-twinkle" />
+                <circle cx="12" cy="11.5" r="1" fill="#ffffff" class="gem-ping" opacity="0.75" />
+              </svg>
+            </span>
+            <span class="gem-btn__text">Let's Talk</span>
+            <svg class="gem-arrow-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="7" y1="17" x2="17" y2="7"></line>
+              <polyline points="7 7 17 7 17 17"></polyline>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Mobile 3-Line Hamburger Toggle Button -->
+        <button class="nav__toggle" id="nav-toggle" aria-label="Toggle Navigation Menu">
+          <span class="nav__toggle-line"></span>
+          <span class="nav__toggle-line"></span>
+          <span class="nav__toggle-line"></span>
+        </button>
+      </nav>
+    </header>
+
+    <!-- MAIN -->
+    <main class="main">
+      <!-- 1. HOME -->
+      <section class="home section section-top" id="home">
+        <!-- Ambient Red Atmospheric Lighting System -->
+        <div class="home__red-effect" aria-hidden="true">
+          <div class="home__red-core"></div>
+          <div class="home__red-ambient"></div>
+          <div class="home__red-flare"></div>
+          <div class="home__red-beam"></div>
+          <div class="home__red-vignette"></div>
+        </div>
+
+        <!-- Transparent Cutout Portrait Stage Centered in Hero -->
+        <div class="home__portrait-stage" id="heroPortraitStage">
+          <div class="home__portrait-wrapper" id="morphingPortrait">
+            <picture class="home__portrait-picture">
+              <source media="(max-width: 1023px)" srcset="assets/img/home-perfil1.png" />
+              <img
+                src="assets/img/hero-profile1.png?v=20261024_1950"
+                alt="Md Sahadat Hossain - AI Agent Architect &amp; Prompt Engineer"
+                class="home__profile home__portrait-cutout"
+                id="heroPortraitCutout"
+              />
+            </picture>
+          </div>
+        </div>
+
+        <div class="home__container container">
+          <div class="home__content">
+            <!-- Left Column: Identity & Bio -->
+            <div class="home__data">
+              <h1 class="home__name">
+                Md Sahadat <br />
+                Hossain
+              </h1>
+              <p class="home__description">
+                Architecting autonomous multi-agent systems, prompt engineering graphs, and high-concurrency production platforms.
+              </p>
+
+              <div class="home__social">
+                <!-- 3D Silicon LinkedIn Badge -->
+                <a
+                  href="https://www.linkedin.com/in/mdsahadatconnact/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="home__social-link gem-interactive gem-social--linkedin"
+                  title="LinkedIn"
+                  aria-label="LinkedIn"
+                >
+                  <span class="gem-shimmer"></span>
+                  <span class="gem-icon-wrap">
+                    <span class="gem-icon-ambient gem-ambient-blue"></span>
+                    <svg viewBox="0 0 24 24" class="gem-icon-svg" aria-hidden="true">
+                      <defs>
+                        <linearGradient id="liHeroGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stop-color="#60a5fa" />
+                          <stop offset="50%" stop-color="#2563eb" />
+                          <stop offset="100%" stop-color="#1d4ed8" />
+                        </linearGradient>
+                      </defs>
+                      <rect x="2" y="2" width="20" height="20" rx="5" fill="url(#liHeroGrad)" stroke="#ffffff" stroke-width="0.5" />
+                      <circle cx="7" cy="7.5" r="1.5" fill="#ffffff" />
+                      <rect x="5.5" y="10.5" width="3" height="8" rx="0.8" fill="#ffffff" />
+                      <path d="M11 10.5h2.8v1.2c.4-.7 1.4-1.4 2.8-1.4 2.1 0 3.4 1.3 3.4 3.7V18.5H17v-4.2c0-1.2-.5-1.9-1.5-1.9-1 0-1.6.7-1.6 1.9v4.2H11v-8z" fill="#ffffff" />
+                      <circle cx="19" cy="5" r="0.8" fill="#ffffff" class="gem-twinkle" />
+                    </svg>
+                  </span>
+                </a>
+
+                <!-- 3D Silicon GitHub Badge -->
+                <a
+                  href="https://github.com/stl-sahadat"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="home__social-link gem-interactive gem-social--github"
+                  title="GitHub"
+                  aria-label="GitHub"
+                >
+                  <span class="gem-shimmer"></span>
+                  <span class="gem-icon-wrap">
+                    <span class="gem-icon-ambient gem-ambient-violet"></span>
+                    <svg viewBox="0 0 24 24" class="gem-icon-svg" aria-hidden="true">
+                      <defs>
+                        <linearGradient id="ghHeroGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stop-color="#ffffff" />
+                          <stop offset="60%" stop-color="#e2e8f0" />
+                          <stop offset="100%" stop-color="#94a3b8" />
+                        </linearGradient>
+                      </defs>
+                      <path fill="url(#ghHeroGrad)" fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+                    </svg>
+                  </span>
+                </a>
+
+                <!-- 3D Silicon WhatsApp Badge -->
+                <a
+                  href="https://wa.me/8801867140801"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="home__social-link gem-interactive gem-social--whatsapp"
+                  title="WhatsApp"
+                  aria-label="WhatsApp"
+                >
+                  <span class="gem-shimmer"></span>
+                  <span class="gem-icon-wrap">
+                    <span class="gem-icon-ambient gem-ambient-emerald"></span>
+                    <svg viewBox="0 0 24 24" class="gem-icon-svg" aria-hidden="true">
+                      <defs>
+                        <linearGradient id="waHeroGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stop-color="#4ade80" />
+                          <stop offset="60%" stop-color="#22c55e" />
+                          <stop offset="100%" stop-color="#15803d" />
+                        </linearGradient>
+                      </defs>
+                      <path fill="url(#waHeroGrad)" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2Z" />
+                      <path fill="#ffffff" d="M17.5 14.33C17.2 14.18 15.73 13.45 15.45 13.35C15.18 13.25 14.98 13.2 14.78 13.5C14.58 13.8 14.02 14.47 13.85 14.67C13.68 14.87 13.5 14.9 13.2 14.75C12.9 14.6 11.95 14.28 10.82 13.28C9.94 12.5 9.35 11.53 9.18 11.23C9 10.93 9.16 10.77 9.31 10.62C9.45 10.48 9.61 10.27 9.76 10.1C9.91 9.93 9.96 9.8 10.06 9.6C10.16 9.4 10.11 9.23 10.03 9.08C9.96 8.93 9.36 7.45 9.11 6.85C8.86 6.27 8.61 6.35 8.43 6.33L7.85 6.32C7.65 6.32 7.33 6.4 7.05 6.7C6.78 7 6 7.73 6 9.2C6 10.68 7.08 12.1 7.23 12.3C7.38 12.5 9.35 15.53 12.36 16.83C13.08 17.14 13.64 17.33 14.08 17.47C14.8 17.7 15.45 17.67 15.97 17.59C16.55 17.5 17.75 16.87 18 16.15C18.25 15.43 18.25 14.83 18.18 14.7C18.1 14.58 17.8 14.48 17.5 14.33Z" />
+                    </svg>
+                  </span>
+                </a>
+
+                <!-- 3D Silicon Direct Mail Badge -->
+                <a
+                  href="mailto:sahadat.info01@gmail.com"
+                  class="home__social-link gem-interactive gem-social--email"
+                  title="Email"
+                  aria-label="Email"
+                >
+                  <span class="gem-shimmer"></span>
+                  <span class="gem-icon-wrap">
+                    <span class="gem-icon-ambient gem-ambient-purple"></span>
+                    <svg viewBox="0 0 24 24" class="gem-icon-svg" aria-hidden="true">
+                      <defs>
+                        <linearGradient id="mailHeroGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stop-color="#e9d5ff" />
+                          <stop offset="50%" stop-color="#a855f7" />
+                          <stop offset="100%" stop-color="#6b21a8" />
+                        </linearGradient>
+                        <linearGradient id="mailHeroFlap" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stop-color="#ffffff" />
+                          <stop offset="100%" stop-color="#c084fc" />
+                        </linearGradient>
+                      </defs>
+                      <rect x="2" y="4" width="20" height="16" rx="4" fill="url(#mailHeroGrad)" stroke="#ffffff" stroke-width="0.5" />
+                      <polygon points="3,6 12,13 21,6" fill="url(#mailHeroFlap)" opacity="0.95" />
+                      <line x1="3" y1="18" x2="9" y2="12" stroke="#ffffff" stroke-width="0.6" opacity="0.7" />
+                      <line x1="21" y1="18" x2="15" y2="12" stroke="#ffffff" stroke-width="0.6" opacity="0.7" />
+                      <circle cx="18" cy="7" r="0.8" fill="#ffffff" class="gem-twinkle" />
+                    </svg>
+                  </span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Right Column: Focus Areas & Action CTAs -->
+            <div class="home__info">
+              <div class="home__roles">
+                <h3 class="home__split">Core Specialization</h3>
+                <div class="flip-fade-container" id="heroFlipFadeText" aria-label="Core Specialization">
+                  <div class="flip-fade-word flip-fade-visible">
+                    <span class="flip-fade-chunk">
+                      <span class="flip-fade-letter">A</span><span class="flip-fade-letter">U</span><span class="flip-fade-letter">T</span><span class="flip-fade-letter">O</span><span class="flip-fade-letter">N</span><span class="flip-fade-letter">O</span><span class="flip-fade-letter">M</span><span class="flip-fade-letter">O</span><span class="flip-fade-letter">U</span><span class="flip-fade-letter">S</span>
+                    </span>
+                    <span class="flip-fade-space">&nbsp;</span>
+                    <span class="flip-fade-chunk">
+                      <span class="flip-fade-letter">A</span><span class="flip-fade-letter">I</span>
+                    </span>
+                    <span class="flip-fade-space">&nbsp;</span>
+                    <span class="flip-fade-chunk">
+                      <span class="flip-fade-letter">A</span><span class="flip-fade-letter">G</span><span class="flip-fade-letter">E</span><span class="flip-fade-letter">N</span><span class="flip-fade-letter">T</span><span class="flip-fade-letter">S</span>
+                    </span>
+                  </div>
+                </div>
+                <h2 class="home__profession-2">&amp; Systems Engineering</h2>
+              </div>
+              <div class="home__actions">
+                <a href="/projects" class="home__btn gem-btn gem-btn--primary" data-path="/projects">
+                  <span class="gem-shimmer"></span>
+                  <span class="gem-icon-wrap">
+                    <span class="gem-icon-ambient gem-ambient-violet"></span>
+                    <svg viewBox="0 0 24 24" class="gem-icon-svg" aria-hidden="true">
+                      <defs>
+                        <linearGradient id="workHeroTop" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stop-color="#ffffff" />
+                          <stop offset="50%" stop-color="#d8b4fe" />
+                          <stop offset="100%" stop-color="#9d4edd" />
+                        </linearGradient>
+                        <linearGradient id="workHeroMid" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stop-color="#c084fc" />
+                          <stop offset="100%" stop-color="#7b2cbf" />
+                        </linearGradient>
+                      </defs>
+                      <polygon points="12,2.5 22,8 12,13.5 2,8" fill="url(#workHeroTop)" stroke="#ffffff" stroke-width="0.6" stroke-linejoin="round" />
+                      <polyline points="2,12.5 12,18 22,12.5" stroke="url(#workHeroMid)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                      <polyline points="2,16.8 12,22 22,16.8" stroke="#9d4edd" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                      <circle cx="12" cy="8" r="1.3" fill="#ffffff" class="gem-twinkle" />
+                    </svg>
+                  </span>
+                  <span class="gem-btn__text">Explore Works</span>
+                  <i class="ri-arrow-right-line"></i>
+                </a>
+              </div>
+            </div>
+          </div>        </div>
+      </section>
+
+      <!-- 2. ABOUT -->
+      <section class="about section" id="about">
+        <div class="about__shadow"></div>
+
+        <div class="about__container container grid">
+          <div class="about__data">
+            <h2 class="section__title">
+              <span>Autonomous Systems &amp;</span>
+              <br />
+              AI Architecture
+            </h2>
+            <p class="about__description">
+              <span style="display: block; margin-bottom: 12px;">
+                I am an <b>Autonomous AI Agent Architect &amp; Prompt Engineer</b> who transforms cutting-edge AI models into resilient, scalable, production-grade software. I architect intelligent autonomous systems designed to eliminate complexity, compress execution timelines by 10x, and cut engineering costs by 60–70%.
+              </span>
+              <span style="display: block; margin-bottom: 14px;">
+                My journey into technology was born from a lifelong obsession with code, web architecture, and digital engineering since childhood. While I completed my Master's Degree, my real engineering edge was forged through relentless independent research, continuous experimentation, and building tangible software from the ground up.<br /><br />
+                <b>Core Targets &amp; Impact:</b><br />
+                • <b>10x Execution Velocity:</b> Compressing weeks of traditional development into hours using autonomous agent swarms that scaffold, test, and self-heal.<br />
+                • <b>70% Cost Compression:</b> Eliminating bloated agency retainers and manual overhead through deterministic, automated AI pipelines.<br />
+                • <b>Zero-Hallucination Resilience:</b> Engineering strict guardrails, structured JSON schemas, and automated lint verification for flawless production output.
+              </span>
+            </p>
+
+            <a
+              href="#contact"
+              class="button gem-btn gem-btn--primary"
+              id="about-cta-btn"
+            >
+              <span class="gem-shimmer"></span>
+              <span class="gem-icon-wrap">
+                <span class="gem-icon-ambient gem-ambient-cyan"></span>
+                <svg viewBox="0 0 24 24" class="gem-icon-svg" aria-hidden="true">
+                  <defs>
+                    <linearGradient id="aboutGemCrown" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#ffffff" />
+                      <stop offset="50%" stop-color="#e0f2fe" />
+                      <stop offset="100%" stop-color="#7dd3fc" />
+                    </linearGradient>
+                    <linearGradient id="aboutGemLeft" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#38bdf8" />
+                      <stop offset="100%" stop-color="#0284c7" />
+                    </linearGradient>
+                    <linearGradient id="aboutGemCenter" x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0%" stop-color="#ffffff" />
+                      <stop offset="40%" stop-color="#a5f3fc" />
+                      <stop offset="100%" stop-color="#38bdf8" />
+                    </linearGradient>
+                    <linearGradient id="aboutGemRight" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#60a5fa" />
+                      <stop offset="50%" stop-color="#818cf8" />
+                      <stop offset="100%" stop-color="#a855f7" />
+                    </linearGradient>
+                  </defs>
+                  <polygon points="6,5 18,5 22,10 2,10" fill="url(#aboutGemCrown)" stroke="#ffffff" stroke-width="0.6" stroke-linejoin="round" />
+                  <polygon points="6,5 18,5 15,10 9,10" fill="#ffffff" opacity="0.9" />
+                  <polygon points="2,10 12,21 7,10" fill="url(#aboutGemLeft)" stroke="#7dd3fc" stroke-width="0.5" stroke-linejoin="round" />
+                  <polygon points="7,10 12,21 17,10" fill="url(#aboutGemCenter)" stroke="#ffffff" stroke-width="0.6" stroke-linejoin="round" />
+                  <polygon points="17,10 12,21 22,10" fill="url(#aboutGemRight)" stroke="#818cf8" stroke-width="0.5" stroke-linejoin="round" />
+                  <path d="M17.5 2 L18.2 4.2 L20.5 5 L18.2 5.8 L17.5 8 L16.8 5.8 L14.5 5 L16.8 4.2 Z" fill="#ffffff" class="gem-twinkle" />
+                  <circle cx="12" cy="11.5" r="1" fill="#ffffff" class="gem-ping" opacity="0.75" />
+                </svg>
+              </span>
+              <span class="gem-btn__text">Let's Build Together</span>
+              <i class="ri-arrow-right-up-line"></i>
+            </a>
+          </div>
+
+          <div class="about__image" id="aboutPortraitTarget">
+            <div class="about__portrait-dock" id="aboutPortraitDock">
+              <img
+                src="assets/img/sahadat-about-new.jpg?v=20261024_1650"
+                alt="Md Sahadat Hossain - Autonomous Systems Engineer"
+                class="about__profile about__profile--studio"
+                id="aboutStudioImg"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. PROJECTS -->
+      <section class="projects section" id="projects">
+        <div class="projects__header-wrap container">
+          <div class="projects__title-group">
+            <h2 class="section__title">
+              Featured <br />
+              <span>Projects</span>
+            </h2>
+            <p class="section__subtitle">
+              Production-grade AI agent swarms, automated pipelines &amp; enterprise platforms
+            </p>
+          </div>
+
+          <!-- True 3D Interactive Studio Gateway Button -->
+          <div class="projects__3d-cta-container">
+            <a
+              href="/3d"
+              class="btn-3d-studio"
+              title="Explore 3D Developer Studio"
+              id="btn-projects-3d"
+            >
+              <span class="btn-3d-studio__shadow"></span>
+              <span class="btn-3d-studio__edge"></span>
+              <span class="btn-3d-studio__front">
+                <span class="btn-3d-studio__shimmer"></span>
+                <span class="btn-3d-studio__cube-wrap">
+                  <span class="cube-3d-mini">
+                    <span class="cube-side cube-side--front"></span>
+                    <span class="cube-side cube-side--back"></span>
+                    <span class="cube-side cube-side--right"></span>
+                    <span class="cube-side cube-side--left"></span>
+                    <span class="cube-side cube-side--top"></span>
+                    <span class="cube-side cube-side--bottom"></span>
+                  </span>
+                </span>
+                <span class="btn-3d-studio__copy">
+                  <span class="btn-3d-studio__label">EXPLORE 3D STUDIO</span>
+                  <span class="btn-3d-studio__sub">Interactive WebGL Room</span>
+                </span>
+                <span class="btn-3d-studio__icon">
+                  <i class="ri-arrow-right-up-line"></i>
+                </span>
+              </span>
+            </a>
+          </div>
+        </div>
+
+        <div class="projects__container container grid">
+          <div class="projects__swiper swiper">
+            <div class="swiper-wrapper">
+              <!-- Project 1 -->
+              <article class="projects__card swiper-slide">
+                <div class="blob"></div>
+
+                <div class="projects__number">
+                  <h1>01</h1>
+                  <h3>Cafe &amp; E-Commerce</h3>
+                </div>
+
+                <div class="projects__data">
+                  <h1 class="projects__title">
+                    Morning Mug Coffee House
+                  </h1>
+                  <p class="projects__subtitle">Engineering &amp; Design Stack</p>
+                  <p class="projects__description">
+                    React 18, Vite, Tailwind CSS, Modern JavaScript, HTML5, Responsive UI &amp; E-Commerce
+                  </p>
+                </div>
+
+                <div class="projects__image">
+                  <img
+                    src="assets/img/project-1.png"
+                    alt="Morning Mug Coffee House"
+                    class="projects__img"
+                  />
+                  <div class="projects__buttons">
+                    <a
+                      href="https://stl-sahadat.github.io/morning-mug-coffee-house/index.html"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="projects__button projects__button--live gem-interactive"
+                      title="Visit Live Application"
+                    >
+                      <span class="gem-shimmer"></span>
+                      <span class="gem-icon-wrap">
+                        <span class="gem-icon-ambient gem-ambient-emerald"></span>
+                        <i class="ri-arrow-right-up-line"></i>
+                      </span>
+                    </a>
+                    <a
+                      href="https://github.com/stl-sahadat/morning-mug-coffee-house"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="projects__button projects__button--github gem-interactive"
+                      title="View GitHub Repository"
+                    >
+                      <span class="gem-shimmer"></span>
+                      <span class="gem-icon-wrap">
+                        <span class="gem-icon-ambient gem-ambient-violet"></span>
+                        <i class="ri-github-line"></i>
+                      </span>
+                    </a>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Project 2 -->
+              <article class="projects__card swiper-slide">
+                <div class="blob"></div>
+
+                <div class="projects__number">
+                  <h1>02</h1>
+                  <h3>Cloud Run &amp; Finance</h3>
+                </div>
+
+                <div class="projects__data">
+                  <h1 class="projects__title">Cloud Expense Tracker Suite</h1>
+                  <p class="projects__subtitle">Engineering &amp; Design Stack</p>
+                  <p class="projects__description">
+                    Google Cloud Run, Docker Container, Python, FastAPI, Real-Time Charts &amp; REST API
+                  </p>
+                </div>
+
+                <div class="projects__image">
+                  <img
+                    src="assets/img/project-2.png"
+                    alt="Cloud Expense Tracker Suite"
+                    class="projects__img"
+                  />
+                  <div class="projects__buttons">
+                    <a
+                      href="https://ais-pre-5outvodj2oly3dlanlrfxg-873905991312.asia-southeast1.run.app"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="projects__button projects__button--live gem-interactive"
+                      title="Visit Live Application"
+                    >
+                      <span class="gem-shimmer"></span>
+                      <span class="gem-icon-wrap">
+                        <span class="gem-icon-ambient gem-ambient-emerald"></span>
+                        <i class="ri-arrow-right-up-line"></i>
+                      </span>
+                    </a>
+                    <a
+                      href="https://github.com/stl-sahadat"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="projects__button projects__button--github gem-interactive"
+                      title="View GitHub Repository"
+                    >
+                      <span class="gem-shimmer"></span>
+                      <span class="gem-icon-wrap">
+                        <span class="gem-icon-ambient gem-ambient-violet"></span>
+                        <i class="ri-github-line"></i>
+                      </span>
+                    </a>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Project 3 -->
+              <article class="projects__card swiper-slide">
+                <div class="blob"></div>
+
+                <div class="projects__number">
+                  <h1>03</h1>
+                  <h3>Institutional ERP &amp; Accounts</h3>
+                </div>
+
+                <div class="projects__data">
+                  <h1 class="projects__title">Madrasa Management ERP Suite</h1>
+                  <p class="projects__subtitle">Engineering &amp; Design Stack</p>
+                  <p class="projects__description">
+                    Next.js 14, TypeScript, Tailwind CSS, Prisma, Student Admissions, Digital ID, Boarding &amp; Khana Accounts, Cash Book &amp; Examinations
+                  </p>
+                </div>
+
+                <div class="projects__image">
+                  <img
+                    src="assets/img/project-3.png"
+                    alt="Madrasa Management ERP Suite"
+                    class="projects__img"
+                  />
+                  <div class="projects__buttons">
+                    <a
+                      href="https://stl-sahadat.github.io/madrasha-apps/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="projects__button projects__button--live gem-interactive"
+                      title="Visit Live Application"
+                    >
+                      <span class="gem-shimmer"></span>
+                      <span class="gem-icon-wrap">
+                        <span class="gem-icon-ambient gem-ambient-emerald"></span>
+                        <i class="ri-arrow-right-up-line"></i>
+                      </span>
+                    </a>
+                    <a
+                      href="https://github.com/stl-sahadat/madrasha-apps"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="projects__button projects__button--github gem-interactive"
+                      title="View GitHub Repository"
+                    >
+                      <span class="gem-shimmer"></span>
+                      <span class="gem-icon-wrap">
+                        <span class="gem-icon-ambient gem-ambient-violet"></span>
+                        <i class="ri-github-line"></i>
+                      </span>
+                    </a>
+                  </div>
+                </div>
+              </article>
+
+<!-- Project 4 -->
+              <article class="projects__card swiper-slide">
+                <div class="blob"></div>
+
+                <div class="projects__number">
+                  <h1>04</h1>
+                  <h3>Multi-Agent Synthesis</h3>
+                </div>
+
+                <div class="projects__data">
+                  <h1 class="projects__title">Autonomous AI Web Builder</h1>
+                  <p class="projects__subtitle">Engineering &amp; Design Stack</p>
+                  <p class="projects__description">
+                    Autonomous Multi-Agent, CrewAI, LangChain, Claude 3.5 Sonnet, GPT-4o &amp; Code Synthesis
+                  </p>
+                </div>
+
+                <div class="projects__image">
+                  <img
+                    src="assets/img/gallery/photo-1526374965328-7f61d4dc18c5.jpg"
+                    alt="Autonomous AI Web Builder"
+                    class="projects__img"
+                  />
+                  <div class="projects__buttons">
+                    <a
+                      href="https://github.com/stl-sahadat"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="projects__button projects__button--live gem-interactive"
+                      title="Visit Live Application"
+                    >
+                      <span class="gem-shimmer"></span>
+                      <span class="gem-icon-wrap">
+                        <span class="gem-icon-ambient gem-ambient-emerald"></span>
+                        <i class="ri-arrow-right-up-line"></i>
+                      </span>
+                    </a>
+                    <a
+                      href="https://github.com/stl-sahadat"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="projects__button projects__button--github gem-interactive"
+                      title="View GitHub Repository"
+                    >
+                      <span class="gem-shimmer"></span>
+                      <span class="gem-icon-wrap">
+                        <span class="gem-icon-ambient gem-ambient-violet"></span>
+                        <i class="ri-github-line"></i>
+                      </span>
+                    </a>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Project 5 -->
+              <article class="projects__card swiper-slide">
+                <div class="blob"></div>
+
+                <div class="projects__number">
+                  <h1>05</h1>
+                  <h3>Vector Retrieval</h3>
+                </div>
+
+                <div class="projects__data">
+                  <h1 class="projects__title">Enterprise RAG Knowledge Engine</h1>
+                  <p class="projects__subtitle">Engineering &amp; Design Stack</p>
+                  <p class="projects__description">
+                    Pinecone Vector DB, LangChain, OpenAI Embeddings, FastAPI &amp; Hybrid Semantic Search
+                  </p>
+                </div>
+
+                <div class="projects__image">
+                  <img
+                    src="assets/img/gallery/photo-1639762681485-074b7f938ba0.jpg"
+                    alt="Enterprise RAG Knowledge Engine"
+                    class="projects__img"
+                  />
+                  <a
+                    href="https://github.com/stl-sahadat"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="projects__button gem-interactive"
+                    title="View Project"
+                  >
+                    <span class="gem-shimmer"></span>
+                    <span class="gem-icon-wrap">
+                      <span class="gem-icon-ambient gem-ambient-cyan"></span>
+                      <i class="ri-arrow-right-up-line"></i>
+                    </span>
+                  </a>
+                </div>
+              </article>
+
+              <!-- Project 6 -->
+              <article class="projects__card swiper-slide">
+                <div class="blob"></div>
+
+                <div class="projects__number">
+                  <h1>06</h1>
+                  <h3>Real-Time Telemetry</h3>
+                </div>
+
+                <div class="projects__data">
+                  <h1 class="projects__title">Neural Pulse Ops Telemetry</h1>
+                  <p class="projects__subtitle">Engineering &amp; Design Stack</p>
+                  <p class="projects__description">
+                    React 18, Tailwind CSS, WebSockets, Prometheus, Chart.js &amp; Cloud Run Telemetry
+                  </p>
+                </div>
+
+                <div class="projects__image">
+                  <img
+                    src="assets/img/gallery/photo-1504639725590-34d0984388bd.jpg"
+                    alt="Neural Pulse Ops Telemetry"
+                    class="projects__img"
+                  />
+                  <a
+                    href="https://github.com/stl-sahadat"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="projects__button gem-interactive"
+                    title="View Project"
+                  >
+                    <span class="gem-shimmer"></span>
+                    <span class="gem-icon-wrap">
+                      <span class="gem-icon-ambient gem-ambient-cyan"></span>
+                      <i class="ri-arrow-right-up-line"></i>
+                    </span>
+                  </a>
+                </div>
+              </article>
+
+              <!-- Project 7 -->
+              <article class="projects__card swiper-slide">
+                <div class="blob"></div>
+
+                <div class="projects__number">
+                  <h1>07</h1>
+                  <h3>NLP &amp; Matching</h3>
+                </div>
+
+                <div class="projects__data">
+                  <h1 class="projects__title">
+                    Talent Intelligence <br />
+                    Resume AI
+                  </h1>
+                  <p class="projects__subtitle">Engineering &amp; Design Stack</p>
+                  <p class="projects__description">
+                    Python, FastAPI, spaCy, Transformers, BERT Embeddings, React, PostgreSQL &amp; Docker
+                  </p>
+                </div>
+
+                <div class="projects__image">
+                  <img
+                    src="assets/img/gallery/photo-1586281380349-632531db7ed4.jpg"
+                    alt="Talent Intelligence Resume AI"
+                    class="projects__img"
+                  />
+                  <a
+                    href="https://github.com/stl-sahadat"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="projects__button gem-interactive"
+                    title="View Project"
+                  >
+                    <span class="gem-shimmer"></span>
+                    <span class="gem-icon-wrap">
+                      <span class="gem-icon-ambient gem-ambient-cyan"></span>
+                      <i class="ri-arrow-right-up-line"></i>
+                    </span>
+                  </a>
+                </div>
+              </article>
+
+              <!-- Project 8 -->
+              <article class="projects__card swiper-slide">
+                <div class="blob"></div>
+
+                <div class="projects__number">
+                  <h1>08</h1>
+                  <h3>FinTech Quant</h3>
+                </div>
+
+                <div class="projects__data">
+                  <h1 class="projects__title">
+                    Crypto Quant <br />
+                    High-Frequency Terminal
+                  </h1>
+                  <p class="projects__subtitle">Engineering &amp; Design Stack</p>
+                  <p class="projects__description">
+                    React, TypeScript, 60fps Canvas 2D, WebSockets, Binance API, Redis &amp; Tailwind CSS
+                  </p>
+                </div>
+
+                <div class="projects__image">
+                  <img
+                    src="assets/img/gallery/photo-1563986768609-322da13575f3.jpg"
+                    alt="Crypto Quant High-Frequency Terminal"
+                    class="projects__img"
+                  />
+                  <a
+                    href="https://github.com/stl-sahadat"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="projects__button gem-interactive"
+                    title="View Project"
+                  >
+                    <span class="gem-shimmer"></span>
+                    <span class="gem-icon-wrap">
+                      <span class="gem-icon-ambient gem-ambient-cyan"></span>
+                      <i class="ri-arrow-right-up-line"></i>
+                    </span>
+                  </a>
+                </div>
+              </article>
+
+              <!-- Project 9 -->
+              <article class="projects__card swiper-slide">
+                <div class="blob"></div>
+
+                <div class="projects__number">
+                  <h1>09</h1>
+                  <h3>Multi-Agent Swarms</h3>
+                </div>
+
+                <div class="projects__data">
+                  <h1 class="projects__title">
+                    CrewAI Workflow <br />
+                    Automation Swarm
+                  </h1>
+                  <p class="projects__subtitle">Engineering &amp; Design Stack</p>
+                  <p class="projects__description">
+                    CrewAI, LangGraph, Python, Anthropic Claude, GPT-4o, Celery, Redis &amp; FastAPI
+                  </p>
+                </div>
+
+                <div class="projects__image">
+                  <img
+                    src="assets/img/gallery/photo-1518770660439-4636190af475.jpg"
+                    alt="CrewAI Workflow Automation Swarm"
+                    class="projects__img"
+                  />
+                  <a
+                    href="https://github.com/stl-sahadat"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="projects__button gem-interactive"
+                    title="View Project"
+                  >
+                    <span class="gem-shimmer"></span>
+                    <span class="gem-icon-wrap">
+                      <span class="gem-icon-ambient gem-ambient-cyan"></span>
+                      <i class="ri-arrow-right-up-line"></i>
+                    </span>
+                  </a>
+                </div>
+              </article>
+            </div>
+
+            <div class="swiper-pagination"></div>
+          </div>
+        </div>
+            </div>
+
+            <div class="swiper-pagination"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. GALLERY / VISUAL SHOWCASE -->
+      <section class="gallery section" id="gallery">
+        <h2 class="section__title">
+          Visual <br />
+          <span>Showcase</span>
+        </h2>
+
+        <div class="gallery__container container grid">
+          <!-- Card 1 -->
+          <article class="gallery__card" data-modal-target="modal-1" data-live-url="https://stl-sahadat.github.io/madrasha-apps/" data-github-url="https://github.com/stl-sahadat/madrasha-apps">
+            <div class="blob"></div>
+            <div class="gallery__image-box">
+              <span class="gallery__badge">ERP &amp; ACCOUNTS</span>
+              <div class="gallery__zoom-icon"><i class="ri-zoom-in-line"></i></div>
+              <img
+                src="assets/img/project-3.png"
+                alt="Madrasa Management Accounts &amp; Dining System"
+                class="gallery__img"
+              />
+            </div>
+            <div class="gallery__content">
+              <h3 class="gallery__title">Madrasa Management Accounts System</h3>
+              <p class="gallery__description">
+                Specialized institutional ledger, Khoraki dining accounts, student fees collection, and automated financial statements.
+              </p>
+              <div class="gallery__tags">
+                <span class="gallery__tag">Next.js</span>
+                <span class="gallery__tag">Prisma</span>
+                <span class="gallery__tag">Accounts</span>
+              </div>
+              <div class="gallery__actions">
+                <a href="https://stl-sahadat.github.io/madrasha-apps/" target="_blank" rel="noopener noreferrer" class="gallery__btn gallery__btn--live gem-interactive" title="Visit Live Application">
+                  <span class="gem-shimmer"></span>
+                  <i class="ri-arrow-right-up-line"></i>
+                  <span>Live App</span>
+                </a>
+                <a href="https://github.com/stl-sahadat/madrasha-apps" target="_blank" rel="noopener noreferrer" class="gallery__btn gallery__btn--github gem-interactive" title="View GitHub Repository">
+                  <span class="gem-shimmer"></span>
+                  <i class="ri-github-line"></i>
+                  <span>GitHub</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="gallery__card" data-modal-target="modal-2" data-live-url="https://stl-sahadat.github.io/madrasha-apps/" data-github-url="https://github.com/stl-sahadat/madrasha-apps">
+            <div class="blob"></div>
+            <div class="gallery__image-box">
+              <span class="gallery__badge">FULL-STACK ERP</span>
+              <div class="gallery__zoom-icon"><i class="ri-zoom-in-line"></i></div>
+              <img
+                src="assets/img/gallery/photo-1555949963-ff9fe0c870eb.jpg"
+                alt="Madrasa Management ERP Suite"
+                class="gallery__img"
+              />
+            </div>
+            <div class="gallery__content">
+              <h3 class="gallery__title">Madrasa Management ERP Suite</h3>
+              <p class="gallery__description">
+                Full-stack institutional ERP managing student admissions, digital ID generation, boarding and meal accounting, cash book, and examinations.
+              </p>
+              <div class="gallery__tags">
+                <span class="gallery__tag">Next.js 14</span>
+                <span class="gallery__tag">TypeScript</span>
+                <span class="gallery__tag">Tailwind</span>
+              </div>
+              <div class="gallery__actions">
+                <a href="https://stl-sahadat.github.io/madrasha-apps/" target="_blank" rel="noopener noreferrer" class="gallery__btn gallery__btn--live gem-interactive" title="Visit Live Application">
+                  <span class="gem-shimmer"></span>
+                  <i class="ri-arrow-right-up-line"></i>
+                  <span>Live App</span>
+                </a>
+                <a href="https://github.com/stl-sahadat/madrasha-apps" target="_blank" rel="noopener noreferrer" class="gallery__btn gallery__btn--github gem-interactive" title="View GitHub Repository">
+                  <span class="gem-shimmer"></span>
+                  <i class="ri-github-line"></i>
+                  <span>GitHub</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="gallery__card" data-modal-target="modal-3" data-live-url="https://stl-sahadat.github.io/morning-mug-coffee-house/index.html" data-github-url="https://github.com/stl-sahadat/morning-mug-coffee-house">
+            <div class="blob"></div>
+            <div class="gallery__image-box">
+              <span class="gallery__badge">CAFE &amp; E-COMMERCE</span>
+              <div class="gallery__zoom-icon"><i class="ri-zoom-in-line"></i></div>
+              <img
+                src="assets/img/project-1.png"
+                alt="Morning Mug Coffee House"
+                class="gallery__img"
+              />
+            </div>
+            <div class="gallery__content">
+              <h3 class="gallery__title">Morning Mug Coffee House</h3>
+              <p class="gallery__description">
+                Modern high-craft cafe storefront with interactive product catalog, responsive cart flow, and elegant micro-interactions.
+              </p>
+              <div class="gallery__tags">
+                <span class="gallery__tag">React 18</span>
+                <span class="gallery__tag">Tailwind</span>
+                <span class="gallery__tag">E-Commerce</span>
+              </div>
+              <div class="gallery__actions">
+                <a href="https://stl-sahadat.github.io/morning-mug-coffee-house/index.html" target="_blank" rel="noopener noreferrer" class="gallery__btn gallery__btn--live gem-interactive" title="Visit Live Application">
+                  <span class="gem-shimmer"></span>
+                  <i class="ri-arrow-right-up-line"></i>
+                  <span>Live App</span>
+                </a>
+                <a href="https://github.com/stl-sahadat/morning-mug-coffee-house" target="_blank" rel="noopener noreferrer" class="gallery__btn gallery__btn--github gem-interactive" title="View GitHub Repository">
+                  <span class="gem-shimmer"></span>
+                  <i class="ri-github-line"></i>
+                  <span>GitHub</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 4 -->
+          <article class="gallery__card" data-modal-target="modal-4" data-live-url="https://ais-pre-5outvodj2oly3dlanlrfxg-873905991312.asia-southeast1.run.app" data-github-url="https://github.com/stl-sahadat">
+            <div class="blob"></div>
+            <div class="gallery__image-box">
+              <span class="gallery__badge">CLOUD &amp; FINTECH</span>
+              <div class="gallery__zoom-icon"><i class="ri-zoom-in-line"></i></div>
+              <img
+                src="assets/img/gallery/photo-1551288049-bebda4e38f71.jpg"
+                alt="Cloud Expense Tracker Suite"
+                class="gallery__img"
+              />
+            </div>
+            <div class="gallery__content">
+              <h3 class="gallery__title">Cloud Expense Tracker Suite</h3>
+              <p class="gallery__description">
+                Production financial tracking platform containerized with Docker and deployed on Google Cloud Run with real-time analytics.
+              </p>
+              <div class="gallery__tags">
+                <span class="gallery__tag">Google Cloud</span>
+                <span class="gallery__tag">Docker</span>
+                <span class="gallery__tag">Python</span>
+              </div>
+              <div class="gallery__actions">
+                <a href="https://ais-pre-5outvodj2oly3dlanlrfxg-873905991312.asia-southeast1.run.app" target="_blank" rel="noopener noreferrer" class="gallery__btn gallery__btn--live gem-interactive" title="Visit Live Application">
+                  <span class="gem-shimmer"></span>
+                  <i class="ri-arrow-right-up-line"></i>
+                  <span>Live App</span>
+                </a>
+                <a href="https://github.com/stl-sahadat" target="_blank" rel="noopener noreferrer" class="gallery__btn gallery__btn--github gem-interactive" title="View GitHub Profile">
+                  <span class="gem-shimmer"></span>
+                  <i class="ri-github-line"></i>
+                  <span>GitHub</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 5 -->
+          <article class="gallery__card" data-modal-target="modal-5" data-live-url="https://github.com/stl-sahadat/boi-ghor" data-github-url="https://github.com/stl-sahadat/boi-ghor">
+            <div class="blob"></div>
+            <div class="gallery__image-box">
+              <span class="gallery__badge">BOOKSTORE &amp; WEB</span>
+              <div class="gallery__zoom-icon"><i class="ri-zoom-in-line"></i></div>
+              <img
+                src="assets/img/project-4.png"
+                alt="Boi Ghor Web Platform"
+                class="gallery__img"
+              />
+            </div>
+            <div class="gallery__content">
+              <h3 class="gallery__title">Boi Ghor Web Platform</h3>
+              <p class="gallery__description">
+                Curated book catalog platform with responsive interface, dynamic categories, and literature discovery.
+              </p>
+              <div class="gallery__tags">
+                <span class="gallery__tag">JavaScript</span>
+                <span class="gallery__tag">HTML5/CSS3</span>
+                <span class="gallery__tag">Responsive</span>
+              </div>
+              <div class="gallery__actions">
+                <a href="https://github.com/stl-sahadat/boi-ghor" target="_blank" rel="noopener noreferrer" class="gallery__btn gallery__btn--github gem-interactive" title="View GitHub Repository">
+                  <span class="gem-shimmer"></span>
+                  <i class="ri-github-line"></i>
+                  <span>GitHub</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 6 -->
+          <article class="gallery__card" data-modal-target="modal-6" data-live-url="https://github.com/stl-sahadat/E-commerce-Website" data-github-url="https://github.com/stl-sahadat/E-commerce-Website">
+            <div class="blob"></div>
+            <div class="gallery__image-box">
+              <span class="gallery__badge">DIGITAL STORE</span>
+              <div class="gallery__zoom-icon"><i class="ri-zoom-in-line"></i></div>
+              <img
+                src="assets/img/project-5.png"
+                alt="Modern E-Commerce Storefront"
+                class="gallery__img"
+              />
+            </div>
+            <div class="gallery__content">
+              <h3 class="gallery__title">Modern E-Commerce Storefront</h3>
+              <p class="gallery__description">
+                Interactive shopping storefront with dynamic product catalog, cart state, and responsive layouts.
+              </p>
+              <div class="gallery__tags">
+                <span class="gallery__tag">E-Commerce</span>
+                <span class="gallery__tag">CSS Grid</span>
+                <span class="gallery__tag">UI/UX</span>
+              </div>
+              <div class="gallery__actions">
+                <a href="https://github.com/stl-sahadat/E-commerce-Website" target="_blank" rel="noopener noreferrer" class="gallery__btn gallery__btn--github gem-interactive" title="View GitHub Repository">
+                  <span class="gem-shimmer"></span>
+                  <i class="ri-github-line"></i>
+                  <span>GitHub</span>
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- LIGHTBOX MODAL -->
+      <div class="gallery__modal" id="gallery-modal">
+        <div class="gallery__modal-content">
+          <button class="gallery__modal-close" id="modal-close" aria-label="Close modal">
+            <i class="ri-close-line"></i>
+          </button>
+          <img src="" alt="" class="gallery__modal-img" id="modal-img" />
+          <div class="gallery__modal-info">
+            <h3 id="modal-title"></h3>
+            <p id="modal-desc"></p>
+            <div class="gallery__modal-actions" id="modal-actions">
+              <a href="#" target="_blank" rel="noopener noreferrer" class="gallery__modal-btn gallery__modal-btn--live gem-interactive" id="modal-live-btn" title="Visit Live Application">
+                <span class="gem-shimmer"></span>
+                <i class="ri-arrow-right-up-line"></i>
+                <span class="modal-btn-label">Live Application</span>
+              </a>
+              <a href="#" target="_blank" rel="noopener noreferrer" class="gallery__modal-btn gallery__modal-btn--github gem-interactive" id="modal-github-btn" title="View GitHub Repository">
+                <span class="gem-shimmer"></span>
+                <i class="ri-github-line"></i>
+                <span class="modal-btn-label">GitHub Repository</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. WORK / EXPERIENCE & EDUCATION -->
+      <section class="work section" id="work">
+        <h2 class="section__title">
+          <span>Career &amp;</span>
+          <br />
+          Milestones
+        </h2>
+
+        <div class="work__container container">
+          <div class="work__content" id="experience">
+            <!-- Box 1 -->
+            <div class="work__card">
+              <div class="work__header">
+                <div class="work__node">
+                  <i class="ri-cpu-line"></i>
+                </div>
+                <span class="work__year">2024 — Present</span>
+              </div>
+              <div class="work__data">
+                <h3 class="work__title">Lead Automation &amp; Systems Architect</h3>
+                <h4 class="work__subtitle">Autonomous Enterprise Solutions · Intelligent Process Automation</h4>
+              </div>
+
+              <p class="work__description">
+                Architecting fault-tolerant autonomous agent frameworks and Python automation engines that eliminate operational bottlenecks and cut manual task overhead by 80%. Implemented deterministic API tool schemas and self-healing error recovery loops ensuring 24/7 autonomous reliability.
+              </p>
+
+              <div class="work__tags">
+                <span class="work__tag">Python</span>
+                <span class="work__tag">CrewAI</span>
+                <span class="work__tag">Multi-Agent Swarms</span>
+                <span class="work__tag">Google Cloud Run</span>
+                <span class="work__tag">Docker</span>
+              </div>
+            </div>
+
+            <!-- Box 2 -->
+            <div class="work__card">
+              <div class="work__header">
+                <div class="work__node">
+                  <i class="ri-terminal-box-line"></i>
+                </div>
+                <span class="work__year">2023 — Present</span>
+              </div>
+              <div class="work__data">
+                <h3 class="work__title">Full-Stack Systems Engineer</h3>
+                <h4 class="work__subtitle">Institutional Solutions · Modular ERP Platforms</h4>
+              </div>
+
+              <p class="work__description">
+                Engineering robust, type-safe institutional ERP platforms and data management suites using TypeScript, modern reactive frontends, and structured relational persistence. Digitized paper-based workflows into synchronized cloud database interfaces with 100% type-safe audit logging.
+              </p>
+
+              <div class="work__tags">
+                <span class="work__tag">Next.js 15</span>
+                <span class="work__tag">TypeScript</span>
+                <span class="work__tag">PostgreSQL</span>
+                <span class="work__tag">Prisma ORM</span>
+                <span class="work__tag">Tailwind CSS</span>
+              </div>
+            </div>
+
+            <!-- Box 3 -->
+            <div class="work__card">
+              <div class="work__header">
+                <div class="work__node">
+                  <i class="ri-layout-masonry-line"></i>
+                </div>
+                <span class="work__year">2023 — Present</span>
+              </div>
+              <div class="work__data">
+                <h3 class="work__title">Product &amp; Web Architect</h3>
+                <h4 class="work__subtitle">STL Tech Solutions · Bespoke Web Engineering &amp; UX</h4>
+              </div>
+
+              <p class="work__description">
+                Delivering bespoke consumer-facing web applications and modern commercial platforms with responsive micro-interactions, accessibility compliance, and optimized performance standards.
+              </p>
+
+              <div class="work__tags">
+                <span class="work__tag">Modern JavaScript</span>
+                <span class="work__tag">HTML5 / CSS3</span>
+                <span class="work__tag">Micro-Interactions</span>
+                <span class="work__tag">UI/UX Systems</span>
+                <span class="work__tag">Performance Optimization</span>
+              </div>
+            </div>
+
+            <!-- Box 4 -->
+            <div class="work__card">
+              <div class="work__header">
+                <div class="work__node">
+                  <i class="ri-cloud-line"></i>
+                </div>
+                <span class="work__year">2024 — Present</span>
+              </div>
+              <div class="work__data">
+                <h3 class="work__title">Cloud &amp; DevOps Architect</h3>
+                <h4 class="work__subtitle">Independent Systems · Serverless Infrastructure</h4>
+              </div>
+
+              <p class="work__description">
+                Architecting and deploying containerized full-stack services on Google Cloud Run with automated continuous deployment, strict schema validation, 99.9% uptime, and serverless auto-scaling.
+              </p>
+
+              <div class="work__tags">
+                <span class="work__tag">Docker</span>
+                <span class="work__tag">Google Cloud Run</span>
+                <span class="work__tag">REST APIs</span>
+                <span class="work__tag">CI/CD Automation</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. SERVICES / TECHNICAL SKILLS -->
+      <section class="services section" id="services">
+        <h2 class="section__title">Technical <span>Skills &amp; Architecture</span></h2>
+
+        <div class="services__container container grid">
+          <!-- 1. Autonomous AI & Prompt Architecture -->
+          <div class="services__card services__close">
+            <div class="blob"></div>
+
+            <div class="services__data">
+              <h2 class="services__title">Autonomous AI &amp; Prompt Architecture</h2>
+              <p class="services__description">
+                Architecting autonomous multi-agent swarms, deterministic guardrails, structured JSON schema generators, and agentic workflows using frontier LLM engines.
+              </p>
+            </div>
+
+            <div class="services__info">
+              <h3 class="services__subtitle">AI Stack &amp; Frameworks</h3>
+
+              <ul class="services__skills">
+                <li class="services__skill">CrewAI</li>
+                <li class="services__skill">LangChain</li>
+                <li class="services__skill">Claude 3.5 Sonnet</li>
+                <li class="services__skill">GPT-4o Frontier</li>
+                <li class="services__skill">DeepSeek R1</li>
+                <li class="services__skill">Prompt Architecture</li>
+                <li class="services__skill">Vector DBs</li>
+                <li class="services__skill">Pinecone</li>
+                <li class="services__skill">Autonomous Swarms</li>
+                <li class="services__skill">Model Context Protocol</li>
+              </ul>
+            </div>
+
+            <button class="services__button" aria-label="Toggle Skills">
+              <i class="ri-arrow-down-s-line"></i>
+            </button>
+          </div>
+
+          <!-- 2. Full-Stack & Spatial Web Engineering -->
+          <div class="services__card services__close">
+            <div class="blob blob-2"></div>
+
+            <div class="services__data">
+              <h2 class="services__title">Full-Stack &amp; Spatial Web Engineering</h2>
+              <p class="services__description">
+                Engineering high-performance responsive web platforms, modern client routing, reactive frontends, and accessible interactive interfaces.
+              </p>
+            </div>
+
+            <div class="services__info">
+              <h3 class="services__subtitle">Frontend Technologies</h3>
+
+              <ul class="services__skills">
+                <li class="services__skill">React 18</li>
+                <li class="services__skill">Next.js 15</li>
+                <li class="services__skill">TypeScript</li>
+                <li class="services__skill">JavaScript (ES6+)</li>
+                <li class="services__skill">Tailwind CSS</li>
+                <li class="services__skill">Vite &amp; Tooling</li>
+                <li class="services__skill">HTML5 &amp; CSS3</li>
+                <li class="services__skill">Redux / Zustand</li>
+                <li class="services__skill">WebSockets</li>
+                <li class="services__skill">Three.js 3D</li>
+              </ul>
+            </div>
+
+            <button class="services__button" aria-label="Toggle Tools">
+              <i class="ri-arrow-down-s-line"></i>
+            </button>
+          </div>
+
+          <!-- 3. Backend, Cloud & Production Infra -->
+          <div class="services__card services__close">
+            <div class="blob"></div>
+
+            <div class="services__data">
+              <h2 class="services__title">Backend, Cloud &amp; Production Infra</h2>
+              <p class="services__description">
+                Deploying containerized microservices, serverless Cloud Run pipelines, low-latency APIs, and resilient database architectures.
+              </p>
+            </div>
+
+            <div class="services__info">
+              <h3 class="services__subtitle">Backend &amp; Cloud Infra</h3>
+
+              <ul class="services__skills">
+                <li class="services__skill">Python</li>
+                <li class="services__skill">FastAPI</li>
+                <li class="services__skill">Google Cloud Run</li>
+                <li class="services__skill">Docker</li>
+                <li class="services__skill">PostgreSQL</li>
+                <li class="services__skill">Redis Caching</li>
+                <li class="services__skill">RESTful APIs</li>
+                <li class="services__skill">Linux VPS</li>
+                <li class="services__skill">Git &amp; CI/CD</li>
+                <li class="services__skill">Zero-Trust IAM</li>
+              </ul>
+            </div>
+
+            <button class="services__button" aria-label="Toggle Tools">
+              <i class="ri-arrow-down-s-line"></i>
+            </button>
+          </div>
+
+          <!-- 4. Reverse Engineering & System Architecture (Dedicated Skill Card) -->
+          <div class="services__card services__close">
+            <div class="blob blob-2"></div>
+
+            <div class="services__data">
+              <h2 class="services__title">Reverse Engineering &amp; System Recon</h2>
+              <p class="services__description">
+                Advanced software decompilation, protocol reverse engineering, network inspection, AST analysis, and high-fidelity application reconstruction.
+              </p>
+            </div>
+
+            <div class="services__info">
+              <h3 class="services__subtitle">Reverse Engineering Stack</h3>
+
+              <ul class="services__skills">
+                <li class="services__skill">Reverse Engineering</li>
+                <li class="services__skill">Binary &amp; AST Analysis</li>
+                <li class="services__skill">API &amp; Network Inspection</li>
+                <li class="services__skill">Protocol Decoding</li>
+                <li class="services__skill">Web Target Reconnaissance</li>
+                <li class="services__skill">Decompilation Tools</li>
+                <li class="services__skill">Architecture Mapping</li>
+                <li class="services__skill">Security &amp; Vulnerability Audit</li>
+                <li class="services__skill">Dynamic Tracing &amp; Hooks</li>
+                <li class="services__skill">Chrome DevTools Protocol</li>
+              </ul>
+            </div>
+
+            <button class="services__button" aria-label="Toggle Tools">
+              <i class="ri-arrow-down-s-line"></i>
+            </button>
+          </div>
+
+          <!-- 5. UI/UX Design Systems & Spatial UI -->
+          <div class="services__card services__close">
+            <div class="blob"></div>
+
+            <div class="services__data">
+              <h2 class="services__title">UI/UX Design Systems &amp; Spatial UI</h2>
+              <p class="services__description">
+                Designing high-conversion digital experiences, coherent design token architectures, interactive prototypes, and modern liquid glass aesthetic interfaces.
+              </p>
+            </div>
+
+            <div class="services__info">
+              <h3 class="services__subtitle">Design &amp; UI Architecture</h3>
+
+              <ul class="services__skills">
+                <li class="services__skill">Figma &amp; Prototyping</li>
+                <li class="services__skill">Design Systems &amp; Tokens</li>
+                <li class="services__skill">Micro-Interactions</li>
+                <li class="services__skill">ThreeUI Glassmorphism</li>
+                <li class="services__skill">Mobile &amp; Web UI Layouts</li>
+                <li class="services__skill">User Journey Architecture</li>
+                <li class="services__skill">WCAG Accessibility</li>
+                <li class="services__skill">Wireframing &amp; Design Specs</li>
+              </ul>
+            </div>
+
+            <button class="services__button" aria-label="Toggle Tools">
+              <i class="ri-arrow-down-s-line"></i>
+            </button>
+          </div>
+
+          <!-- 6. Specialized Engineering & Developer Roles -->
+          <div class="services__card services__close">
+            <div class="blob blob-2"></div>
+
+            <div class="services__data">
+              <h2 class="services__title">Specialized Engineering &amp; Developer Roles</h2>
+              <p class="services__description">
+                End-to-end multi-disciplinary capabilities spanning autonomous AI content orchestration, modern web applications, mobile platforms, and production full-stack systems.
+              </p>
+            </div>
+
+            <div class="services__info">
+              <h3 class="services__subtitle">Core Engineering Roles</h3>
+
+              <ul class="services__skills">
+                <li class="services__skill">AI Content Creator</li>
+                <li class="services__skill">Lead Systems Architect</li>
+                <li class="services__skill">Web Application Developer</li>
+                <li class="services__skill">Mobile App Developer</li>
+                <li class="services__skill">Frontend Developer</li>
+                <li class="services__skill">Backend Developer</li>
+                <li class="services__skill">Full-Stack Solutions Engineer</li>
+                <li class="services__skill">Technical Solutions Consultant</li>
+              </ul>
+            </div>
+
+            <button class="services__button" aria-label="Toggle Roles">
+              <i class="ri-arrow-down-s-line"></i>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7. TECH STACK & TOOLS MARQUEE (UNIFIED RIGHT AFTER SKILLS) -->
+      <section class="tech section" id="tech-stack">
+        <h2 class="section__title">
+          <span>Battle-Tested</span>
+          <br />
+          Tech Stack &amp; Tools
+        </h2>
+
+        <div class="tech__container">
+          <!-- Row 1: AI, Backend & Cloud Infra (Scrolls Left) -->
+          <div class="tech__track">
+            <!-- Set 1 -->
+            <div class="tech__badge">
+              <div class="tech__icon"><i class="devicon-python-plain colored"></i></div>
+              <div class="tech__info"><h3 class="tech__name">Python</h3><span class="tech__category">AI &amp; Automation</span></div>
+            </div>
+            <div class="tech__badge">
+              <div class="tech__icon"><i class="devicon-fastapi-plain colored"></i></div>
+              <div class="tech__info"><h3 class="tech__name">FastAPI</h3><span class="tech__category">Async APIs</span></div>
+            </div>
+            <div class="tech__badge">
+              <div class="tech__icon"><i class="devicon-docker-plain colored"></i></div>
+              <div class="tech__info"><h3 class="tech__name">Docker</h3><span class="tech__category">Containers</span></div>
+            </div>
+            <div class="tech__badge">
+              <div class="tech__icon"><i class="devicon-googlecloud-plain colored"></i></div>
+              <div class="tech__info"><h3 class="tech__name">Cloud Run</h3><span class="tech__category">Serverless GCP</span></div>
+            </div>
+            <div class="tech__badge">
+              <div class="tech__icon"><i class="ri-robot-2-line"></i></div>
+              <div class="tech__info"><h3 class="tech__name">CrewAI</h3><span class="tech__category">Multi-Agent</span></div>
+            </div>
+            <div class="tech__badge">
+              <div class="tech__icon"><i class="ri-brain-line"></i></div>
+              <div class="tech__info"><h3 class="tech__name">LangChain</h3><span class="tech__category">LLM Chains</span></div>
+            </div>
+            <div class="tech__badge">
+              <div class="tech__icon"><i class="ri-sparkling-fill"></i></div>
+              <div class="tech__info"><h3 class="tech__name">Claude 3.5</h3><span class="tech__category">Anthropic AI</span></div>
+            </div>
+            <div class="tech__badge">
+              <div class="tech__icon"><i class="ri-cpu-line"></i></div>
+              <div class="tech__info"><h3 class="tech__name">GPT-4o</h3><span class="tech__category">OpenAI Models</span></div>
+            </div>
+            <div class="tech__badge">
+              <div class="tech__icon"><i class="devicon-postgresql-plain colored"></i></div>
+              <div class="tech__info"><h3 class="tech__name">PostgreSQL</h3><span class="tech__category">Relational DB</span></div>
+            </div>
+            <div class="tech__badge">
+              <div class="tech__icon"><i class="devicon-redis-plain colored"></i></div>
+              <div class="tech__info"><h3 class="tech__name">Redis</h3><span class="tech__category">Memory Cache</span></div>
+            </div>
+            <div class="tech__badge">
+              <div class="tech__icon"><i class="devicon-git-plain colored"></i></div>
+              <div class="tech__info"><h3 class="tech__name">Git &amp; GitHub</h3><span class="tech__category">Version Control</span></div>
+            </div>
+            <div class="tech__badge">
+              <div class="tech__icon"><i class="ri-terminal-box-line" style="color: #c084fc; font-size: 1.5rem;"></i></div>
+              <div class="tech__info"><h3 class="tech__name">Reverse Eng</h3><span class="tech__category">Binary &amp; Recon</span></div>
+            </div>
+
+            <!-- Set 1 Duplicate for Infinite Loop -->
+            <div class="tech__badge">
+              <div class="tech__icon"><i class="devicon-python-plain colored"></i></div>
+              <div class="tech__info"><h3 class="tech__name">Python</h3><span class="tech__category">AI &amp; Automation</span></div>
+            </div>
+            <div class="tech__badge">
+              <div class="tech__icon"><i class="devicon-fastapi-plain colored"></i></div>
+              <div class="tech__info"><h3 class="tech__name">FastAPI</h3><span class="tech__category">Async APIs</span></div>
+            </div>
+            <div class="tech__badge">
+              <div class="tech__icon"><i class="devicon-docker-plain colored"></i></div>
+              <div class="tech__info"><h3 class="tech__name">Docker</h3><span class="tech__category">Containers</span></div>
+            </div>
+            <div class="tech__badge">
+              <div class="tech__icon"><i class="devicon-googlecloud-plain colored"></i></div>
+              <div class="tech__info"><h3 class="tech__name">Cloud Run</h3><span class="tech__category">Serverless GCP</span></div>
+            </div>
+            <div class="tech__badge">
+              <div class="tech__icon"><i class="ri-robot-2-line"></i></div>
+              <div class="tech__info"><h3 class="tech__name">CrewAI</h3><span class="tech__category">Multi-Agent</span></div>
+            </div>
+            <div class="tech__badge">
+              <div class="tech__icon"><i class="ri-brain-line"></i></div>
+              <div class="tech__info"><h3 class="tech__name">LangChain</h3><span class="tech__category">LLM Chains</span></div>
+            </div>
+            <div class="tech__badge">
+              <div class="tech__icon"><i class="ri-sparkling-fill"></i></div>
+              <div class="tech__info"><h3 class="tech__name">Claude 3.5</h3><span class="tech__category">Anthropic AI</span></div>
+            </div>
+            <div class="tech__badge">
+              <div class="tech__icon"><i class="ri-cpu-line"></i></div>
+              <div class="tech__info"><h3 class="tech__name">GPT-4o</h3><span class="tech__category">OpenAI Models</span></div>
+            </div>
+            <div class="tech__badge">
+              <div class="tech__icon"><i class="devicon-postgresql-plain colored"></i></div>
+              <div class="tech__info"><h3 class="tech__name">PostgreSQL</h3><span class="tech__category">Relational DB</span></div>
+            </div>
+            <div class="tech__badge">
+              <div class="tech__icon"><i class="devicon-redis-plain colored"></i></div>
+              <div class="tech__info"><h3 class="tech__name">Redis</h3><span class="tech__category">Memory Cache</span></div>
+            </div>
+            <div class="tech__badge">
+              <div class="tech__icon"><i class="devicon-git-plain colored"></i></div>
+              <div class="tech__info"><h3 class="tech__name">Git &amp; GitHub</h3><span class="tech__category">Version Control</span></div>
+            </div>
+            <div class="tech__badge">
+              <div class="tech__icon"><i class="ri-terminal-box-line" style="color: #c084fc; font-size: 1.5rem;"></i></div>
+              <div class="tech__info"><h3 class="tech__name">Reverse Eng</h3><span class="tech__category">Binary &amp; Recon</span></div>
+            </div>
+          </div>
+
+          <!-- Row 2: Frontend, Spatial Web & Tooling (Scrolls Right) -->
+          <div class="tech__track tech__track-reverse">
+            <!-- Set 2 -->
+            <div class="tech__badge">
+              <div class="tech__icon"><i class="devicon-react-original colored"></i></div>
+              <div class="tech__info"><h3 class="tech__name">React 18</h3><span class="tech__category">UI Architecture</span></div>
+            </div>
+            <div class="tech__badge">
+              <div class="tech__icon"><i class="devicon-nextjs-plain"></i></div>
+              <div class="tech__info"><h3 class="tech__name">Next.js</h3><span class="tech__category">App Router</span></div>
+            </div>
+            <div class="tech__badge">
+              <div class="tech__icon"><i class="devicon-typescript-plain colored"></i></div>
+              <div class="tech__info"><h3 class="tech__name">TypeScript</h3><span class="tech__category">Type Safety</span></div>
+            </div>
+            <div class="tech__badge">
+              <div class="tech__icon"><i class="devicon-tailwindcss-original colored"></i></div>
+              <div class="tech__info"><h3 class="tech__name">Tailwind CSS</h3><span class="tech__category">Design Systems</span></div>
+            </div>
+            <div class="tech__badge">
+              <div class="tech__icon"><i class="devicon-javascript-plain colored"></i></div>
+              <div class="tech__info"><h3 class="tech__name">JavaScript</h3><span class="tech__category">Async ES6+</span></div>
+            </div>
+            <div class="tech__badge">
+              <div class="tech__icon"><i class="devicon-vite-plain colored"></i></div>
+              <div class="tech__info"><h3 class="tech__name">Vite</h3><span class="tech__category">Bundler</span></div>
+            </div>
+            <div class="tech__badge">
+              <div class="tech__icon"><i class="devicon-html5-plain colored"></i></div>
+              <div class="tech__info"><h3 class="tech__name">HTML5 / CSS3</h3><span class="tech__category">Modern Web</span></div>
+            </div>
+            <div class="tech__badge">
+              <div class="tech__icon"><i class="ri-wifi-line"></i></div>
+              <div class="tech__info"><h3 class="tech__name">WebSockets</h3><span class="tech__category">Real-Time Streams</span></div>
+            </div>
+            <div class="tech__badge">
+              <div class="tech__icon"><i class="devicon-threejs-original"></i></div>
+              <div class="tech__info"><h3 class="tech__name">Three.js 3D</h3><span class="tech__category">WebGL Shaders</span></div>
+            </div>
+            <div class="tech__badge">
+              <div class="tech__icon"><i class="devicon-linux-plain"></i></div>
+              <div class="tech__info"><h3 class="tech__name">Linux</h3><span class="tech__category">Server &amp; CLI</span></div>
+            </div>
+            <div class="tech__badge">
+              <div class="tech__icon"><i class="ri-git-merge-line"></i></div>
+              <div class="tech__info"><h3 class="tech__name">CI/CD</h3><span class="tech__category">Automated Deploy</span></div>
+            </div>
+            <div class="tech__badge">
+              <div class="tech__icon"><i class="ri-shield-keyhole-line" style="color: #38bdf8; font-size: 1.5rem;"></i></div>
+              <div class="tech__info"><h3 class="tech__name">System Recon</h3><span class="tech__category">AST &amp; Protocol</span></div>
+            </div>
+
+            <!-- Set 2 Duplicate for Infinite Loop -->
+            <div class="tech__badge">
+              <div class="tech__icon"><i class="devicon-react-original colored"></i></div>
+              <div class="tech__info"><h3 class="tech__name">React 18</h3><span class="tech__category">UI Architecture</span></div>
+            </div>
+            <div class="tech__badge">
+              <div class="tech__icon"><i class="devicon-nextjs-plain"></i></div>
+              <div class="tech__info"><h3 class="tech__name">Next.js</h3><span class="tech__category">App Router</span></div>
+            </div>
+            <div class="tech__badge">
+              <div class="tech__icon"><i class="devicon-typescript-plain colored"></i></div>
+              <div class="tech__info"><h3 class="tech__name">TypeScript</h3><span class="tech__category">Type Safety</span></div>
+            </div>
+            <div class="tech__badge">
+              <div class="tech__icon"><i class="devicon-tailwindcss-original colored"></i></div>
+              <div class="tech__info"><h3 class="tech__name">Tailwind CSS</h3><span class="tech__category">Design Systems</span></div>
+            </div>
+            <div class="tech__badge">
+              <div class="tech__icon"><i class="devicon-javascript-plain colored"></i></div>
+              <div class="tech__info"><h3 class="tech__name">JavaScript</h3><span class="tech__category">Async ES6+</span></div>
+            </div>
+            <div class="tech__badge">
+              <div class="tech__icon"><i class="devicon-vite-plain colored"></i></div>
+              <div class="tech__info"><h3 class="tech__name">Vite</h3><span class="tech__category">Bundler</span></div>
+            </div>
+            <div class="tech__badge">
+              <div class="tech__icon"><i class="devicon-html5-plain colored"></i></div>
+              <div class="tech__info"><h3 class="tech__name">HTML5 / CSS3</h3><span class="tech__category">Modern Web</span></div>
+            </div>
+            <div class="tech__badge">
+              <div class="tech__icon"><i class="ri-wifi-line"></i></div>
+              <div class="tech__info"><h3 class="tech__name">WebSockets</h3><span class="tech__category">Real-Time Streams</span></div>
+            </div>
+            <div class="tech__badge">
+              <div class="tech__icon"><i class="devicon-threejs-original"></i></div>
+              <div class="tech__info"><h3 class="tech__name">Three.js 3D</h3><span class="tech__category">WebGL Shaders</span></div>
+            </div>
+            <div class="tech__badge">
+              <div class="tech__icon"><i class="devicon-linux-plain"></i></div>
+              <div class="tech__info"><h3 class="tech__name">Linux</h3><span class="tech__category">Server &amp; CLI</span></div>
+            </div>
+            <div class="tech__badge">
+              <div class="tech__icon"><i class="ri-git-merge-line"></i></div>
+              <div class="tech__info"><h3 class="tech__name">CI/CD</h3><span class="tech__category">Automated Deploy</span></div>
+            </div>
+            <div class="tech__badge">
+              <div class="tech__icon"><i class="ri-shield-keyhole-line" style="color: #38bdf8; font-size: 1.5rem;"></i></div>
+              <div class="tech__info"><h3 class="tech__name">System Recon</h3><span class="tech__category">AST &amp; Protocol</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 8. CONTACT -->
+      <section class="contact section" id="contact">
+        <div class="contact__container container grid">
+          <div class="contact__data">
+            <h2 class="section__title">Let's <span>Build Together</span></h2>
+
+            <p class="contact__description">Have an ambitious project, autonomous AI agent goal, or full-stack software challenge? Let's connect and build an exceptional production solution together.</p>
+
+            <button class="contact__button button gem-btn" id="contact-btn">
+              <span class="gem-shimmer"></span>
+              <span class="gem-icon-wrap">
+                <span class="gem-icon-ambient gem-ambient-cyan"></span>
+                <svg viewBox="0 0 24 24" class="gem-icon-svg" aria-hidden="true">
+                  <defs>
+                    <linearGradient id="copyGradBtn" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#ffffff" />
+                      <stop offset="50%" stop-color="#7dd3fc" />
+                      <stop offset="100%" stop-color="#0284c7" />
+                    </linearGradient>
+                  </defs>
+                  <rect x="8" y="8" width="12" height="13" rx="2.5" fill="url(#copyGradBtn)" stroke="#ffffff" stroke-width="0.5" />
+                  <path d="M16 8V5C16 3.9 15.1 3 14 3H6C4.9 3 4 3.9 4 5V15C4 16.1 4.9 17 6 17H8" stroke="#ffffff" stroke-width="1.3" stroke-linecap="round" fill="none" opacity="0.85" />
+                  <circle cx="14" cy="12" r="0.9" fill="#ffffff" class="gem-twinkle" />
+                </svg>
+              </span>
+              <span class="gem-btn__text">Copy Email</span>
+              <!-- Email hidden span for 1-click clipboard -->
+              <span class="contact__email" id="contact-email">sahadat.info01@gmail.com</span>
+            </button>
+          </div>
+
+          <div class="contact__content grid">
+            <div class="contact__info grid">
+              <div>
+                <h3 class="contact__title">Direct Email</h3>
+                <address class="contact__address">
+                  <a href="mailto:sahadat.info01@gmail.com" style="color: inherit; text-decoration: underline;">sahadat.info01@gmail.com</a>
+                </address>
+              </div>
+
+              <div>
+                <h3 class="contact__title">Location</h3>
+                <address class="contact__address">
+                  Barura, Cumilla, Chattogram, Bangladesh · Open to Remote Worldwide
+                </address>
+              </div>
+            </div>
+
+            <div class="contact__social">
+              <h3 class="contact__title">Professional Networks</h3>
+
+              <div class="contact__links">
+                <a
+                  href="https://www.linkedin.com/in/mdsahadatconnact/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="contact__link contact__link--linkedin gem-interactive"
+                >
+                  <span class="gem-shimmer"></span>
+                  <span class="contact__link-inner">
+                    <span class="gem-icon-wrap">
+                      <span class="gem-icon-ambient gem-ambient-blue"></span>
+                      <svg viewBox="0 0 24 24" class="gem-icon-svg" aria-hidden="true">
+                        <defs>
+                          <linearGradient id="liContactGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#60a5fa" />
+                            <stop offset="50%" stop-color="#2563eb" />
+                            <stop offset="100%" stop-color="#1d4ed8" />
+                          </linearGradient>
+                        </defs>
+                        <rect x="2" y="2" width="20" height="20" rx="5" fill="url(#liContactGrad)" stroke="#ffffff" stroke-width="0.5" />
+                        <circle cx="7" cy="7.5" r="1.5" fill="#ffffff" />
+                        <rect x="5.5" y="10.5" width="3" height="8" rx="0.8" fill="#ffffff" />
+                        <path d="M11 10.5h2.8v1.2c.4-.7 1.4-1.4 2.8-1.4 2.1 0 3.4 1.3 3.4 3.7V18.5H17v-4.2c0-1.2-.5-1.9-1.5-1.9-1 0-1.6.7-1.6 1.9v4.2H11v-8z" fill="#ffffff" />
+                        <circle cx="19" cy="5" r="0.8" fill="#ffffff" class="gem-twinkle" />
+                      </svg>
+                    </span>
+                    <span>LinkedIn</span>
+                  </span>
+                  <i class="ri-arrow-right-up-line contact__link-arrow"></i>
+                </a>
+
+                <a
+                  href="https://github.com/stl-sahadat"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="contact__link gem-interactive"
+                >
+                  <span class="gem-shimmer"></span>
+                  <span class="contact__link-inner">
+                    <span class="gem-icon-wrap">
+                      <span class="gem-icon-ambient gem-ambient-violet"></span>
+                      <svg viewBox="0 0 24 24" class="gem-icon-svg" aria-hidden="true">
+                        <defs>
+                          <linearGradient id="ghContactGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#ffffff" />
+                            <stop offset="60%" stop-color="#e2e8f0" />
+                            <stop offset="100%" stop-color="#94a3b8" />
+                          </linearGradient>
+                        </defs>
+                        <path fill="url(#ghContactGrad)" fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+                        <circle cx="18" cy="5" r="0.8" fill="#ffffff" class="gem-twinkle" />
+                      </svg>
+                    </span>
+                    <span>GitHub</span>
+                  </span>
+                  <i class="ri-arrow-right-up-line contact__link-arrow"></i>
+                </a>
+
+                <a
+                  href="mailto:sahadat.info01@gmail.com"
+                  class="contact__link gem-interactive"
+                >
+                  <span class="gem-shimmer"></span>
+                  <span class="contact__link-inner">
+                    <span class="gem-icon-wrap">
+                      <span class="gem-icon-ambient gem-ambient-purple"></span>
+                      <svg viewBox="0 0 24 24" class="gem-icon-svg" aria-hidden="true">
+                        <defs>
+                          <linearGradient id="mailContactGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#e9d5ff" />
+                            <stop offset="50%" stop-color="#a855f7" />
+                            <stop offset="100%" stop-color="#6b21a8" />
+                          </linearGradient>
+                          <linearGradient id="mailContactFlap" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#ffffff" />
+                            <stop offset="100%" stop-color="#c084fc" />
+                          </linearGradient>
+                        </defs>
+                        <rect x="2" y="4" width="20" height="16" rx="4" fill="url(#mailContactGrad)" stroke="#ffffff" stroke-width="0.5" />
+                        <polygon points="3,6 12,13 21,6" fill="url(#mailContactFlap)" opacity="0.95" />
+                        <line x1="3" y1="18" x2="9" y2="12" stroke="#ffffff" stroke-width="0.6" opacity="0.7" />
+                        <line x1="21" y1="18" x2="15" y2="12" stroke="#ffffff" stroke-width="0.6" opacity="0.7" />
+                        <circle cx="18" cy="7" r="0.8" fill="#ffffff" class="gem-twinkle" />
+                      </svg>
+                    </span>
+                    <span>Direct Mail</span>
+                  </span>
+                  <i class="ri-arrow-right-up-line contact__link-arrow"></i>
+                </a>
+              </div>
+            </div>
+
+            <div class="contact__write">
+              <h3 class="contact__title">Direct &amp; Video Channels</h3>
+
+              <div class="contact__links">
+                <a
+                  href="https://wa.me/8801944576159?text=Hello%20Md%20Sahadat%20Hossain,%20I%20would%20like%20to%20discuss%20a%20project."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="contact__link contact__link--whatsapp gem-interactive"
+                  title="WhatsApp"
+                  aria-label="WhatsApp"
+                >
+                  <span class="gem-shimmer"></span>
+                  <span class="contact__link-inner">
+                    <span class="gem-icon-wrap">
+                      <span class="gem-icon-ambient gem-ambient-emerald"></span>
+                      <svg viewBox="0 0 24 24" class="gem-icon-svg" aria-hidden="true">
+                        <defs>
+                          <linearGradient id="waContactGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#4ade80" />
+                            <stop offset="50%" stop-color="#25d366" />
+                            <stop offset="100%" stop-color="#128c7e" />
+                          </linearGradient>
+                        </defs>
+                        <path d="M12 2C6.48 2 2 6.48 2 12c0 1.94.55 3.75 1.51 5.29L2.3 21.5l4.35-1.18C8.11 21.36 9.99 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z" fill="url(#waContactGrad)" stroke="#ffffff" stroke-width="0.5" />
+                        <path d="M16.4 14.5c-.25-.13-1.46-.72-1.69-.8-.23-.08-.39-.13-.56.13-.16.25-.64.8-.78.96-.15.16-.29.18-.54.06-.25-.13-1.05-.39-2-1.24-.74-.66-1.24-1.48-1.39-1.73-.14-.25-.01-.39.11-.51.11-.11.25-.29.38-.44.13-.15.17-.25.25-.42.08-.17.04-.32-.02-.45-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.16 0-.43.06-.66.31-.23.25-.87.85-.87 2.08s.89 2.42 1.01 2.59c.13.17 1.76 2.68 4.25 3.76.59.26 1.06.41 1.42.52.6.19 1.15.16 1.58.1.48-.07 1.46-.6 1.67-1.18.2-.57.2-1.07.14-1.18-.06-.11-.23-.18-.48-.3z" fill="#ffffff" />
+                        <circle cx="16" cy="6" r="0.9" fill="#ffffff" class="gem-twinkle" />
+                      </svg>
+                    </span>
+                    <span>WhatsApp</span>
+                  </span>
+                  <i class="ri-arrow-right-up-line contact__link-arrow"></i>
+                </a>
+
+                <a
+                  href="https://www.youtube.com/@sahadatautomation"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="contact__link contact__link--youtube gem-interactive"
+                  title="YouTube"
+                  aria-label="YouTube"
+                >
+                  <span class="gem-shimmer"></span>
+                  <span class="contact__link-inner">
+                    <span class="gem-icon-wrap">
+                      <span class="gem-icon-ambient gem-ambient-crimson"></span>
+                      <svg viewBox="0 0 24 24" class="gem-icon-svg" aria-hidden="true">
+                        <defs>
+                          <linearGradient id="ytContactGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#ff4b4b" />
+                            <stop offset="50%" stop-color="#ef233c" />
+                            <stop offset="100%" stop-color="#b91c1c" />
+                          </linearGradient>
+                        </defs>
+                        <rect x="2" y="5" width="20" height="14" rx="4" fill="url(#ytContactGrad)" stroke="#ffffff" stroke-width="0.5" />
+                        <polygon points="10,8.5 16,12 10,15.5" fill="#ffffff" />
+                        <circle cx="19" cy="8" r="0.8" fill="#ffffff" class="gem-twinkle" />
+                      </svg>
+                    </span>
+                    <span>YouTube</span>
+                  </span>
+                  <i class="ri-arrow-right-up-line contact__link-arrow"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer grid">
+      <div class="blob-animate"></div>
+
+      <div class="footer__copy">
+        All Rights Reserved By <span>Md Sahadat Hossain</span>
+      </div>
+
+      <div class="footer__year">
+        &#169;
+        <span id="footer-year">2026</span>
+      </div>
+    </footer>
+
+    <!-- SCROLLREVEAL -->
+    <script src="assets/js/scrollreveal.min.js"></script>
+
+    <!-- ANIME JS -->
+    <script src="https://cdn.jsdelivr.net/npm/animejs/lib/anime.iife.min.js"></script>
+
+    <!-- SWIPER JS -->
+    <script src="assets/js/swiper-bundle.min.js"></script>
+
+    <!-- REAL VISITOR ANALYTICS -->
+    <script src="assets/js/analytics.js"></script>
+
+    <!-- CONSTELLATION FIELD & PARTICLE DRIFT BACKGROUND -->
+    <script src="assets/js/constellation-bg.js"></script>
+
+    <!-- MAIN JS -->
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>
