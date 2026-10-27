@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Md Sahadat Hossain — Software Architect & Systems Engineer</title>
+    <meta name="description" content="Unified Architecture Portfolio of Md Sahadat Hossain: High-concurrency systems, distributed microservices, 3D spatial tech stack, and enterprise solutions.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="/prototype/style.css">
+</head>
+<body>
+    <!-- Custom Magnetic Cursor -->
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-follower" id="cursorFollower"></div>
+
+    <!-- Quick Navigation Ambient Glow -->
+    <div class="ambient-mesh" aria-hidden="true">
+        <div class="mesh-orb orb-1"></div>
+        <div class="mesh-orb orb-2"></div>
+        <div class="mesh-orb orb-3"></div>
+    </div>
+
+    <!-- Floating Island Navigation Bar -->
+    <header class="navbar-wrapper">
+        <nav class="navbar" id="navbar">
+            <a href="#hero" class="nav-brand" aria-label="Sahadat Hossain Home">
+                <span class="brand-monogram">SH</span>
+                <span class="brand-telemetry">
+                    <span class="status-dot"></span>
+                    <span class="status-text">SYS_ONLINE</span>
+                </span>
+            </a>
+
+            <div class="nav-links">
+                <a href="#hero" class="nav-link active"><span>01</span> Core</a>
+                <a href="#orbit" class="nav-link"><span>02</span> 3D Orbit</a>
+                <a href="#metrics" class="nav-link"><span>03</span> Telemetry</a>
+                <a href="#showcase" class="nav-link"><span>04</span> Case Studies</a>
+                <a href="#blueprints" class="nav-link"><span>05</span> Blueprints</a>
+                <a href="#room-portal" class="nav-link"><span>06</span> 3D Studio</a>
+                <a href="#contact" class="nav-link"><span>07</span> Connect</a>
+            </div>
+
+            <div class="nav-actions">
+                <!-- Cosmos Dual Theme Switcher -->
+                <button class="theme-toggle" id="themeToggle" title="Toggle OLED Dark / Warm Paper Theme" aria-label="Toggle Theme">
+                    <span class="theme-icon icon-moon"><i class="fa-solid fa-moon"></i></span>
+                    <span class="theme-icon icon-sun"><i class="fa-solid fa-sun"></i></span>
+                </button>
+
+                <!-- Classic Mode Switcher -->
+                <a href="/" class="btn-classic" title="Return to Classic Portfolio">
+                    <span>Classic Site</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+
+                <!-- Magnetic Connect Button -->
+                <a href="#contact" class="btn-magnetic" id="navContactBtn">
+                    <span class="btn-text">Consult</span>
+                    <span class="btn-rotating-badge">
+                        <i class="fa-solid fa-arrow-trend-up"></i>
+                    </span>
+                </a>
+            </div>
+
+            <!-- Mobile Hamburger -->
+            <button class="mobile-toggle" id="mobileMenuBtn" aria-label="Toggle Mobile Navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+
+        <!-- Mobile Drawer -->
+        <div class="mobile-drawer" id="mobileDrawer">
+            <a href="#hero" class="mobile-link"><span>01</span> Core Overview</a>
+            <a href="#orbit" class="mobile-link"><span>02</span> 3D Spatial Stack</a>
+            <a href="#metrics" class="mobile-link"><span>03</span> Architecture Telemetry</a>
+            <a href="#showcase" class="mobile-link"><span>04</span> Editorial Case Studies</a>
+            <a href="#blueprints" class="mobile-link"><span>05</span> System Blueprints</a>
+            <a href="#room-portal" class="mobile-link"><span>06</span> 3D Cyber Studio</a>
+            <a href="#contact" class="mobile-link"><span>07</span> Connect & Inquire</a>
+            <div class="mobile-bottom">
+                <a href="/" class="mobile-classic-btn">Switch to Classic View</a>
+                <a href="/admin" class="mobile-admin-btn">Admin Portal</a>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <!-- ============================================== -->
+        <!-- SECTION 1: HERO ARCHIT[E]CT MORPHING CAPSULE   -->
+        <!-- ============================================== -->
+        <section class="section-hero" id="hero">
+            <div class="hero-container">
+                <!-- Status & Identification Meta -->
+                <div class="hero-meta-strip">
+                    <div class="meta-tag"><i class="fa-solid fa-terminal"></i> SOFTWARE ARCHITECT & FULL STACK DEVELOPER</div>
+                    <div class="meta-divider">/</div>
+                    <div class="meta-location"><i class="fa-solid fa-location-dot"></i> COMILLA, CHITTAGONG, BANGLADESH</div>
+                    <div class="meta-divider">/</div>
+                    <div class="meta-availability"><span class="pulse-indicator"></span> OPEN FOR ENTERPRISE CONTRACTS</div>
+                </div>
+
+                <!-- Arooth Morphing Kinetic Headline -->
+                <div class="hero-headline-wrapper">
+                    <div class="hero-line hero-line-top">SOFTWARE</div>
+                    <div class="hero-line hero-line-bottom">
+                        <span class="title-part">ARCHIT</span>
+                        <!-- Morphing Interactive Capsule -->
+                        <div class="morph-capsule" id="morphCapsule" title="Click to expand architecture telemetry">
+                            <div class="capsule-glow"></div>
+                            <div class="capsule-inner">
+                                <span class="capsule-letter">E</span>
+                                <span class="capsule-details">
+                                    <span class="capsule-badge">SCALE</span>
+                                    <span class="capsule-ticker">HIGH CONCURRENCY</span>
+                                </span>
+                                <div class="capsule-ring"></div>
+                            </div>
+                        </div>
+                        <span class="title-part">CT</span>
+                    </div>
+                </div>
+
+                <!-- Subtitle & Strategic Bio -->
+                <p class="hero-lead">
+                    Architecting high-concurrency distributed platforms, resilient backend pipelines, and high-performance user interfaces. 
+                    Specialized in event-driven microservices, real-time WebSockets, and zero-downtime containerized infrastructures.
+                </p>
+
+                <!-- Action CTA Cluster -->
+                <div class="hero-cta-group">
+                    <a href="#showcase" class="cta-primary magnetic-target">
+                        <span class="cta-inner">
+                            <span class="cta-label">Explore Case Studies</span>
+                            <span class="cta-icon-wrapper">
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </span>
+                        </span>
+                    </a>
+
+                    <a href="/3d" class="cta-room-portal magnetic-target" target="_blank" rel="noopener noreferrer">
+                        <span class="cta-room-icon"><i class="fa-solid fa-vr-cardboard"></i></span>
+                        <span class="cta-room-text">
+                            <span class="cta-room-title">Enter 3D Developer Studio</span>
+                            <span class="cta-room-sub">Interactive Three.js Isometric Room</span>
+                        </span>
+                        <span class="badge-3d">3D LIVE</span>
+                    </a>
+                </div>
+
+                <!-- Telemetry Ticker Strip -->
+                <div class="hero-telemetry-hud">
+                    <div class="telemetry-cell">
+                        <span class="cell-label">SYSTEM CLOCK</span>
+                        <span class="cell-value" id="hudClock">12:00:00 UTC+6</span>
+                    </div>
+                    <div class="telemetry-cell">
+                        <span class="cell-label">RUNTIME ENGINE</span>
+                        <span class="cell-value">NODE.JS 22 / NEXT 15</span>
+                    </div>
+                    <div class="telemetry-cell">
+                        <span class="cell-label">DATABASE REDUNDANCY</span>
+                        <span class="cell-value">POSTGRES + REDIS REPLICA</span>
+                    </div>
+                    <div class="telemetry-cell">
+                        <span class="cell-label">EDGE PROTOCOL</span>
+                        <span class="cell-value">HTTP/3 QUIC + WEBSOCKETS</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scroll Down Indicator -->
+            <a href="#orbit" class="scroll-down-pill" aria-label="Scroll to 3D Orbit section">
+                <span class="pill-track"><span class="pill-thumb"></span></span>
+                <span class="pill-text">SPATIAL ARCHITECTURE</span>
+            </a>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- SECTION 2: COSMOS 3D SPATIAL ORBIT CONSTELLATION-->
+        <!-- ============================================== -->
+        <section class="section-orbit" id="orbit">
+            <div class="section-header">
+                <div class="badge-category"><span class="color-dot indigo"></span> SPATIAL CONSTELLATION</div>
+                <h2 class="section-title">Architectural Tech Ecosystem</h2>
+                <p class="section-subtitle">
+                    Interactive 3D orbital constellation representing the foundational distributed technologies powering high-throughput enterprise systems.
+                </p>
+            </div>
+
+            <!-- 3D Orbit Stage with Mouse Parallax -->
+            <div class="orbit-stage-wrapper" id="orbitStageWrapper">
+                <div class="orbit-stage" id="orbitStage">
+                    
+                    <!-- Center Sun Core: Architect Core -->
+                    <div class="orbit-core" id="orbitCore">
+                        <div class="core-aura"></div>
+                        <div class="core-ring core-ring-1"></div>
+                        <div class="core-ring core-ring-2"></div>
+                        <div class="core-avatar">
+                            <img src="/assets/img/sahadat-avatar.jpg" alt="Md Sahadat Hossain" onerror="this.src='assets/img/hero-profile1.png'">
+                        </div>
+                        <div class="core-badge">
+                            <span class="core-name">SAHADAT HOSSAIN</span>
+                            <span class="core-role">SYSTEMS ARCHITECT</span>
+                        </div>
+                    </div>
+
+                    <!-- Orbital Elliptical Rings -->
+                    <div class="orbit-ellipse orbit-ellipse-inner"></div>
+                    <div class="orbit-ellipse orbit-ellipse-outer"></div>
+
+                    <!-- Satellite Nodes (Calculated and positioned dynamically or via CSS transforms) -->
+                    <div class="satellite-node" data-index="0" data-tech="PostgreSQL & ACID" data-color="#10B981" data-desc="Enterprise relational storage, connection pooling with PgBouncer, B-Tree partitioning, and zero-loss ACID replication.">
+                        <div class="node-card">
+                            <div class="node-icon" style="color: #10B981;"><i class="fa-solid fa-database"></i></div>
+                            <div class="node-info">
+                                <span class="node-title">PostgreSQL</span>
+                                <span class="node-category">Relational Core</span>
+                            </div>
+                            <span class="node-ping" style="background: #10B981;"></span>
+                        </div>
+                    </div>
+
+                    <div class="satellite-node" data-index="1" data-tech="Redis Pub/Sub Streams" data-color="#EF4444" data-desc="Ultra-low latency in-memory data store, atomic distributed locking (Redlock), and real-time pub/sub message brokers.">
+                        <div class="node-card">
+                            <div class="node-icon" style="color: #EF4444;"><i class="fa-solid fa-bolt"></i></div>
+                            <div class="node-info">
+                                <span class="node-title">Redis Streams</span>
+                                <span class="node-category">Cache & Queue</span>
+                            </div>
+                            <span class="node-ping" style="background: #EF4444;"></span>
+                        </div>
+                    </div>
+
+                    <div class="satellite-node" data-index="2" data-tech="Docker & Kubernetes" data-color="#0284C7" data-desc="Production containerization, multi-stage builds, Helm charts, self-healing pod scheduling, and horizontal auto-scaling.">
+                        <div class="node-card">
+                            <div class="node-icon" style="color: #0284C7;"><i class="fa-brands fa-docker"></i></div>
+                            <div class="node-info">
+                                <span class="node-title">Docker & K8s</span>
+                                <span class="node-category">Orchestration</span>
+                            </div>
+                            <span class="node-ping" style="background: #0284C7;"></span>
+                        </div>
+                    </div>
+
+                    <div class="satellite-node" data-index="3" data-tech="Microservices & gRPC" data-color="#6366F1" data-desc="Decoupled domain-driven microservices, high-speed binary RPC serialization, API gateways, and distributed tracing.">
+                        <div class="node-card">
+                            <div class="node-icon" style="color: #6366F1;"><i class="fa-solid fa-diagram-project"></i></div>
+                            <div class="node-info">
+                                <span class="node-title">Microservices</span>
+                                <span class="node-category">System Design</span>
+                            </div>
+                            <span class="node-ping" style="background: #6366F1;"></span>
+                        </div>
+                    </div>
+
+                    <div class="satellite-node" data-index="4" data-tech="Next.js 15 & React" data-color="#F59E0B" data-desc="React Server Components (RSC), incremental static regeneration (ISR), streaming SSR, and micro-frontend integrations.">
+                        <div class="node-card">
+                            <div class="node-icon" style="color: #F59E0B;"><i class="fa-brands fa-react"></i></div>
+                            <div class="node-info">
+                                <span class="node-title">Next.js 15</span>
+                                <span class="node-category">Modern Frontend</span>
+                            </div>
+                            <span class="node-ping" style="background: #F59E0B;"></span>
+                        </div>
+                    </div>
+
+                    <div class="satellite-node" data-index="5" data-tech="Node.js & TypeScript" data-color="#22C55E" data-desc="Strict end-to-end type safety, asynchronous event loop tuning, worker thread concurrency, and resilient REST/GraphQL APIs.">
+                        <div class="node-card">
+                            <div class="node-icon" style="color: #22C55E;"><i class="fa-brands fa-node-js"></i></div>
+                            <div class="node-info">
+                                <span class="node-title">Node & TS</span>
+                                <span class="node-category">Backend Engine</span>
+                            </div>
+                            <span class="node-ping" style="background: #22C55E;"></span>
+                        </div>
+                    </div>
+
+                    <div class="satellite-node" data-index="6" data-tech="Kafka & Event Mesh" data-color="#EC4899" data-desc="Distributed event streaming, partitioned topic topologies, fault-tolerant log retention, and consumer group elasticity.">
+                        <div class="node-card">
+                            <div class="node-icon" style="color: #EC4899;"><i class="fa-solid fa-network-wired"></i></div>
+                            <div class="node-info">
+                                <span class="node-title">Event Streaming</span>
+                                <span class="node-category">Kafka Mesh</span>
+                            </div>
+                            <span class="node-ping" style="background: #EC4899;"></span>
+                        </div>
+                    </div>
+
+                    <div class="satellite-node" data-index="7" data-tech="Cloudflare & Edge" data-color="#06B6D4" data-desc="Edge worker routing, automated SSL/TLS handshake, DDoS mitigation, DNS caching, and global CDN asset distribution.">
+                        <div class="node-card">
+                            <div class="node-icon" style="color: #06B6D4;"><i class="fa-solid fa-cloud"></i></div>
+                            <div class="node-info">
+                                <span class="node-title">Cloudflare Edge</span>
+                                <span class="node-category">CDN & Security</span>
+                            </div>
+                            <span class="node-ping" style="background: #06B6D4;"></span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Realtime Node Telemetry Inspector Card -->
+            <div class="orbit-inspector" id="orbitInspector">
+                <div class="inspector-header">
+                    <span class="inspector-badge" id="inspectorBadge">DATABASE LAYER</span>
+                    <span class="inspector-tech" id="inspectorTech">PostgreSQL & ACID</span>
+                </div>
+                <p class="inspector-desc" id="inspectorDesc">
+                    Enterprise relational storage, connection pooling with PgBouncer, B-Tree partitioning, and zero-loss ACID replication.
+                </p>
+                <div class="inspector-status">
+                    <span class="indicator-active"></span> Node Operational &bull; Verified in Production
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- SECTION 3: ARCHITECTURE TELEMETRY & METRICS    -->
+        <!-- ============================================== -->
+        <section class="section-metrics" id="metrics">
+            <div class="metrics-grid">
+                <!-- Card 1 -->
+                <div class="metric-card">
+                    <div class="metric-top">
+                        <span class="metric-num" data-target="99.99">99.99%</span>
+                        <span class="metric-icon"><i class="fa-solid fa-shield-halved"></i></span>
+                    </div>
+                    <div class="metric-label">Target SLA Availability</div>
+                    <p class="metric-desc">Engineered with multi-zone automated failovers, circuit breakers, and zero-downtime rolling deployments.</p>
+                    <div class="metric-bar"><div class="metric-progress" style="width: 99.9%;"></div></div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="metric-card">
+                    <div class="metric-top">
+                        <span class="metric-num" data-target="50">50,000+</span>
+                        <span class="metric-icon"><i class="fa-solid fa-tower-broadcast"></i></span>
+                    </div>
+                    <div class="metric-label">Peak Concurrent Connections</div>
+                    <p class="metric-desc">Stress-benchmarked real-time WebSocket mesh backed by Redis Pub/Sub backplanes and Epoll event loops.</p>
+                    <div class="metric-bar"><div class="metric-progress" style="width: 94%;"></div></div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="metric-card">
+                    <div class="metric-top">
+                        <span class="metric-num" data-target="8">8+</span>
+                        <span class="metric-icon"><i class="fa-solid fa-compass-drafting"></i></span>
+                    </div>
+                    <div class="metric-label">Years of Architecture Mastery</div>
+                    <p class="metric-desc">Continuous evolution across full stack development, database sharding, cloud deployments, and lead roles.</p>
+                    <div class="metric-bar"><div class="metric-progress" style="width: 88%;"></div></div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="metric-card">
+                    <div class="metric-top">
+                        <span class="metric-num" data-target="35">35+</span>
+                        <span class="metric-icon"><i class="fa-solid fa-rocket"></i></span>
+                    </div>
+                    <div class="metric-label">Enterprise Deliveries</div>
+                    <p class="metric-desc">High-value production web platforms, SaaS ecosystems, and microservices delivered for global clients.</p>
+                    <div class="metric-bar"><div class="metric-progress" style="width: 92%;"></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- SECTION 4: VISION SPLIT-SCREEN EDITORIAL SLIDER-->
+        <!-- ============================================== -->
+        <section class="section-showcase" id="showcase">
+            <div class="section-header">
+                <div class="badge-category"><span class="color-dot amber"></span> EDITORIAL SHOWCASE</div>
+                <h2 class="section-title">The Architecture of Systems</h2>
+                <p class="section-subtitle">
+                    In-depth case studies dissecting distributed engineering, real-time concurrency, and mission-critical production reliability.
+                </p>
+            </div>
+
+            <div class="split-slider-container" id="splitSlider">
+                <!-- Navigation HUD Controls -->
+                <div class="slider-hud">
+                    <div class="slider-counter">
+                        <span class="current-slide" id="currentSlideNum">01</span>
+                        <span class="counter-divider">/</span>
+                        <span class="total-slides">04</span>
+                    </div>
+
+                    <div class="slider-nav-btns">
+                        <button class="slider-btn prev-btn magnetic-target" id="sliderPrevBtn" aria-label="Previous Slide">
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </button>
+                        <button class="slider-btn next-btn magnetic-target" id="sliderNextBtn" aria-label="Next Slide">
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Slider Track -->
+                <div class="split-slider-viewport">
+                    <!-- Slide 1 -->
+                    <div class="split-slide active" data-slide="1">
+                        <div class="slide-visual-col">
+                            <div class="visual-frame">
+                                <img src="/assets/img/project-1.png" alt="Seekrly — AI Operations Platform" class="slide-img">
+                                <div class="visual-overlay"></div>
+                                <div class="visual-badge">
+                                    <span class="badge-pill">SaaS Platform</span>
+                                    <span class="badge-latency"><i class="fa-solid fa-microchip"></i> 12ms P99</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slide-editorial-col">
+                            <div class="editorial-eyebrow">CASE STUDY 01 &bull; SCALABLE ENTERPRISE SAAS</div>
+                            <h3 class="editorial-title">Seekrly — AI Operations & Workflow Mesh</h3>
+                            <p class="editorial-narrative">
+                                Built to process millions of concurrent asynchronous business tasks. Seekrly decouples compute from ingestion via distributed worker clusters, backed by Redis in-memory deduplication and PostgreSQL ACID transaction logs.
+                            </p>
+                            
+                            <div class="editorial-specs">
+                                <div class="spec-row">
+                                    <span class="spec-name">Core Architecture:</span>
+                                    <span class="spec-val">Distributed Worker Pools + Event Bus</span>
+                                </div>
+                                <div class="spec-row">
+                                    <span class="spec-name">Database Strategy:</span>
+                                    <span class="spec-val">PostgreSQL Read-Replicas with PgBouncer</span>
+                                </div>
+                                <div class="spec-row">
+                                    <span class="spec-name">Cache Throughput:</span>
+                                    <span class="spec-val">Redis Cluster &bull; 99.4% Hit Ratio</span>
+                                </div>
+                            </div>
+
+                            <div class="editorial-tags">
+                                <span class="tag-pill">Next.js 15</span>
+                                <span class="tag-pill">Node.js</span>
+                                <span class="tag-pill">Redis Streams</span>
+                                <span class="tag-pill">PostgreSQL</span>
+                                <span class="tag-pill">Docker</span>
+                            </div>
+
+                            <div class="editorial-actions">
+                                <a href="https://seekrly.com" target="_blank" rel="noopener noreferrer" class="btn-editorial-primary magnetic-target">
+                                    <span>Explore System</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                </a>
+                                <a href="https://github.com/stl-sahadat" target="_blank" rel="noopener noreferrer" class="btn-editorial-secondary magnetic-target">
+                                    <i class="fa-brands fa-github"></i>
+                                    <span>Architecture Docs</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 2 -->
+                    <div class="split-slide" data-slide="2">
+                        <div class="slide-visual-col">
+                            <div class="visual-frame">
+                                <img src="/assets/img/project-2.png" alt="OmniHealth Telemedicine" class="slide-img">
+                                <div class="visual-overlay"></div>
+                                <div class="visual-badge">
+                                    <span class="badge-pill">Healthcare WebRTC</span>
+                                    <span class="badge-latency"><i class="fa-solid fa-lock"></i> HIPAA Compliant</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slide-editorial-col">
+                            <div class="editorial-eyebrow">CASE STUDY 02 &bull; MISSION-CRITICAL HEALTHCARE</div>
+                            <h3 class="editorial-title">OmniHealth — High-Security Telemedicine Mesh</h3>
+                            <p class="editorial-narrative">
+                                Real-time peer-to-peer WebRTC consultation platform serving thousands of simultaneous medical video channels. Features end-to-end media encryption, automated TURN/STUN failover, and zero-compromise audit logs.
+                            </p>
+                            
+                            <div class="editorial-specs">
+                                <div class="spec-row">
+                                    <span class="spec-name">Signaling Protocol:</span>
+                                    <span class="spec-val">Secure WebSockets (WSS) + DTLS-SRTP</span>
+                                </div>
+                                <div class="spec-row">
+                                    <span class="spec-name">Latency Optimization:</span>
+                                    <span class="spec-val">Global Edge Mesh &bull; &lt;80ms Audio Sync</span>
+                                </div>
+                                <div class="spec-row">
+                                    <span class="spec-name">Security Standard:</span>
+                                    <span class="spec-val">HIPAA & GDPR Compliant Encrypted Vault</span>
+                                </div>
+                            </div>
+
+                            <div class="editorial-tags">
+                                <span class="tag-pill">WebRTC</span>
+                                <span class="tag-pill">React</span>
+                                <span class="tag-pill">Node.js</span>
+                                <span class="tag-pill">Socket.io</span>
+                                <span class="tag-pill">PostgreSQL</span>
+                            </div>
+
+                            <div class="editorial-actions">
+                                <a href="https://github.com/stl-sahadat" target="_blank" rel="noopener noreferrer" class="btn-editorial-primary magnetic-target">
+                                    <span>Inspect WebRTC Mesh</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                </a>
+                                <a href="https://github.com/stl-sahadat" target="_blank" rel="noopener noreferrer" class="btn-editorial-secondary magnetic-target">
+                                    <i class="fa-brands fa-github"></i>
+                                    <span>Source Code</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 3 -->
+                    <div class="split-slide" data-slide="3">
+                        <div class="slide-visual-col">
+                            <div class="visual-frame">
+                                <img src="/assets/img/project-3.png" alt="PulseChat Realtime Engine" class="slide-img">
+                                <div class="visual-overlay"></div>
+                                <div class="visual-badge">
+                                    <span class="badge-pill">Realtime Engine</span>
+                                    <span class="badge-latency"><i class="fa-solid fa-bolt"></i> 50k Concurrency</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slide-editorial-col">
+                            <div class="editorial-eyebrow">CASE STUDY 03 &bull; HIGH-CONCURRENCY MESSAGING</div>
+                            <h3 class="editorial-title">PulseChat — Distributed WebSocket Backplane</h3>
+                            <p class="editorial-narrative">
+                                Benchmarked under rigorous stress tests handling over 50,000 active concurrent connections. Implements Redis Pub/Sub clustering across ephemeral node instances with automatic heartbeat reconnections and offline state reconciliation.
+                            </p>
+                            
+                            <div class="editorial-specs">
+                                <div class="spec-row">
+                                    <span class="spec-name">Socket Transport:</span>
+                                    <span class="spec-val">Raw WebSockets with Binary Buffers</span>
+                                </div>
+                                <div class="spec-row">
+                                    <span class="spec-name">Backplane Message Bus:</span>
+                                    <span class="spec-val">Redis Pub/Sub Sharded Channel Mesh</span>
+                                </div>
+                                <div class="spec-row">
+                                    <span class="spec-name">Delivery Guarantee:</span>
+                                    <span class="spec-val">At-least-once with Client ACK Tokens</span>
+                                </div>
+                            </div>
+
+                            <div class="editorial-tags">
+                                <span class="tag-pill">WebSockets</span>
+                                <span class="tag-pill">Redis</span>
+                                <span class="tag-pill">Express.js</span>
+                                <span class="tag-pill">TypeScript</span>
+                                <span class="tag-pill">Nginx</span>
+                            </div>
+
+                            <div class="editorial-actions">
+                                <a href="https://github.com/stl-sahadat" target="_blank" rel="noopener noreferrer" class="btn-editorial-primary magnetic-target">
+                                    <span>View Architecture Specs</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                </a>
+                                <a href="https://github.com/stl-sahadat" target="_blank" rel="noopener noreferrer" class="btn-editorial-secondary magnetic-target">
+                                    <i class="fa-brands fa-github"></i>
+                                    <span>GitHub Repo</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 4 -->
+                    <div class="split-slide" data-slide="4">
+                        <div class="slide-visual-col">
+                            <div class="visual-frame">
+                                <img src="/assets/img/project-5.png" alt="Cloud Infrastructure Analytics" class="slide-img">
+                                <div class="visual-overlay"></div>
+                                <div class="visual-badge">
+                                    <span class="badge-pill">Analytics & Cloud</span>
+                                    <span class="badge-latency"><i class="fa-solid fa-chart-line"></i> Sub-sec Aggregations</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slide-editorial-col">
+                            <div class="editorial-eyebrow">CASE STUDY 04 &bull; TELEMETRY & OBSERVABILITY</div>
+                            <h3 class="editorial-title">ObservaScale — Cloud Telemetry Dashboard</h3>
+                            <p class="editorial-narrative">
+                                Unified distributed observability platform aggregating container metrics, HTTP latency percentiles, and database slow-query logs. Provides real-time interactive canvas graphs and instant webhook alerting.
+                            </p>
+                            
+                            <div class="editorial-specs">
+                                <div class="spec-row">
+                                    <span class="spec-name">Data Pipeline:</span>
+                                    <span class="spec-val">Time-series indexing with Rollup Windows</span>
+                                </div>
+                                <div class="spec-row">
+                                    <span class="spec-name">Visualization Engine:</span>
+                                    <span class="spec-val">HTML5 Canvas 60 FPS Micro-Charts</span>
+                                </div>
+                                <div class="spec-row">
+                                    <span class="spec-name">Alerting Dispatcher:</span>
+                                    <span class="spec-val">Multi-Channel Webhooks &bull; &lt;2s Alert SLA</span>
+                                </div>
+                            </div>
+
+                            <div class="editorial-tags">
+                                <span class="tag-pill">Next.js</span>
+                                <span class="tag-pill">PostgreSQL</span>
+                                <span class="tag-pill">Chart.js</span>
+                                <span class="tag-pill">Tailwind CSS</span>
+                                <span class="tag-pill">Docker</span>
+                            </div>
+
+                            <div class="editorial-actions">
+                                <a href="https://github.com/stl-sahadat" target="_blank" rel="noopener noreferrer" class="btn-editorial-primary magnetic-target">
+                                    <span>Inspect Telemetry</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                </a>
+                                <a href="https://github.com/stl-sahadat" target="_blank" rel="noopener noreferrer" class="btn-editorial-secondary magnetic-target">
+                                    <i class="fa-brands fa-github"></i>
+                                    <span>Code Repository</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slider Progress Bar -->
+                <div class="slider-progress-track">
+                    <div class="slider-progress-bar" id="sliderProgressBar" style="width: 25%;"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- SECTION 5: COSMOS BLUEPRINTS & 8-COLOR FILTERS -->
+        <!-- ============================================== -->
+        <section class="section-blueprints" id="blueprints">
+            <div class="section-header">
+                <div class="badge-category"><span class="color-dot cyan"></span> ARCHITECTURAL BLUEPRINTS</div>
+                <h2 class="section-title">System Blueprints & Catalog</h2>
+                <p class="section-subtitle">
+                    Explore production blueprints organized with Cosmos-style 3px geometry and precision taxonomy filters.
+                </p>
+            </div>
+
+            <!-- 8-Color Category Filters -->
+            <div class="filter-bar" id="filterBar">
+                <button class="filter-pill active" data-filter="all">
+                    <span class="filter-dot all"></span> All Blueprints <span class="filter-count">8</span>
+                </button>
+                <button class="filter-pill" data-filter="microservices">
+                    <span class="filter-dot indigo"></span> Microservices <span class="filter-count">2</span>
+                </button>
+                <button class="filter-pill" data-filter="realtime">
+                    <span class="filter-dot cyan"></span> Realtime & Sockets <span class="filter-count">2</span>
+                </button>
+                <button class="filter-pill" data-filter="database">
+                    <span class="filter-dot emerald"></span> Database & Cache <span class="filter-count">2</span>
+                </button>
+                <button class="filter-pill" data-filter="cloud">
+                    <span class="filter-dot amber"></span> Cloud & DevOps <span class="filter-count">2</span>
+                </button>
+            </div>
+
+            <!-- Blueprints Grid (3px radius cards) -->
+            <div class="blueprint-grid" id="blueprintGrid">
+                <!-- Card 1 -->
+                <div class="blueprint-card" data-category="microservices">
+                    <div class="card-thumb">
+                        <img src="/assets/img/project-1.png" alt="Microservices Architecture">
+                        <span class="card-domain-badge indigo">Microservices</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-header-row">
+                            <h4 class="card-title">Distributed Task Worker Mesh</h4>
+                            <span class="card-metric">5k req/s</span>
+                        </div>
+                        <p class="card-summary">Decoupled queue orchestration with Redis backplanes, automated retry backoff, and idempotent workers.</p>
+                        <div class="card-tags">
+                            <span class="c-tag">Node.js</span>
+                            <span class="c-tag">Redis Streams</span>
+                            <span class="c-tag">Docker</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="blueprint-card" data-category="realtime">
+                    <div class="card-thumb">
+                        <img src="/assets/img/project-3.png" alt="WebSocket Mesh">
+                        <span class="card-domain-badge cyan">Realtime</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-header-row">
+                            <h4 class="card-title">Realtime WebSocket Mesh</h4>
+                            <span class="card-metric">&lt;10ms Sync</span>
+                        </div>
+                        <p class="card-summary">50k concurrent connection architecture with horizontal node clustering and instant socket handshakes.</p>
+                        <div class="card-tags">
+                            <span class="c-tag">WebSockets</span>
+                            <span class="c-tag">Redis Pub/Sub</span>
+                            <span class="c-tag">TypeScript</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="blueprint-card" data-category="database">
+                    <div class="card-thumb">
+                        <img src="/assets/img/project-4.png" alt="PostgreSQL Partitioning">
+                        <span class="card-domain-badge emerald">Database</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-header-row">
+                            <h4 class="card-title">High-Scale PostgreSQL Sharding</h4>
+                            <span class="card-metric">ACID Tier</span>
+                        </div>
+                        <p class="card-summary">Declarative table partitioning, connection pooling pools, index tuning, and zero-downtime replication.</p>
+                        <div class="card-tags">
+                            <span class="c-tag">PostgreSQL</span>
+                            <span class="c-tag">PgBouncer</span>
+                            <span class="c-tag">SQLX</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="blueprint-card" data-category="cloud">
+                    <div class="card-thumb">
+                        <img src="/assets/img/project-6.png" alt="Kubernetes Cluster">
+                        <span class="card-domain-badge amber">Cloud</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-header-row">
+                            <h4 class="card-title">Kubernetes Multi-Zone Deployments</h4>
+                            <span class="card-metric">HA Pods</span>
+                        </div>
+                        <p class="card-summary">Automated continuous deployment with canary releases, health probes, and horizontal auto-scalers.</p>
+                        <div class="card-tags">
+                            <span class="c-tag">Kubernetes</span>
+                            <span class="c-tag">Docker</span>
+                            <span class="c-tag">CI/CD</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="blueprint-card" data-category="realtime">
+                    <div class="card-thumb">
+                        <img src="/assets/img/project-2.png" alt="WebRTC Media">
+                        <span class="card-domain-badge cyan">Realtime</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-header-row">
+                            <h4 class="card-title">WebRTC Low-Latency Streaming</h4>
+                            <span class="card-metric">DTLS-SRTP</span>
+                        </div>
+                        <p class="card-summary">End-to-end encrypted audio/video peer routing with intelligent STUN/TURN dynamic fallback routing.</p>
+                        <div class="card-tags">
+                            <span class="c-tag">WebRTC</span>
+                            <span class="c-tag">Node.js</span>
+                            <span class="c-tag">React</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="blueprint-card" data-category="microservices">
+                    <div class="card-thumb">
+                        <img src="/assets/img/project-7.png" alt="API Gateway">
+                        <span class="card-domain-badge indigo">Microservices</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-header-row">
+                            <h4 class="card-title">Zero-Trust Enterprise API Gateway</h4>
+                            <span class="card-metric">JWT + mTLS</span>
+                        </div>
+                        <p class="card-summary">Rate-limiting, request routing, distributed token validation, and automated circuit breaking.</p>
+                        <div class="card-tags">
+                            <span class="c-tag">Nginx</span>
+                            <span class="c-tag">Node.js</span>
+                            <span class="c-tag">gRPC</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 7 -->
+                <div class="blueprint-card" data-category="database">
+                    <div class="card-thumb">
+                        <img src="/assets/img/project-8.png" alt="Distributed Caching">
+                        <span class="card-domain-badge emerald">Database</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-header-row">
+                            <h4 class="card-title">Distributed Multi-Tier Cache</h4>
+                            <span class="card-metric">99.8% Hits</span>
+                        </div>
+                        <p class="card-summary">In-memory L1 cache + Redis cluster L2 with write-through cache eviction and stampede prevention.</p>
+                        <div class="card-tags">
+                            <span class="c-tag">Redis</span>
+                            <span class="c-tag">Memcached</span>
+                            <span class="c-tag">Node.js</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 8 -->
+                <div class="blueprint-card" data-category="cloud">
+                    <div class="card-thumb">
+                        <img src="/assets/img/project-5.png" alt="Edge CDN">
+                        <span class="card-domain-badge amber">Cloud</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-header-row">
+                            <h4 class="card-title">Cloudflare Edge Worker Topology</h4>
+                            <span class="card-metric">&lt;5ms Edge</span>
+                        </div>
+                        <p class="card-summary">Global edge request rewriting, geolocation inspection, intelligent DDoS shield, and HTTP/3 caching.</p>
+                        <div class="card-tags">
+                            <span class="c-tag">Cloudflare</span>
+                            <span class="c-tag">DNS</span>
+                            <span class="c-tag">Security</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- SECTION 6: DEDICATED 3D STUDIO PORTAL BRIDGE   -->
+        <!-- ============================================== -->
+        <section class="section-room-portal" id="room-portal">
+            <div class="portal-card">
+                <div class="portal-badge-row">
+                    <span class="portal-pill"><i class="fa-solid fa-cube"></i> ISOMETRIC THREE.JS 3D ENGINE</span>
+                    <span class="portal-status"><span class="status-dot"></span> LIVE AT /3D</span>
+                </div>
+
+                <div class="portal-grid">
+                    <div class="portal-info">
+                        <h2 class="portal-title">Step Inside the 3D Cyber Developer Studio</h2>
+                        <p class="portal-desc">
+                            A dedicated, high-fidelity Three.js isometric virtual headquarters. Explore 10 interactive project TV screens, curved workstation displays, dynamic ambient lighting, and full orbital camera controls.
+                        </p>
+
+                        <div class="portal-features">
+                            <div class="p-feat"><i class="fa-solid fa-tv"></i> 10 Interactive Project Displays</div>
+                            <div class="p-feat"><i class="fa-solid fa-camera"></i> 360° Orbit & Isometric Controls</div>
+                            <div class="p-feat"><i class="fa-solid fa-lightbulb"></i> Day/Cyber Night Lighting Modes</div>
+                            <div class="p-feat"><i class="fa-solid fa-music"></i> Ambient Developer Audio Engine</div>
+                        </div>
+
+                        <div class="portal-actions">
+                            <a href="/3d" class="btn-launch-room magnetic-target" target="_blank" rel="noopener noreferrer">
+                                <span class="launch-text">Launch Full 3D Room</span>
+                                <span class="launch-icon"><i class="fa-solid fa-up-right-from-square"></i></span>
+                            </a>
+                            <span class="portal-hint">Zero download required &bull; WebGL 60 FPS</span>
+                        </div>
+                    </div>
+
+                    <div class="portal-preview-col">
+                        <div class="isometric-wireframe-box">
+                            <div class="wireframe-grid"></div>
+                            <div class="cube-3d-visual">
+                                <div class="cube-face front">TV 01-10</div>
+                                <div class="cube-face back">SERVER RACK</div>
+                                <div class="cube-face right">CURVED PC</div>
+                                <div class="cube-face left">AC UNIT</div>
+                                <div class="cube-face top">HUD OVERLAY</div>
+                                <div class="cube-face bottom">FLOOR GRID</div>
+                            </div>
+                            <div class="wireframe-telemetry">
+                                <span>SCENE: CYBER_ROOM_V2</span>
+                                <span>RENDERER: THREE.JS</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- SECTION 7: SYSTEM ARCHITECTURE CONSULTATION    -->
+        <!-- ============================================== -->
+        <section class="section-contact" id="contact">
+            <div class="section-header">
+                <div class="badge-category"><span class="color-dot emerald"></span> ENTERPRISE ENGAGEMENT</div>
+                <h2 class="section-title">Initiate Architecture Dialogue</h2>
+                <p class="section-subtitle">
+                    Seeking strategic guidance on distributed system scalability, database migration, or full stack execution? Let's connect.
+                </p>
+            </div>
+
+            <div class="contact-card-wrapper">
+                <div class="contact-card">
+                    <div class="contact-left">
+                        <h3 class="contact-left-title">Md Sahadat Hossain</h3>
+                        <p class="contact-left-subtitle">Software Architect & Full Stack Lead</p>
+
+                        <div class="contact-details">
+                            <div class="c-item">
+                                <span class="c-icon"><i class="fa-regular fa-envelope"></i></span>
+                                <div class="c-text">
+                                    <span class="c-label">DIRECT EMAIL</span>
+                                    <a href="mailto:sahadat.info01@gmail.com" class="c-val">sahadat.info01@gmail.com</a>
+                                </div>
+                            </div>
+
+                            <div class="c-item">
+                                <span class="c-icon"><i class="fa-brands fa-whatsapp"></i></span>
+                                <div class="c-text">
+                                    <span class="c-label">WHATSAPP DIRECT</span>
+                                    <a href="https://wa.me/8801944576159?text=Hello%20Md%20Sahadat%20Hossain,%20I%20would%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener noreferrer" class="c-val">+880 1944-576159</a>
+                                </div>
+                            </div>
+
+                            <div class="c-item">
+                                <span class="c-icon"><i class="fa-solid fa-location-dot"></i></span>
+                                <div class="c-text">
+                                    <span class="c-label">HEADQUARTERS</span>
+                                    <span class="c-val">Comilla, Chittagong, Bangladesh</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Social Connectivity -->
+                        <div class="social-pills">
+                            <a href="https://www.linkedin.com/in/mdsahadatconnact/" target="_blank" rel="noopener noreferrer" class="social-pill" title="LinkedIn Profile">
+                                <i class="fa-brands fa-linkedin-in"></i>
+                                <span>LinkedIn</span>
+                            </a>
+                            <a href="https://github.com/stl-sahadat" target="_blank" rel="noopener noreferrer" class="social-pill" title="GitHub Repositories">
+                                <i class="fa-brands fa-github"></i>
+                                <span>GitHub</span>
+                            </a>
+                            <a href="/" class="social-pill" title="Classic Portfolio">
+                                <i class="fa-solid fa-house"></i>
+                                <span>Classic Site</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="contact-right">
+                        <div class="terminal-box">
+                            <div class="terminal-bar">
+                                <span class="t-btn red"></span>
+                                <span class="t-btn yellow"></span>
+                                <span class="t-btn green"></span>
+                                <span class="t-title">consultation-request.sh</span>
+                            </div>
+                            <form class="terminal-form" id="consultationForm">
+                                <div class="form-row">
+                                    <label class="form-label" for="clientName">&gt; ENTER_NAME:</label>
+                                    <input type="text" id="clientName" class="form-input" placeholder="e.g. Enterprise Engineering Lead" required>
+                                </div>
+                                <div class="form-row">
+                                    <label class="form-label" for="clientEmail">&gt; ENTER_EMAIL:</label>
+                                    <input type="email" id="clientEmail" class="form-input" placeholder="e.g. lead@enterprise.com" required>
+                                </div>
+                                <div class="form-row">
+                                    <label class="form-label" for="projectScope">&gt; ARCHITECTURAL_REQUIREMENTS:</label>
+                                    <textarea id="projectScope" class="form-input" rows="4" placeholder="Briefly describe your concurrency, scalability, or full stack objectives..." required></textarea>
+                                </div>
+                                <button type="submit" class="terminal-submit-btn magnetic-target" id="submitFormBtn">
+                                    <span>TRANSMIT SPECIFICATION</span>
+                                    <i class="fa-solid fa-paper-plane"></i>
+                                </button>
+                                <div class="form-status" id="formStatusMsg"></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-left">
+                <span class="footer-brand">MD SAHADAT HOSSAIN</span>
+                <span class="footer-copy">&copy; 2026. Architected with high-precision engineering.</span>
+            </div>
+            <div class="footer-right">
+                <a href="/" class="footer-link">Classic View</a>
+                <a href="/3d" class="footer-link">3D Studio Room</a>
+                <a href="/admin" class="footer-link">Admin CMS</a>
+                <a href="#hero" class="footer-link back-to-top"><i class="fa-solid fa-arrow-up"></i> Top</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Lightbox / Inspection Drawer -->
+    <div class="blueprint-modal" id="blueprintModal" aria-hidden="true">
+        <div class="modal-backdrop" id="modalBackdrop"></div>
+        <div class="modal-window">
+            <div class="modal-header">
+                <span class="modal-domain" id="modalDomain">SYSTEM BLUEPRINT</span>
+                <button class="modal-close-btn" id="modalCloseBtn" aria-label="Close Modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h3 class="modal-title" id="modalTitle">Blueprint Title</h3>
+                <p class="modal-summary" id="modalSummary">System summary explanation.</p>
+                <div class="modal-tags" id="modalTags"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/prototype/app.js"></script>
+</body>
+</html>

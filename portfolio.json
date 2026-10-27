@@ -1,0 +1,389 @@
+{
+  "profile": {
+    "name": "Md Sahadat Hossain",
+    "greeting": "AI AGENT ARCHITECT & PROMPT ENGINEER",
+    "title_split": "Core Specialization",
+    "title_line1": "Autonomous AI Agents",
+    "title_line2": "& Systems Engineering",
+    "avatar_img": "assets/img/sahadat-about-new.jpg?v=20261024_1650",
+    "hero_img": "assets/img/hero-profile1.png?v=20261024_1650",
+    "hero_cutout": "assets/img/hero-profile1.png?v=20261024_1650",
+    "about_img": "assets/img/sahadat-about-new.jpg?v=20261024_1650",
+    "hero_video": "assets/video/hero-intro.mp4",
+    "resume_url": "assets/pdf/Md-Sahadat-Hossain-Resume.pdf",
+    "location": "Barura, Cumilla, Chattogram, Bangladesh · Open to Remote Worldwide",
+    "specialization": "Autonomous AI Agents, Reverse Engineering & Enterprise Systems Architecture",
+    "badge": "AVAILABLE WORLDWIDE",
+    "bio": "I architect intelligent autonomous systems designed to eliminate complexity, compress execution timelines, and multiply human potential. Leveraging Autonomous AI Agents, Multi-Agent Orchestration, and custom AI web-builders to deliver production-ready software in days while cutting costs by 60–70%.",
+    "quote_badge": "TURNING AUTONOMOUS INTELLIGENCE INTO HIGH-IMPACT DIGITAL SOLUTIONS.",
+    "stats": [
+      {
+        "number": "10x+",
+        "label": "EXECUTION SPEED"
+      },
+      {
+        "number": "70%+",
+        "label": "COST REDUCTION"
+      },
+      {
+        "number": "24/7",
+        "label": "AUTONOMOUS AGENTS"
+      }
+    ],
+    "hero_portrait": "assets/img/sahadat-studio-portrait.jpg"
+  },
+  "about": {
+    "title": "About Me",
+    "bio_heading": "Autonomous Systems & AI Architecture",
+    "subtitle": "Driven by Autonomy & Precision.",
+    "intro_kicker": "I am Md Sahadat Hossain — an Autonomous Systems Engineer & AI Architect who transforms cutting-edge AI models into resilient, scalable, production-grade software.",
+    "bio_p1": "My journey into technology was born not from a classroom syllabus, but from a lifelong obsession with code, web architecture, and digital engineering since childhood. While I completed my Master's Degree, my real engineering edge was forged through relentless independent research, continuous experimentation, and building tangible software from the ground up.",
+    "bio_p2": "I believe true engineering is proven by execution, not certificates — demonstrated through resilient backend architectures, intuitive frontend experiences, and software that delivers real-world impact. Combining deep fluency in modern web standards (HTML5, CSS, modern JavaScript, Python) with frontier AI models (Claude Opus & Sonnet, OpenAI GPT-4o, Google Gemini), I orchestrate intelligent, self-operating multi-agent ecosystems designed to scale.\n\nCore Targets & Impact:\n• 10x Execution Velocity: Compressing weeks of traditional development into hours using autonomous agent swarms that scaffold, test, and self-heal.\n• 70% Cost Compression: Eliminating bloated agency retainers and manual overhead through deterministic, automated AI pipelines.\n• Zero-Hallucination Resilience: Engineering strict guardrails, structured JSON schemas, and automated lint verification for flawless production output.",
+    "years_experience": "4+",
+    "completed_projects": "30+",
+    "target_uptime": "99.99%",
+    "specialization": "Autonomous AI Agents, Reverse Engineering & Enterprise Systems Architecture",
+    "philosophy_quote": "Real engineering is measured by execution, not certificates. Turning autonomous intelligence into production solutions that eliminate operational friction and scale effortlessly.",
+    "targets": [
+      {
+        "title": "10x Execution Velocity",
+        "desc": "Compressing weeks of traditional development into hours using autonomous agent swarms that scaffold, test, and self-heal.",
+        "stat": "10x Faster"
+      },
+      {
+        "title": "70% Cost Compression",
+        "desc": "Eliminating bloated agency retainers and manual overhead through deterministic, automated AI pipelines.",
+        "stat": "70% Savings"
+      },
+      {
+        "title": "Zero-Hallucination Resilience",
+        "desc": "Engineering strict guardrails, structured JSON schemas, and automated lint verification for flawless production output.",
+        "stat": "99.9% Reliable"
+      }
+    ],
+    "cta_text": "Let's Build Together",
+    "cta_url": "#contact"
+  },
+  "skills": [
+    {
+      "id": "ai-agents",
+      "title": "Autonomous AI & Prompt Architecture",
+      "desc": "Architecting autonomous multi-agent swarms, deterministic guardrails, structured JSON schema generators, and agentic workflows using frontier LLM engines.",
+      "items": [
+        "CrewAI",
+        "LangChain",
+        "Claude 3.5 Sonnet",
+        "GPT-4o Frontier",
+        "DeepSeek R1",
+        "Prompt Architecture",
+        "Vector DBs",
+        "Pinecone",
+        "Autonomous Swarms",
+        "Model Context Protocol"
+      ]
+    },
+    {
+      "id": "frontend-web",
+      "title": "Full-Stack & Spatial Web Engineering",
+      "desc": "Engineering high-performance responsive web platforms, modern client routing, reactive frontends, and accessible interactive interfaces.",
+      "items": [
+        "React 18",
+        "Next.js 15",
+        "TypeScript",
+        "JavaScript (ES6+)",
+        "Tailwind CSS",
+        "Vite & Tooling",
+        "HTML5 & CSS3",
+        "Redux / Zustand",
+        "WebSockets",
+        "Three.js 3D"
+      ]
+    },
+    {
+      "id": "backend-cloud",
+      "title": "Backend, Cloud & Production Infra",
+      "desc": "Deploying containerized microservices, serverless Cloud Run pipelines, low-latency APIs, and resilient database architectures.",
+      "items": [
+        "Python",
+        "FastAPI",
+        "Google Cloud Run",
+        "Docker",
+        "PostgreSQL",
+        "Redis Caching",
+        "RESTful APIs",
+        "Linux VPS",
+        "Git & CI/CD",
+        "Zero-Trust IAM"
+      ]
+    },
+    {
+      "id": "reverse-engineering",
+      "title": "Reverse Engineering & System Recon",
+      "desc": "Advanced software decompilation, protocol reverse engineering, network inspection, AST analysis, and high-fidelity application reconstruction.",
+      "items": [
+        "Reverse Engineering",
+        "Binary & AST Analysis",
+        "API & Network Inspection",
+        "Protocol Decoding",
+        "Web Target Reconnaissance",
+        "Decompilation Tools",
+        "Architecture Mapping",
+        "Security & Vulnerability Audit",
+        "Dynamic Tracing & Hooks",
+        "Chrome DevTools Protocol"
+      ]
+    },
+    {
+      "id": "ui-ux-design",
+      "title": "UI/UX Design Systems & Spatial UI",
+      "desc": "Designing high-conversion digital experiences, coherent design token architectures, interactive prototypes, and modern liquid glass aesthetic interfaces.",
+      "items": [
+        "Figma & Prototyping",
+        "Design Systems & Tokens",
+        "Micro-Interactions",
+        "ThreeUI Glassmorphism",
+        "Mobile & Web UI Layouts",
+        "User Journey Architecture",
+        "WCAG Accessibility",
+        "Wireframing & Design Specs"
+      ]
+    },
+    {
+      "id": "engineering-roles",
+      "title": "Specialized Engineering & Developer Roles",
+      "desc": "End-to-end multi-disciplinary capabilities spanning autonomous AI content orchestration, modern web applications, mobile platforms, and production full-stack systems.",
+      "items": [
+        "AI Content Creator",
+        "Lead Systems Architect",
+        "Web Application Developer",
+        "Mobile App Developer",
+        "Frontend Developer",
+        "Backend Developer",
+        "Full-Stack Solutions Engineer",
+        "Technical Solutions Consultant"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "id": "p1",
+      "number": "01",
+      "tag": "Cafe & E-Commerce",
+      "title": "Morning Mug Coffee House",
+      "desc": "A modern, high-craft coffee house platform featuring responsive aesthetics, dynamic menu catalog, and streamlined ordering flow with delightful micro-interactions.",
+      "img": "assets/img/project-1.png",
+      "demo_url": "https://stl-sahadat.github.io/morning-mug-coffee-house/index.html",
+      "github_url": "https://github.com/stl-sahadat/morning-mug-coffee-house"
+    },
+    {
+      "id": "p2",
+      "number": "02",
+      "tag": "Cloud Run & Finance",
+      "title": "Cloud Expense Tracker Suite",
+      "desc": "Production financial tracking and analytics platform containerized with Docker and deployed on Google Cloud Run with real-time computation and zero operational overhead.",
+      "img": "assets/img/gallery/photo-1551288049-bebda4e38f71.jpg",
+      "demo_url": "https://ais-pre-5outvodj2oly3dlanlrfxg-873905991312.asia-southeast1.run.app",
+      "github_url": "https://github.com/stl-sahadat"
+    },
+    {
+      "id": "p3",
+      "number": "03",
+      "tag": "Institutional ERP & Accounts",
+      "title": "Madrasa Management ERP Suite",
+      "desc": "Full-stack institutional ERP managing student admissions, digital ID generation, boarding and meal accounting (Khoraki / Dining Accounts), cash book ledger, examinations, and automated reporting.",
+      "img": "assets/img/gallery/photo-1555949963-ff9fe0c870eb.jpg",
+      "demo_url": "https://stl-sahadat.github.io/madrasha-apps/",
+      "github_url": "https://github.com/stl-sahadat/madrasha-apps"
+    },
+    {
+      "id": "p4",
+      "number": "04",
+      "tag": "Multi-Agent Synthesis",
+      "title": "Autonomous AI Web Builder",
+      "desc": "Autonomous multi-agent system orchestrating requirements parsing, AST code generation, and live browser testing with automated self-healing loops.",
+      "img": "assets/img/gallery/photo-1526374965328-7f61d4dc18c5.jpg",
+      "demo_url": "https://github.com/stl-sahadat",
+      "github_url": "https://github.com/stl-sahadat"
+    },
+    {
+      "id": "p5",
+      "number": "05",
+      "tag": "Vector Retrieval",
+      "title": "Enterprise RAG Knowledge Engine",
+      "desc": "High-throughput semantic retrieval engine combining hybrid vector search, dynamic re-ranking, and automated document ingestion pipelines.",
+      "img": "assets/img/gallery/photo-1639762681485-074b7f938ba0.jpg",
+      "demo_url": "https://github.com/stl-sahadat",
+      "github_url": "https://github.com/stl-sahadat"
+    },
+    {
+      "id": "p6",
+      "number": "06",
+      "tag": "Real-Time Telemetry",
+      "title": "Neural Pulse Ops Telemetry",
+      "desc": "Mission control dashboard tracking real-time autonomous agent swarms, token throughput, latency bottlenecks, and automated anomaly alerts.",
+      "img": "assets/img/gallery/photo-1504639725590-34d0984388bd.jpg",
+      "demo_url": "https://github.com/stl-sahadat",
+      "github_url": "https://github.com/stl-sahadat"
+    },
+    {
+      "id": "p7",
+      "number": "07",
+      "tag": "NLP & Matching",
+      "title": "Talent Intelligence Resume AI",
+      "desc": "Semantic talent matching platform scoring candidate resumes against job specifications with explainable capability vectors and bias-free rankers.",
+      "img": "assets/img/gallery/photo-1586281380349-632531db7ed4.jpg",
+      "demo_url": "https://github.com/stl-sahadat",
+      "github_url": "https://github.com/stl-sahadat"
+    },
+    {
+      "id": "p8",
+      "number": "08",
+      "tag": "FinTech Quant",
+      "title": "Crypto Quant High-Frequency Terminal",
+      "desc": "Low-latency algorithmic order-flow terminal visualizing multi-exchange order books, liquidation heatmaps, and millisecond price actions.",
+      "img": "assets/img/gallery/photo-1563986768609-322da13575f3.jpg",
+      "demo_url": "https://github.com/stl-sahadat",
+      "github_url": "https://github.com/stl-sahadat"
+    },
+    {
+      "id": "p9",
+      "number": "09",
+      "tag": "Multi-Agent Swarms",
+      "title": "CrewAI Workflow Automation Swarm",
+      "desc": "Enterprise multi-agent autonomous swarm executing end-to-end sales prospecting, competitive intelligence gathering, and executive summary dispatching.",
+      "img": "assets/img/gallery/photo-1518770660439-4636190af475.jpg",
+      "demo_url": "https://github.com/stl-sahadat",
+      "github_url": "https://github.com/stl-sahadat"
+    }
+  ],
+  "showcase": [
+    {
+      "id": "s1",
+      "title": "Autonomous Multi-Agent Swarms",
+      "desc": "Hierarchical topologies, supervisor checkpoints, and self-healing execution loops.",
+      "tag": "AUTONOMOUS AGENTS",
+      "img": "assets/img/gallery/photo-1518770660439-4636190af475.jpg",
+      "demo_url": "https://github.com/stl-sahadat",
+      "github_url": "https://github.com/stl-sahadat"
+    },
+    {
+      "id": "s2",
+      "title": "Madrasa Management ERP Suite",
+      "desc": "Full-stack institutional management system with admissions, student ID, dining accounts, and ledgers.",
+      "tag": "FULL-STACK ERP",
+      "img": "assets/img/gallery/photo-1555949963-ff9fe0c870eb.jpg",
+      "demo_url": "https://stl-sahadat.github.io/madrasha-apps/",
+      "github_url": "https://github.com/stl-sahadat/madrasha-apps"
+    },
+    {
+      "id": "s3",
+      "title": "Morning Mug Coffee House",
+      "desc": "Modern responsive cafe storefront with interactive catalog and dynamic shopping experience.",
+      "tag": "CAFE & E-COMMERCE",
+      "img": "assets/img/project-1.png",
+      "demo_url": "https://stl-sahadat.github.io/morning-mug-coffee-house/index.html",
+      "github_url": "https://github.com/stl-sahadat/morning-mug-coffee-house"
+    },
+    {
+      "id": "s4",
+      "title": "Cloud Expense Tracker Suite",
+      "desc": "Docker containerized finance dashboard deployed on Google Cloud Run with real-time analytics.",
+      "tag": "CLOUD & FINTECH",
+      "img": "assets/img/gallery/photo-1551288049-bebda4e38f71.jpg",
+      "demo_url": "https://ais-pre-5outvodj2oly3dlanlrfxg-873905991312.asia-southeast1.run.app",
+      "github_url": "https://github.com/stl-sahadat"
+    },
+    {
+      "id": "s5",
+      "title": "Enterprise RAG & Hybrid Vector Search",
+      "desc": "Pinecone vector retrieval with semantic caching, contextual chunking, and reciprocal rank fusion.",
+      "tag": "KNOWLEDGE ENGINES",
+      "img": "assets/img/gallery/photo-1526374965328-7f61d4dc18c5.jpg",
+      "demo_url": "https://github.com/stl-sahadat",
+      "github_url": "https://github.com/stl-sahadat"
+    },
+    {
+      "id": "s6",
+      "title": "Neural Telemetry & Stream Metrics",
+      "desc": "Real-time agent monitoring tracking sub-second latency, token throughput, and anomaly alerts.",
+      "tag": "TELEMETRY & METRICS",
+      "img": "assets/img/gallery/photo-1504639725590-34d0984388bd.jpg",
+      "demo_url": "https://github.com/stl-sahadat",
+      "github_url": "https://github.com/stl-sahadat"
+    }
+  ],
+  "experience": [
+    {
+      "id": "exp1",
+      "company": "Autonomous Enterprise Solutions",
+      "role": "Lead Automation & Systems Architect",
+      "years": "2024 — Present",
+      "desc": "Architecting fault-tolerant autonomous agent frameworks and Python automation engines that eliminate operational bottlenecks and cut manual task overhead by 80%. Implemented deterministic API tool schemas and self-healing error recovery loops ensuring 24/7 autonomous reliability."
+    },
+    {
+      "id": "exp2",
+      "company": "Institutional Solutions · Enterprise ERP",
+      "role": "Full-Stack Systems Engineer",
+      "years": "2023 — Present",
+      "desc": "Engineering robust, type-safe institutional ERP platforms and data management suites using TypeScript, modern reactive frontends, and structured relational persistence. Digitized paper-based workflows into synchronized cloud database interfaces."
+    },
+    {
+      "id": "exp3",
+      "company": "STL Tech Solutions · Product Solutions",
+      "role": "Product & Web Architect",
+      "years": "2023 — Present",
+      "desc": "Delivering bespoke consumer-facing web applications and modern commercial platforms combining responsive architecture, fluid micro-interactions, and 98+ Google Lighthouse benchmarks."
+    },
+    {
+      "id": "exp4",
+      "company": "Cloud & Systems Infrastructure",
+      "role": "Cloud Solutions Consultant",
+      "years": "2024 — Present",
+      "desc": "Architecting and deploying containerized full-stack services on Google Cloud Run with automated continuous deployment, strict schema validation, 99.9% uptime, and serverless auto-scaling."
+    }
+  ],
+  "education": [
+    {
+      "id": "edu1",
+      "institution": "Graduate Studies",
+      "degree": "Master's Degree (Completed)",
+      "years": "Completed",
+      "desc": "Completed Master's Degree while independently mastering advanced computer systems, software architecture, and full-stack autonomous AI engineering."
+    },
+    {
+      "id": "edu2",
+      "institution": "Independent AI & Software Systems Architecture",
+      "degree": "Self-Driven Research & Systems Engineering",
+      "years": "Continuous Mastery",
+      "desc": "Relentless hands-on research in autonomous multi-agent topologies, LLM prompt engineering, vector databases, and containerized microservices."
+    },
+    {
+      "id": "edu3",
+      "institution": "Govt Science College",
+      "degree": "Higher Secondary Certificate (Science)",
+      "years": "Completed",
+      "desc": "Completed Higher Secondary studies in Science with strong foundations in advanced mathematics, physics, and algorithmic computing."
+    }
+  ],
+  "contact": {
+    "email": "sahadat.info01@gmail.com",
+    "phone": "+880 1944-576159",
+    "whatsapp_url": "https://wa.me/8801944576159?text=Hello%20Md%20Sahadat%20Hossain,%20I%20would%20like%20to%20discuss%20a%20project.",
+    "linkedin": "https://www.linkedin.com/in/mdsahadatconnact/",
+    "github": "https://github.com/stl-sahadat",
+    "facebook": "https://facebook.com/stl.sahadat",
+    "twitter": "https://x.com/stl_sahadat",
+    "instagram": "https://www.instagram.com/stlsahadat/?hl=en",
+    "youtube": "https://www.youtube.com/@sahadatautomation",
+    "telegram": "https://t.me/stl_sahadat"
+  },
+  "specialized_roles": [
+    "AI Content Creator",
+    "Reverse Engineer",
+    "Web Developer",
+    "App Developer",
+    "Frontend Developer",
+    "Backend Developer",
+    "Full-Stack Developer"
+  ]
+}

@@ -1,0 +1,957 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="/" />
+
+    <!-- FAVICON -->
+    <link rel="shortcut icon" href="assets/img/Icon.png" type="image/png" />
+
+    <!-- REMIXICONS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css"
+    />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/admin.css?v=2" />
+
+    <title>Md Sahadat Hossain | Admin & Analytics Console</title>
+  </head>
+  <body>
+    <!-- Ambient Background Violet Blobs -->
+    <div class="admin-ambient">
+      <div class="ambient-blob blob-1"></div>
+      <div class="ambient-blob blob-2"></div>
+    </div>
+
+    <!-- AUTHENTICATION OVERLAY / LOGIN GATE -->
+    <div class="auth-overlay" id="auth-overlay">
+      <div class="auth-card">
+        <div class="auth-header">
+          <div class="auth-badge">
+            <i class="ri-shield-keyhole-line"></i> Secure Console
+          </div>
+          <h1 class="auth-title">Sahadat Hossain</h1>
+          <p class="auth-subtitle">AI Agent Architect &amp; Prompt Engineer · Admin Portal Access</p>
+        </div>
+
+        <form class="auth-form" id="auth-form" autocomplete="off">
+          <div class="lockout-banner" id="lockout-banner" style="display: none;">
+            <i class="ri-alarm-warning-fill"></i>
+            <span id="lockout-text">Security Lockout Active</span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="admin-gmail">
+              <span>Gmail Address</span>
+              <span class="form-label-tag">Admin Verification</span>
+            </label>
+            <div class="input-wrapper">
+              <i class="ri-mail-line input-icon"></i>
+              <input
+                type="email"
+                id="admin-gmail"
+                class="form-input"
+                value="sahadat.info01@gmail.com"
+                placeholder="Give me Gmail"
+                required
+                autocomplete="username"
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="admin-password">
+              <span>Admin Password</span>
+              <span class="form-label-tag">Security Gate</span>
+            </label>
+            <div class="input-wrapper">
+              <i class="ri-lock-password-line input-icon"></i>
+              <input
+                type="password"
+                id="admin-password"
+                class="form-input"
+                placeholder="Give me Password"
+                required
+                autocomplete="current-password"
+              />
+              <button
+                type="button"
+                id="toggle-password-btn"
+                class="toggle-password"
+                title="Show / Hide Password"
+              >
+                <i class="ri-eye-line"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="auth-error" id="auth-error">
+            <i class="ri-error-warning-line"></i>
+            <span>Invalid credentials!</span>
+          </div>
+
+          <button type="submit" class="auth-btn" id="auth-submit-btn">
+            Authenticate &amp; Enter Console <i class="ri-arrow-right-line"></i>
+          </button>
+        </form>
+
+        <div class="auth-footer">
+          Verified Authentication · End-to-End Encrypted Session
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN ADMIN LAYOUT -->
+    <div class="admin-layout">
+      <!-- LEFT SIDEBAR -->
+      <aside class="admin-sidebar" id="admin-sidebar">
+        <div class="sidebar-brand">
+          <div class="brand-avatar">
+            <img src="assets/img/sahadat-avatar.jpg" alt="Md Sahadat Hossain" />
+          </div>
+          <div class="brand-info">
+            <div class="brand-name">Md Sahadat Hossain</div>
+            <div class="brand-role">
+              <span class="status-dot"></span> System Online
+            </div>
+          </div>
+        </div>
+
+        <nav class="sidebar-menu">
+          <div class="menu-label">Console Modules</div>
+
+          <button type="button" class="sidebar-nav-item item-active" data-admin-tab="dashboard">
+            <i class="ri-dashboard-3-line"></i>
+            <span>Overview &amp; Stats</span>
+            <span class="nav-badge">Live</span>
+          </button>
+
+          <button type="button" class="sidebar-nav-item" data-admin-tab="about">
+            <i class="ri-user-6-line"></i>
+            <span>About Me</span>
+          </button>
+
+          <button type="button" class="sidebar-nav-item" data-admin-tab="profile">
+            <i class="ri-user-star-line"></i>
+            <span>Profile &amp; Identity</span>
+          </button>
+
+          <button type="button" class="sidebar-nav-item" data-admin-tab="skills">
+            <i class="ri-code-s-slash-line"></i>
+            <span>Technical Skills</span>
+          </button>
+
+          <button type="button" class="sidebar-nav-item" data-admin-tab="projects">
+            <i class="ri-apps-2-line"></i>
+            <span>Projects</span>
+          </button>
+
+          <button type="button" class="sidebar-nav-item" data-admin-tab="showcase">
+            <i class="ri-layout-masonry-line"></i>
+            <span>Showcase &amp; Designs</span>
+          </button>
+
+          <button type="button" class="sidebar-nav-item" data-admin-tab="experience">
+            <i class="ri-briefcase-4-line"></i>
+            <span>Experience</span>
+          </button>
+
+          <button type="button" class="sidebar-nav-item" data-admin-tab="contact">
+            <i class="ri-contacts-book-line"></i>
+            <span>Contact &amp; Channels</span>
+          </button>
+        </nav>
+
+        <div class="sidebar-footer">
+          <a href="/" target="_blank" class="sidebar-action-btn">
+            <i class="ri-external-link-line"></i>
+            <span>View Live Portfolio</span>
+          </a>
+
+          <button type="button" class="sidebar-action-btn sidebar-logout-btn action-logout">
+            <i class="ri-logout-box-r-line"></i>
+            <span>Exit / Logout</span>
+          </button>
+        </div>
+      </aside>
+
+      <!-- MAIN CONTENT VIEW -->
+      <main class="admin-main">
+        <!-- TOPBAR HEADER -->
+        <header class="admin-header">
+          <div class="header-left">
+            <button
+              type="button"
+              class="sidebar-toggle-mobile"
+              id="mobile-sidebar-toggle"
+              title="Toggle Menu"
+            >
+              <i class="ri-menu-line"></i>
+            </button>
+            <div class="header-title-wrap">
+              <span class="header-category">Admin Control Center</span>
+              <h2 class="header-page-title" id="header-page-title">
+                Visitor Analytics &amp; Live Overview
+              </h2>
+            </div>
+          </div>
+
+          <div class="header-center">
+            <div class="live-badge">
+              <span class="status-dot"></span> Real Tracker Active
+            </div>
+            <div class="header-clock" id="live-clock">--:--:-- --</div>
+          </div>
+
+          <div class="header-right">
+            <a href="/" target="_blank" class="header-portfolio-btn">
+              <i class="ri-global-line"></i> Live Site
+            </a>
+
+            <!-- 3-DOTS BUTTON (Triggers Right Off-Canvas Drawer) -->
+            <button
+              type="button"
+              class="dots-btn"
+              id="dots-toggle-btn"
+              title="Quick Navigation &amp; Tools"
+            >
+              <i class="ri-more-2-fill"></i>
+            </button>
+          </div>
+        </header>
+
+        <!-- RIGHT SIDEBAR / OFF-CANVAS DRAWER -->
+        <div class="right-drawer-overlay" id="right-drawer-overlay">
+          <div class="right-drawer">
+            <div class="drawer-header">
+              <div class="drawer-title-wrap">
+                <i class="ri-compass-3-line"></i>
+                <div class="drawer-title">Quick Jump &amp; Tools</div>
+              </div>
+              <button
+                type="button"
+                class="drawer-close-btn"
+                id="drawer-close-btn"
+                title="Close Drawer"
+              >
+                <i class="ri-close-line"></i>
+              </button>
+            </div>
+
+            <div class="drawer-content">
+              <div>
+                <div class="drawer-section-title">Navigation Hub</div>
+                <div class="drawer-nav-list">
+                  <button type="button" class="drawer-nav-btn" data-admin-tab="dashboard">
+                    <i class="ri-dashboard-3-line"></i> Overview &amp; Stats
+                  </button>
+                  <button type="button" class="drawer-nav-btn" data-admin-tab="about">
+                    <i class="ri-user-6-line"></i> About Me
+                  </button>
+                  <button type="button" class="drawer-nav-btn" data-admin-tab="profile">
+                    <i class="ri-user-star-line"></i> Profile &amp; Identity
+                  </button>
+                  <button type="button" class="drawer-nav-btn" data-admin-tab="skills">
+                    <i class="ri-code-s-slash-line"></i> Technical Skills
+                  </button>
+                  <button type="button" class="drawer-nav-btn" data-admin-tab="projects">
+                    <i class="ri-apps-2-line"></i> Featured Projects
+                  </button>
+                  <button type="button" class="drawer-nav-btn" data-admin-tab="showcase">
+                    <i class="ri-layout-masonry-line"></i> Showcase &amp; Designs
+                  </button>
+                  <button type="button" class="drawer-nav-btn" data-admin-tab="experience">
+                    <i class="ri-briefcase-4-line"></i> Work &amp; Education
+                  </button>
+                  <button type="button" class="drawer-nav-btn" data-admin-tab="contact">
+                    <i class="ri-contacts-book-line"></i> Contact &amp; Leads
+                  </button>
+                </div>
+              </div>
+
+              <div>
+                <div class="drawer-section-title">Analytics Controls</div>
+                <div class="drawer-nav-list">
+                  <button type="button" class="drawer-nav-btn" id="btn-refresh-stats">
+                    <i class="ri-refresh-line"></i> Refresh Real Stats
+                  </button>
+                  <button
+                    type="button"
+                    class="drawer-nav-btn"
+                    id="btn-reset-stats"
+                    style="color: #f87171;"
+                  >
+                    <i class="ri-delete-bin-6-line" style="color: #f87171;"></i> Reset All Analytics
+                  </button>
+                </div>
+              </div>
+
+              <div>
+                <div class="drawer-section-title">Diagnostics</div>
+                <div class="drawer-diagnostics">
+                  <div class="diag-item">
+                    <span class="diag-label">Data Engine:</span>
+                    <span class="diag-value" id="diag-storage">localStorage</span>
+                  </div>
+                  <div class="diag-item">
+                    <span class="diag-label">Session ID:</span>
+                    <span class="diag-value" id="diag-session">--</span>
+                  </div>
+                  <div class="diag-item">
+                    <span class="diag-label">Resolution:</span>
+                    <span class="diag-value" id="diag-res">--</span>
+                  </div>
+                  <div class="diag-item">
+                    <span class="diag-label">Status:</span>
+                    <span class="diag-value" style="color: var(--accent-emerald);">● Synchronized</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="drawer-footer">
+              <a href="/" target="_blank" class="sidebar-action-btn">
+                <i class="ri-external-link-line"></i> View Live Portfolio
+              </a>
+              <button type="button" class="sidebar-action-btn sidebar-logout-btn action-logout">
+                <i class="ri-logout-box-r-line"></i> Lock &amp; Logout
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- CONTENT AREA -->
+        <div class="admin-content-area">
+          <!-- 1. DASHBOARD OVERVIEW TAB -->
+          <div class="admin-tab-pane pane-active" id="pane-dashboard">
+            <div class="dashboard-grid">
+              <!-- REAL METRIC CARDS -->
+              <div class="metrics-row">
+                <!-- Visits -->
+                <div class="metric-card">
+                  <div class="metric-header">
+                    <span class="metric-title">Total Real Visitors</span>
+                    <div class="metric-icon-wrap icon-purple">
+                      <i class="ri-group-line"></i>
+                    </div>
+                  </div>
+                  <div class="metric-body">
+                    <div class="metric-value" id="stat-total-visits">0</div>
+                    <div class="metric-desc">
+                      <span class="metric-badge-real">
+                        <i class="ri-shield-check-line"></i> Real Visitors
+                      </span>
+                      <span>(Unique sessions)</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Time Spent -->
+                <div class="metric-card">
+                  <div class="metric-header">
+                    <span class="metric-title">Total Active Time</span>
+                    <div class="metric-icon-wrap icon-green">
+                      <i class="ri-time-line"></i>
+                    </div>
+                  </div>
+                  <div class="metric-body">
+                    <div class="metric-value" id="stat-total-duration">0s</div>
+                    <div class="metric-desc">
+                      <span class="metric-badge-real">
+                        <i class="ri-pulse-line"></i> Real Duration
+                      </span>
+                      <span>(Cumulative time)</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- GitHub Clicks -->
+                <div class="metric-card">
+                  <div class="metric-header">
+                    <span class="metric-title">GitHub Profile Visits</span>
+                    <div class="metric-icon-wrap icon-cyan">
+                      <i class="ri-github-fill"></i>
+                    </div>
+                  </div>
+                  <div class="metric-body">
+                    <div class="metric-value" id="stat-github-clicks">0</div>
+                    <div class="metric-desc" id="stat-github-status">
+                      <span class="badge-status badge-no">Not Visited Yet</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- WhatsApp Clicks -->
+                <div class="metric-card">
+                  <div class="metric-header">
+                    <span class="metric-title">WhatsApp Inquiries</span>
+                    <div class="metric-icon-wrap icon-amber">
+                      <i class="ri-whatsapp-line"></i>
+                    </div>
+                  </div>
+                  <div class="metric-body">
+                    <div class="metric-value" id="stat-whatsapp-clicks">0</div>
+                    <div class="metric-desc">
+                      <span class="metric-badge-real">
+                        <i class="ri-chat-1-line"></i> Direct Messages
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- SECONDARY METRICS ROW -->
+              <div class="metrics-row">
+                <div class="metric-card">
+                  <div class="metric-header">
+                    <span class="metric-title">LinkedIn Clicks</span>
+                    <div class="metric-icon-wrap icon-purple">
+                      <i class="ri-linkedin-fill"></i>
+                    </div>
+                  </div>
+                  <div class="metric-body">
+                    <div class="metric-value" id="stat-linkedin-clicks">0</div>
+                    <div class="metric-desc">Profile views from portfolio</div>
+                  </div>
+                </div>
+
+                <div class="metric-card">
+                  <div class="metric-header">
+                    <span class="metric-title">Email Copies &amp; Mailto</span>
+                    <div class="metric-icon-wrap icon-cyan">
+                      <i class="ri-mail-send-line"></i>
+                    </div>
+                  </div>
+                  <div class="metric-body">
+                    <div class="metric-value" id="stat-email-copies">0</div>
+                    <div class="metric-desc">Direct lead inquiries</div>
+                  </div>
+                </div>
+
+                <div class="metric-card">
+                  <div class="metric-header">
+                    <span class="metric-title">Resume / CV Downloads</span>
+                    <div class="metric-icon-wrap icon-green">
+                      <i class="ri-file-download-line"></i>
+                    </div>
+                  </div>
+                  <div class="metric-body">
+                    <div class="metric-value" id="stat-cv-downloads">0</div>
+                    <div class="metric-desc">PDF CV downloaded</div>
+                  </div>
+                </div>
+
+                <div class="metric-card">
+                  <div class="metric-header">
+                    <span class="metric-title">Project Card Views</span>
+                    <div class="metric-icon-wrap icon-amber">
+                      <i class="ri-external-link-line"></i>
+                    </div>
+                  </div>
+                  <div class="metric-body">
+                    <div class="metric-value" id="stat-project-clicks">0</div>
+                    <div class="metric-desc">Project details explored</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- DETAILED REAL ANALYTICS (TABLE + SECTION PROGRESS) -->
+              <div class="analytics-two-col">
+                <!-- Visitor Sessions Table -->
+                <div class="panel-card">
+                  <div class="panel-header">
+                    <div class="panel-title">
+                      <i class="ri-history-line"></i> Recent Visitor Sessions
+                    </div>
+                    <span style="font-size: 0.75rem; color: var(--text-muted);">
+                      Real Browser Logs
+                    </span>
+                  </div>
+
+                  <div class="sessions-table-wrapper">
+                    <table class="sessions-table">
+                      <thead>
+                        <tr>
+                          <th>Session ID</th>
+                          <th>Visit Time</th>
+                          <th>Time on Site</th>
+                          <th>GitHub?</th>
+                          <th>WhatsApp?</th>
+                          <th>Sections</th>
+                          <th>Device</th>
+                        </tr>
+                      </thead>
+                      <tbody id="sessions-table-body">
+                        <!-- Populated by JavaScript from localStorage -->
+                      </tbody>
+                    </table>
+
+                    <div class="session-empty-state" id="session-empty-notice">
+                      <i class="ri-radar-line"></i>
+                      <div>No visitor sessions recorded yet.</div>
+                      <div style="font-size: 0.75rem; margin-top: 4px; color: var(--text-faint);">
+                        Real visitors browsing the portfolio will automatically appear here.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Section Popularity Progress Bars -->
+                <div class="panel-card">
+                  <div class="panel-header">
+                    <div class="panel-title">
+                      <i class="ri-pie-chart-line"></i> Popular Sections Visited
+                    </div>
+                    <span style="font-size: 0.75rem; color: var(--text-muted);">
+                      Real Views
+                    </span>
+                  </div>
+
+                  <div class="section-bars-list" id="section-bars-container">
+                    <!-- Populated by JavaScript from localStorage -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. ABOUT TAB (LIVE CMS EDITOR) -->
+          <div class="admin-tab-pane" id="pane-about">
+            <div class="cms-card">
+              <div class="cms-header">
+                <div>
+                  <h3 class="cms-title"><i class="ri-user-6-line"></i> About Me &amp; Executive Bio CMS</h3>
+                  <p class="cms-subtitle">Edit your biography, narrative headline, and performance stats live.</p>
+                </div>
+                <button type="button" class="cms-save-btn" id="btn-save-about">
+                  <i class="ri-save-3-line"></i> Save About Changes
+                </button>
+              </div>
+
+              <div class="cms-grid">
+                <div class="cms-field">
+                  <label class="cms-label" for="about-title">
+                    <span>Section Header Title</span>
+                    <span class="cms-label-tag">Header</span>
+                  </label>
+                  <input type="text" id="about-title" class="cms-input" placeholder="e.g. About Me" />
+                </div>
+
+                <div class="cms-field">
+                  <label class="cms-label" for="about-bio-heading">
+                    <span>Bio Highlight Headline</span>
+                    <span class="cms-label-tag">H2 Title</span>
+                  </label>
+                  <input type="text" id="about-bio-heading" class="cms-input" placeholder="e.g. Autonomous Systems &amp; AI Architecture" />
+                </div>
+
+                <div class="cms-field cms-grid-full">
+                  <label class="cms-label" for="about-bio-p1">
+                    <span>Primary Bio Paragraph</span>
+                    <span class="cms-label-tag">Introduction</span>
+                  </label>
+                  <textarea id="about-bio-p1" class="cms-textarea" rows="3" placeholder="Primary biography narrative..."></textarea>
+                </div>
+
+                <div class="cms-field cms-grid-full">
+                  <label class="cms-label" for="about-bio-p2">
+                    <span>Secondary Bio Paragraph</span>
+                    <span class="cms-label-tag">Technical Depth</span>
+                  </label>
+                  <textarea id="about-bio-p2" class="cms-textarea" rows="3" placeholder="Detailed engineering approach..."></textarea>
+                </div>
+
+                <div class="cms-field">
+                  <label class="cms-label" for="about-years">
+                    <span>Years Experience Counter</span>
+                    <span class="cms-label-tag">Badge 1</span>
+                  </label>
+                  <input type="text" id="about-years" class="cms-input" placeholder="e.g. 4+" />
+                </div>
+
+                <div class="cms-field">
+                  <label class="cms-label" for="about-projects">
+                    <span>Completed Projects</span>
+                    <span class="cms-label-tag">Badge 2</span>
+                  </label>
+                  <input type="text" id="about-projects" class="cms-input" placeholder="e.g. 30+" />
+                </div>
+
+                <div class="cms-field">
+                  <label class="cms-label" for="about-uptime">
+                    <span>Target System Uptime</span>
+                    <span class="cms-label-tag">Badge 3</span>
+                  </label>
+                  <input type="text" id="about-uptime" class="cms-input" placeholder="e.g. 99.99%" />
+                </div>
+
+                <div class="cms-field">
+                  <label class="cms-label" for="about-cta-text">
+                    <span>Call-To-Action Button Text</span>
+                    <span class="cms-label-tag">Button Label</span>
+                  </label>
+                  <input type="text" id="about-cta-text" class="cms-input" placeholder="e.g. Contact Me or Let's Talk" />
+                </div>
+
+                <div class="cms-field">
+                  <label class="cms-label" for="about-cta-url">
+                    <span>Call-To-Action Target Link</span>
+                    <span class="cms-label-tag">Target URL</span>
+                  </label>
+                  <input type="text" id="about-cta-url" class="cms-input" placeholder="e.g. #contact" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. PROFILE & IDENTITY TAB (LIVE CMS EDITOR) -->
+          <div class="admin-tab-pane" id="pane-profile">
+            <div class="cms-card">
+              <div class="cms-header">
+                <div>
+                  <h3 class="cms-title"><i class="ri-user-star-line"></i> Profile &amp; Hero Section CMS</h3>
+                  <p class="cms-subtitle">Edit your full name, greeting, animated professions, cutout hero portrait, and avatar.</p>
+                </div>
+                <button type="button" class="cms-save-btn" id="btn-save-profile">
+                  <i class="ri-save-3-line"></i> Save Profile Changes
+                </button>
+              </div>
+
+              <div class="cms-grid">
+                <!-- Hero Image Cutout Upload -->
+                <div class="cms-field cms-grid-full">
+                  <label class="cms-label">
+                    <span>Hero Cutout Portrait (Transparent PNG/JPG)</span>
+                    <span class="cms-label-tag">Hero Main Visual</span>
+                  </label>
+                  <div class="cms-image-picker">
+                    <img id="preview-hero-img" class="cms-image-thumb" src="assets/img/hero-profile1.png" alt="Hero Cutout" />
+                    <div class="cms-image-controls">
+                      <input type="text" id="profile-hero-img" class="cms-input" placeholder="assets/img/hero-profile1.png" />
+                      <label class="cms-upload-btn">
+                        <i class="ri-upload-cloud-line"></i> Upload New Image
+                        <input type="file" id="file-hero-img" accept="image/*" style="display: none;" />
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Hero Video Upload -->
+                <div class="cms-field cms-grid-full">
+                  <label class="cms-label">
+                    <span>Hero Cinematic Video (MP4 / WebM)</span>
+                    <span class="cms-label-tag">Main Hero Video Visual</span>
+                  </label>
+                  <div class="cms-image-picker">
+                    <video id="preview-hero-video" class="cms-image-thumb" src="assets/video/hero-intro.mp4" muted loop autoplay playsinline style="object-fit: cover;"></video>
+                    <div class="cms-image-controls">
+                      <input type="text" id="profile-hero-video" class="cms-input" placeholder="assets/video/hero-intro.mp4" />
+                      <label class="cms-upload-btn">
+                        <i class="ri-video-upload-line"></i> Upload New Video
+                        <input type="file" id="file-hero-video" accept="video/*" style="display: none;" />
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Avatar Image Upload -->
+                <div class="cms-field cms-grid-full">
+                  <label class="cms-label">
+                    <span>Executive Avatar (Square/Circle Photo)</span>
+                    <span class="cms-label-tag">Sidebar &amp; Branding</span>
+                  </label>
+                  <div class="cms-image-picker">
+                    <img id="preview-avatar-img" class="cms-image-thumb" src="assets/img/sahadat-avatar.jpg" alt="Avatar" />
+                    <div class="cms-image-controls">
+                      <input type="text" id="profile-avatar-img" class="cms-input" placeholder="assets/img/sahadat-avatar.jpg" />
+                      <label class="cms-upload-btn">
+                        <i class="ri-upload-cloud-line"></i> Upload New Avatar
+                        <input type="file" id="file-avatar-img" accept="image/*" style="display: none;" />
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="cms-field">
+                  <label class="cms-label" for="profile-name">
+                    <span>Full Legal / Brand Name</span>
+                    <span class="cms-label-tag">H1 Name</span>
+                  </label>
+                  <input type="text" id="profile-name" class="cms-input" placeholder="Md Sahadat Hossain" />
+                </div>
+
+                <div class="cms-field">
+                  <label class="cms-label" for="profile-greeting">
+                    <span>Greeting Text</span>
+                    <span class="cms-label-tag">Hero Greeting</span>
+                  </label>
+                  <input type="text" id="profile-greeting" class="cms-input" placeholder="AI AGENT ARCHITECT &amp; PROMPT ENGINEER" />
+                </div>
+
+                <div class="cms-field">
+                  <label class="cms-label" for="profile-title-split">
+                    <span>Title Prefix / Specialization</span>
+                    <span class="cms-label-tag">Lockup Prefix</span>
+                  </label>
+                  <input type="text" id="profile-title-split" class="cms-input" placeholder="AI Agent Architect &amp;" />
+                </div>
+
+                <div class="cms-field">
+                  <label class="cms-label" for="profile-title-line1">
+                    <span>Animated Title Line 1</span>
+                    <span class="cms-label-tag">Profession 1</span>
+                  </label>
+                  <input type="text" id="profile-title-line1" class="cms-input" placeholder="AI Agent" />
+                </div>
+
+                <div class="cms-field">
+                  <label class="cms-label" for="profile-title-line2">
+                    <span>Animated Title Line 2</span>
+                    <span class="cms-label-tag">Profession 2</span>
+                  </label>
+                  <input type="text" id="profile-title-line2" class="cms-input" placeholder="Architect" />
+                </div>
+
+                <div class="cms-field">
+                  <label class="cms-label" for="profile-location">
+                    <span>Location</span>
+                    <span class="cms-label-tag">Geographic</span>
+                  </label>
+                  <input type="text" id="profile-location" class="cms-input" placeholder="Barura, Cumilla, Chattogram, Bangladesh · Open to Remote Worldwide" />
+                </div>
+
+                <div class="cms-field cms-grid-full">
+                  <label class="cms-label" for="profile-spec">
+                    <span>Specialization Summary</span>
+                    <span class="cms-label-tag">Meta</span>
+                  </label>
+                  <input type="text" id="profile-spec" class="cms-input" placeholder="Autonomous AI Agents, Multi-Agent Orchestration &amp; Enterprise Systems Architecture" />
+                </div>
+
+                <div class="cms-field cms-grid-full">
+                  <label class="cms-label" for="profile-resume-url">
+                    <span>Curriculum Vitae / Resume Download Link</span>
+                    <span class="cms-label-tag">PDF Document</span>
+                  </label>
+                  <input type="text" id="profile-resume-url" class="cms-input" placeholder="assets/pdf/Md-Sahadat-Hossain-Resume.pdf" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. SKILLS TAB (LIVE CMS EDITOR) -->
+          <div class="admin-tab-pane" id="pane-skills">
+            <div class="cms-card">
+              <div class="cms-header">
+                <div>
+                  <h3 class="cms-title"><i class="ri-code-s-slash-line"></i> Technical Skills CMS</h3>
+                  <p class="cms-subtitle">Add, remove, and reorganize skill categories and technical badges.</p>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                  <button type="button" class="cms-add-btn" id="btn-add-skill-cat">
+                    <i class="ri-add-line"></i> Add Category
+                  </button>
+                  <button type="button" class="cms-save-btn" id="btn-save-skills">
+                    <i class="ri-save-3-line"></i> Save Skills
+                  </button>
+                </div>
+              </div>
+
+              <!-- DYNAMIC SKILLS ACCORDION/CARDS CONTAINER -->
+              <div id="skills-cms-container">
+                <!-- Dynamically populated by JS from data/portfolio.json -->
+              </div>
+            </div>
+          </div>
+
+          <!-- 5. PROJECTS TAB (LIVE CMS EDITOR) -->
+          <div class="admin-tab-pane" id="pane-projects">
+            <div class="cms-card">
+              <div class="cms-header">
+                <div>
+                  <h3 class="cms-title"><i class="ri-apps-2-line"></i> Featured Projects CMS</h3>
+                  <p class="cms-subtitle">Manage project titles, categories, tech stack descriptions, screenshots, and links.</p>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                  <button type="button" class="cms-add-btn" id="btn-add-project">
+                    <i class="ri-add-line"></i> Add Project
+                  </button>
+                  <button type="button" class="cms-save-btn" id="btn-save-projects">
+                    <i class="ri-save-3-line"></i> Save Projects
+                  </button>
+                </div>
+              </div>
+
+              <!-- DYNAMIC PROJECTS LIST CONTAINER -->
+              <div id="projects-cms-container">
+                <!-- Dynamically populated by JS -->
+              </div>
+            </div>
+          </div>
+
+          <!-- 6. SHOWCASE TAB (LIVE CMS EDITOR) -->
+          <div class="admin-tab-pane" id="pane-showcase">
+            <div class="cms-card">
+              <div class="cms-header">
+                <div>
+                  <h3 class="cms-title"><i class="ri-layout-masonry-line"></i> Showcase &amp; Visual Designs CMS</h3>
+                  <p class="cms-subtitle">Manage design systems, UI prototypes, and engineering showcases.</p>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                  <button type="button" class="cms-add-btn" id="btn-add-showcase">
+                    <i class="ri-add-line"></i> Add Showcase Item
+                  </button>
+                  <button type="button" class="cms-save-btn" id="btn-save-showcase">
+                    <i class="ri-save-3-line"></i> Save Showcase
+                  </button>
+                </div>
+              </div>
+
+              <!-- DYNAMIC SHOWCASE CONTAINER -->
+              <div id="showcase-cms-container">
+                <!-- Dynamically populated by JS -->
+              </div>
+            </div>
+          </div>
+
+          <!-- 7. EXPERIENCE TAB (LIVE CMS EDITOR) -->
+          <div class="admin-tab-pane" id="pane-experience">
+            <div class="cms-card">
+              <div class="cms-header">
+                <div>
+                  <h3 class="cms-title"><i class="ri-briefcase-4-line"></i> Career Chronology &amp; Experience</h3>
+                  <p class="cms-subtitle">Manage engineering positions, companies, dates, and achievements.</p>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                  <button type="button" class="cms-add-btn" id="btn-add-exp">
+                    <i class="ri-add-line"></i> Add Experience
+                  </button>
+                  <button type="button" class="cms-save-btn" id="btn-save-timeline">
+                    <i class="ri-save-3-line"></i> Save Timeline
+                  </button>
+                </div>
+              </div>
+
+              <!-- DYNAMIC EXPERIENCE CONTAINER -->
+              <div id="exp-cms-container">
+                <!-- Dynamically populated by JS -->
+              </div>
+            </div>
+
+            <div class="cms-card">
+              <div class="cms-header">
+                <div>
+                  <h3 class="cms-title"><i class="ri-graduation-cap-line"></i> Academic Degrees &amp; Education</h3>
+                  <p class="cms-subtitle">Manage academic credentials, certifications, and educational degrees.</p>
+                </div>
+                <button type="button" class="cms-add-btn" id="btn-add-edu">
+                  <i class="ri-add-line"></i> Add Education
+                </button>
+              </div>
+
+              <!-- DYNAMIC EDUCATION CONTAINER -->
+              <div id="edu-cms-container">
+                <!-- Dynamically populated by JS -->
+              </div>
+            </div>
+          </div>
+
+          <!-- 8. CONTACT TAB (LIVE CMS EDITOR) -->
+          <div class="admin-tab-pane" id="pane-contact">
+            <div class="cms-card">
+              <div class="cms-header">
+                <div>
+                  <h3 class="cms-title"><i class="ri-contacts-book-line"></i> Channels &amp; Social Links CMS</h3>
+                  <p class="cms-subtitle">Manage your direct communication channels, phone numbers, and social URLs.</p>
+                </div>
+                <button type="button" class="cms-save-btn" id="btn-save-contact">
+                  <i class="ri-save-3-line"></i> Save Contact Channels
+                </button>
+              </div>
+
+              <div class="cms-grid">
+                <div class="cms-field">
+                  <label class="cms-label" for="contact-email">
+                    <span>Direct Gmail Address</span>
+                    <span class="cms-label-tag">Primary</span>
+                  </label>
+                  <input type="email" id="contact-email" class="cms-input" placeholder="sahadat.info01@gmail.com" />
+                </div>
+
+                <div class="cms-field">
+                  <label class="cms-label" for="contact-phone">
+                    <span>Phone / WhatsApp Number</span>
+                    <span class="cms-label-tag">Direct</span>
+                  </label>
+                  <input type="text" id="contact-phone" class="cms-input" placeholder="+880 1944-576159" />
+                </div>
+
+                <div class="cms-field cms-grid-full">
+                  <label class="cms-label" for="contact-whatsapp-url">
+                    <span>WhatsApp Direct Link (wa.me)</span>
+                    <span class="cms-label-tag">Instant Chat</span>
+                  </label>
+                  <input type="text" id="contact-whatsapp-url" class="cms-input" placeholder="https://wa.me/8801944576159?text=..." />
+                </div>
+
+                <div class="cms-field cms-grid-full">
+                  <label class="cms-label" for="contact-youtube">
+                    <span>YouTube Channel URL</span>
+                    <span class="cms-label-tag">Video Media</span>
+                  </label>
+                  <input type="text" id="contact-youtube" class="cms-input" placeholder="https://www.youtube.com/@sahadatautomation" />
+                </div>
+
+                <div class="cms-field cms-grid-full">
+                  <label class="cms-label" for="contact-linkedin">
+                    <span>LinkedIn Executive Profile URL</span>
+                    <span class="cms-label-tag">Verified Professional</span>
+                  </label>
+                  <input type="url" id="contact-linkedin" class="cms-input" placeholder="https://www.linkedin.com/in/mdsahadatconnact/" />
+                </div>
+
+                <div class="cms-field cms-grid-full">
+                  <label class="cms-label" for="contact-github">
+                    <span>GitHub Engineering Profile URL</span>
+                    <span class="cms-label-tag">Source Code</span>
+                  </label>
+                  <input type="url" id="contact-github" class="cms-input" placeholder="https://github.com/stl-sahadat" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- CONFIRMATION POPUP MODAL -->
+    <div class="cms-modal-overlay" id="confirm-modal-overlay">
+      <div class="cms-modal-card">
+        <div class="cms-modal-icon">
+          <i class="ri-question-line"></i>
+        </div>
+        <h3 class="cms-modal-title" id="confirm-modal-title">Save Profile Changes</h3>
+        <p class="cms-modal-desc" id="confirm-modal-desc">
+          Are you sure you want to save the updated profile information and images? Changes will be published to the live website immediately.
+        </p>
+        <div class="cms-modal-actions">
+          <button type="button" class="cms-modal-cancel" id="btn-modal-cancel">Cancel</button>
+          <button type="button" class="cms-modal-confirm" id="btn-modal-confirm">Save Changes</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div class="cms-toast" id="cms-toast">
+      <i class="ri-checkbox-circle-fill"></i>
+      <span id="cms-toast-msg">Changes saved successfully!</span>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="assets/js/analytics.js?v=2"></script>
+    <script src="assets/js/admin.js?v=2"></script>
+  </body>
+</html>

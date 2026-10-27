@@ -1,0 +1,2212 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="/" />
+
+    <!-- FAVICON -->
+    <link rel="shortcut icon" href="assets/img/Icon.png" type="image/png" />
+
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- REMIXICONS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css"
+    />
+
+    <!-- THREE.JS & GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+    <title>Md Sahadat Hossain | 3D Interactive Developer Room</title>
+
+    <style>
+      :root {
+        --cyan-neon: #00f0ff;
+        --orange-neon: #ff6b35;
+        --green-neon: #00ff88;
+        --purple-neon: #a855f7;
+        --bg-dark: #0a0a0f;
+        --font-main: "Inter", sans-serif;
+        --font-title: "Syne", sans-serif;
+        --font-mono: "JetBrains Mono", monospace;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        user-select: none;
+      }
+
+      body, html {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: var(--bg-dark);
+        font-family: var(--font-main);
+        color: #ffffff;
+      }
+
+      #webgl-canvas {
+        width: 100%;
+        height: 100%;
+        display: block;
+        cursor: grab;
+      }
+
+      #webgl-canvas:active {
+        cursor: grabbing;
+      }
+
+      /* TOP-RIGHT SMOOTH METER HUD (MATCHING REFERENCE IMAGE) */
+      .hud-meter-topright {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(16, 185, 129, 0.9);
+        color: #07070d;
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        font-weight: 700;
+        padding: 6px 12px;
+        border-radius: 6px;
+        box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+        z-index: 100;
+        pointer-events: auto;
+        cursor: default;
+      }
+
+      .hud-meter-topright span {
+        font-size: 0.65rem;
+        opacity: 0.85;
+      }
+
+      /* BOTTOM-RIGHT FLOATING TOOLBAR DOCK */
+      .hud-floating-dock {
+        position: fixed;
+        bottom: 24px;
+        right: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        z-index: 100;
+      }
+
+      .dock-icon-btn {
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.95);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #0d0d14;
+        font-size: 1.15rem;
+        font-weight: 700;
+        text-decoration: none;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+        cursor: pointer;
+        transition: all 0.25s ease;
+      }
+
+      .dock-icon-btn:hover {
+        background: var(--cyan-neon);
+        color: #07070d;
+        transform: scale(1.1);
+        box-shadow: 0 0 16px var(--cyan-neon);
+      }
+
+      .dock-battery {
+        background: #0ea5e9;
+        color: #ffffff;
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        font-weight: 700;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2px;
+        padding: 4px;
+      }
+
+      .dock-battery i {
+        font-size: 0.9rem;
+      }
+
+      /* BOTTOM-LEFT CAMERA SWITCH / RESET BUTTON */
+      .hud-btn-scroll-bottom {
+        position: fixed;
+        bottom: 24px;
+        left: 20px;
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.85);
+        border: 1.5px solid #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #07070d;
+        font-size: 1.3rem;
+        cursor: pointer;
+        z-index: 100;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+        transition: all 0.25s ease;
+      }
+
+      .hud-btn-scroll-bottom:hover {
+        background: #ffffff;
+        transform: translateY(2px) scale(1.08);
+        box-shadow: 0 0 18px rgba(255, 255, 255, 0.8);
+      }
+
+      /* TOP-LEFT PORTFOLIO RETURN LINK */
+      .hud-portfolio-link {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(10, 10, 18, 0.75);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+        color: #f1f5f9;
+        font-family: var(--font-main);
+        font-size: 0.82rem;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        padding: 8px 18px;
+        border-radius: 24px;
+        text-decoration: none;
+        cursor: pointer;
+        z-index: 100;
+        transition: all 0.25s ease;
+      }
+
+      .hud-portfolio-link:hover {
+        background: rgba(255, 255, 255, 0.15);
+        border-color: rgba(255, 255, 255, 0.45);
+        color: #ffffff;
+        transform: translateY(-2px);
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.25);
+      }
+
+      /* INTERACTION HINT PILL */
+      .hud-interaction-hint {
+        position: fixed;
+        bottom: 24px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(10, 10, 18, 0.85);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        padding: 8px 18px;
+        border-radius: 25px;
+        font-size: 0.76rem;
+        color: #e4e4e7;
+        pointer-events: none;
+        z-index: 90;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .hud-interaction-hint i {
+        color: var(--cyan-neon);
+        font-size: 0.95rem;
+      }
+
+      /* DETAIL INSPECTION DRAWER (CYBER HUD MODAL) */
+      .hud-project-modal {
+        position: fixed;
+        bottom: 30px;
+        right: 80px;
+        max-width: 430px;
+        width: calc(100% - 120px);
+        background: rgba(12, 12, 22, 0.92);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        border: 1.5px solid var(--cyan-neon);
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), 0 0 35px rgba(0, 240, 255, 0.3);
+        border-radius: 20px;
+        padding: 24px;
+        z-index: 200;
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+        pointer-events: none;
+        transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+
+      .hud-project-modal.active {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        pointer-events: auto;
+      }
+
+      .modal-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 12px;
+      }
+
+      .modal-badge {
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        color: var(--cyan-neon);
+        background: rgba(0, 240, 255, 0.12);
+        border: 1px solid rgba(0, 240, 255, 0.35);
+        padding: 3px 10px;
+        border-radius: 6px;
+        font-weight: 700;
+      }
+
+      .modal-close-btn {
+        background: rgba(255, 255, 255, 0.08);
+        border: none;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        color: #fff;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.1rem;
+        transition: all 0.2s ease;
+      }
+
+      .modal-close-btn:hover {
+        background: #f43f5e;
+        color: #fff;
+      }
+
+      .modal-title {
+        font-family: var(--font-title);
+        font-size: 1.25rem;
+        font-weight: 800;
+        color: #fff;
+        margin-bottom: 8px;
+        line-height: 1.3;
+      }
+
+      .modal-desc {
+        font-size: 0.84rem;
+        color: #a1a1aa;
+        line-height: 1.55;
+        margin-bottom: 16px;
+      }
+
+      .modal-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-bottom: 18px;
+      }
+
+      .modal-tag {
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        color: #e4e4e7;
+        padding: 3px 8px;
+        border-radius: 4px;
+      }
+
+      .modal-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .modal-action-btn {
+        flex: 1;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        padding: 10px 14px;
+        border-radius: 10px;
+        font-size: 0.82rem;
+        font-weight: 700;
+        text-decoration: none;
+        cursor: pointer;
+        transition: all 0.25s ease;
+      }
+
+      .btn-primary-action {
+        background: var(--cyan-neon);
+        color: #07070d;
+        border: 1px solid var(--cyan-neon);
+        box-shadow: 0 0 16px rgba(0, 240, 255, 0.4);
+      }
+
+      .btn-primary-action:hover {
+        background: #fff;
+        border-color: #fff;
+        box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
+      }
+
+      .btn-secondary-action {
+        background: rgba(255, 255, 255, 0.08);
+        color: #fff;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .btn-secondary-action:hover {
+        background: rgba(255, 255, 255, 0.16);
+      }
+
+      @media (max-width: 768px) {
+        .hud-project-modal {
+          bottom: 16px;
+          right: 16px;
+          left: 16px;
+          width: auto;
+        }
+        .hud-portfolio-link {
+          top: 14px;
+          left: 14px;
+          padding: 6px 14px;
+          font-size: 0.78rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- TOP-LEFT PORTFOLIO RETURN LINK -->
+    <a href="/projects" class="hud-portfolio-link" title="Return to Main Portfolio">
+      <i class="ri-arrow-left-line" style="margin-right: 6px;"></i> Back to Portfolio
+    </a>
+
+    <!-- TOP-RIGHT PERFORMANCE SMOOTH METER HUD (MATCHING PHOTO) -->
+    <div class="hud-meter-topright" id="meter-fps">
+      100% Smooth Meter <i class="ri-arrow-down-s-fill"></i>
+    </div>
+
+    <!-- BOTTOM-LEFT CAMERA SCROLL TOGGLE (MATCHING PHOTO) -->
+    <button type="button" class="hud-btn-scroll-bottom" id="btn-camera-cycle" title="Cycle Views: Overview · Project Wall · PC Desk">
+      <i class="ri-arrow-down-line"></i>
+    </button>
+
+    <!-- BOTTOM-RIGHT FLOATING TOOLBAR DOCK (MATCHING PHOTO) -->
+    <aside class="hud-floating-dock">
+      <button type="button" class="dock-icon-btn" id="btn-fullscreen" title="Toggle Fullscreen">
+        <i class="ri-fullscreen-line"></i>
+      </button>
+      <a href="https://www.linkedin.com/in/mdsahadatconnact/" target="_blank" rel="noopener noreferrer" class="dock-icon-btn" title="LinkedIn Profile">
+        <i class="ri-linkedin-fill"></i>
+      </a>
+      <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="dock-icon-btn" title="Instagram / Social">
+        <i class="ri-instagram-line"></i>
+      </a>
+      <a href="mailto:sahadat.info01@gmail.com" class="dock-icon-btn" title="Send Email">
+        <i class="ri-at-line"></i>
+      </a>
+      <div class="dock-icon-btn dock-battery" title="System Battery Status">
+        <i class="ri-battery-2-charge-line"></i>
+        <span>55%</span>
+      </div>
+    </aside>
+
+    <!-- INTERACTION HINT -->
+    <div class="hud-interaction-hint">
+      <i class="ri-mouse-line"></i> Drag mouse to rotate · Scroll to zoom · Click TVs or PC to inspect
+    </div>
+
+    <!-- DETAIL INSPECT MODAL (HUD POPUP) -->
+    <div class="hud-project-modal" id="hud-modal">
+      <div class="modal-header">
+        <span class="modal-badge" id="modal-badge">PROJECT FOCUS</span>
+        <button type="button" class="modal-close-btn" id="modal-close-btn">
+          <i class="ri-close-line"></i>
+        </button>
+      </div>
+      <h3 class="modal-title" id="modal-title">Space Corridor — 3D Model</h3>
+      <p class="modal-desc" id="modal-desc">
+        Interactive 3D real-time simulation built with Three.js, shaders, and dynamic lighting.
+      </p>
+      <div class="modal-tags" id="modal-tags">
+        <span class="modal-tag">Three.js</span>
+        <span class="modal-tag">WebGL</span>
+        <span class="modal-tag">Shaders</span>
+      </div>
+      <div class="modal-actions">
+        <a href="https://github.com/stl-sahadat" target="_blank" id="modal-link-demo" class="modal-action-btn btn-primary-action">
+          Live Project <i class="ri-external-link-line"></i>
+        </a>
+        <a href="https://github.com/stl-sahadat" target="_blank" id="modal-link-git" class="modal-action-btn btn-secondary-action">
+          Source Code <i class="ri-github-line"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- 3D WEBGL CANVAS -->
+    <canvas id="webgl-canvas"></canvas>
+
+    <!-- THREE.JS SCENE ENGINE -->
+    <script>
+      (function () {
+        'use strict';
+
+        // --- 1. SETUP THREE.JS SCENE, CAMERA, RENDERER ---
+        const canvas = document.getElementById('webgl-canvas');
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x0a0a0f);
+
+        const camera = new THREE.PerspectiveCamera(
+          43,
+          window.innerWidth / window.innerHeight,
+          0.1,
+          1000
+        );
+
+        // Wide panoramic view: Chair & desk & entrance door on left, TV project wall on right
+        const DEFAULT_CAM_POS = new THREE.Vector3(-5.0, 15.0, 26.5);
+        const DEFAULT_TARGET = new THREE.Vector3(1.5, 5.5, -2.0);
+
+        // Start camera slightly further away for smooth entrance glide
+        camera.position.set(-8.0, 19.0, 32.0);
+
+        const renderer = new THREE.WebGLRenderer({
+          canvas: canvas,
+          antialias: true,
+          powerPreference: "high-performance"
+        });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.05;
+        controls.target.copy(DEFAULT_TARGET);
+        controls.minDistance = 5;
+        controls.maxDistance = 42;
+        controls.maxPolarAngle = Math.PI / 2 + 0.01;
+        controls.update();
+
+        // Smooth cinematic glide straight into the room on page load
+        gsap.to(camera.position, {
+          x: DEFAULT_CAM_POS.x,
+          y: DEFAULT_CAM_POS.y,
+          z: DEFAULT_CAM_POS.z,
+          duration: 1.8,
+          ease: "power2.out"
+        });
+
+        // --- 2. LIGHTING RIG ---
+        // Ambient soft fill
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.85);
+        scene.add(ambientLight);
+
+        // Ceiling Main Cyan Neon Flood
+        const ceilingPoint = new THREE.PointLight(0x00f0ff, 2.8, 38);
+        ceilingPoint.position.set(0, 16.5, 0);
+        scene.add(ceilingPoint);
+
+        // Desk Warm Spotlight (over monitor & PC)
+        const deskSpot = new THREE.SpotLight(0xffffff, 2.2);
+        deskSpot.position.set(-6, 13, -3);
+        deskSpot.target.position.set(-6, 3.5, -6);
+        deskSpot.angle = 0.6;
+        deskSpot.penumbra = 0.7;
+        deskSpot.castShadow = true;
+        scene.add(deskSpot);
+        scene.add(deskSpot.target);
+
+        // Right Wall Ambient Spotlight for "MY WORKS" & TV displays
+        const wallSpot = new THREE.SpotLight(0xdbeafe, 1.15);
+        wallSpot.position.set(1.0, 11.0, 4.0);
+        wallSpot.target.position.set(13.0, 7.5, 0.0);
+        wallSpot.angle = 0.95;
+        wallSpot.penumbra = 1.0;
+        scene.add(wallSpot);
+        scene.add(wallSpot.target);
+
+        // --- 3. MATERIALS CACHE ---
+        const cyanNeonMat = new THREE.MeshBasicMaterial({ color: 0x00f0ff });
+        const orangeNeonMat = new THREE.MeshBasicMaterial({ color: 0xff6b35 });
+        const greenNeonMat = new THREE.MeshBasicMaterial({ color: 0x00ff88 });
+
+        const whiteGlossMat = new THREE.MeshStandardMaterial({
+          color: 0xf8f9fa,
+          roughness: 0.18,
+          metalness: 0.05
+        });
+
+        const blackMatteMat = new THREE.MeshStandardMaterial({
+          color: 0x141418,
+          roughness: 0.85,
+          metalness: 0.1
+        });
+
+        const darkRightWallMat = new THREE.MeshBasicMaterial({
+          color: 0x141418
+        });
+
+        const darkSlateTileMat = new THREE.MeshStandardMaterial({
+          color: 0x111216,
+          roughness: 0.7,
+          metalness: 0.15
+        });
+
+        // --- 4. PROCEDURAL ROOM GEOMETRY (MATCHING PHOTO) ---
+        const ROOM_SIZE = 26;
+        const ROOM_HEIGHT = 17;
+        const HALF_SIZE = ROOM_SIZE / 2;
+
+        // FLOOR: Dark Slate Square Tiles with fine grid seams
+        const floorGeo = new THREE.PlaneGeometry(ROOM_SIZE, ROOM_SIZE);
+        const floor = new THREE.Mesh(floorGeo, darkSlateTileMat);
+        floor.rotation.x = -Math.PI / 2;
+        floor.receiveShadow = true;
+        scene.add(floor);
+
+        // Tile Grid Grout Lines on floor
+        const floorGrid = new THREE.GridHelper(ROOM_SIZE, 12, 0x22242a, 0x1a1c22);
+        floorGrid.position.y = 0.015;
+        scene.add(floorGrid);
+
+        // BACK WALL (Dark Matte Wall with Circuit & Workstation)
+        const backWallGeo = new THREE.PlaneGeometry(ROOM_SIZE, ROOM_HEIGHT);
+        const backWall = new THREE.Mesh(backWallGeo, blackMatteMat);
+        backWall.position.set(0, ROOM_HEIGHT / 2, -HALF_SIZE);
+        backWall.receiveShadow = true;
+        scene.add(backWall);
+
+        // WEST WALL (Left Wall - Dark Matte Wall with Entrance Door & Wall Clock)
+        const westWallGeo = new THREE.PlaneGeometry(ROOM_SIZE, ROOM_HEIGHT);
+        const westWall = new THREE.Mesh(westWallGeo, blackMatteMat);
+        westWall.position.set(-HALF_SIZE, ROOM_HEIGHT / 2, 0);
+        westWall.rotation.y = Math.PI / 2;
+        westWall.receiveShadow = true;
+        scene.add(westWall);
+
+        // Sleek Office Entrance Door on West Wall (Matches user request for Chair & Door on left)
+        const doorFrameGeo = new THREE.BoxGeometry(0.14, 10.5, 4.8);
+        const doorFrameMat = new THREE.MeshStandardMaterial({ color: 0x1f242d, roughness: 0.5 });
+        const doorFrame = new THREE.Mesh(doorFrameGeo, doorFrameMat);
+        doorFrame.position.set(-HALF_SIZE + 0.08, 5.25, 4.2);
+        scene.add(doorFrame);
+
+        const doorLeafGeo = new THREE.BoxGeometry(0.1, 10.1, 4.4);
+        const doorLeafMat = new THREE.MeshStandardMaterial({ color: 0x0c0e14, roughness: 0.7 });
+        const doorLeaf = new THREE.Mesh(doorLeafGeo, doorLeafMat);
+        doorLeaf.position.set(-HALF_SIZE + 0.1, 5.05, 4.2);
+        scene.add(doorLeaf);
+
+        // Glowing Cyan Handle on Door
+        const doorHandleGeo = new THREE.CylinderGeometry(0.04, 0.04, 1.4, 16);
+        const doorHandle = new THREE.Mesh(doorHandleGeo, cyanNeonMat);
+        doorHandle.position.set(-HALF_SIZE + 0.22, 5.0, 2.5);
+        scene.add(doorHandle);
+
+        // RIGHT WALL (Matte Architectural Wall with TV Matrix)
+        const rightWallGeo = new THREE.PlaneGeometry(ROOM_SIZE, ROOM_HEIGHT);
+        const rightWall = new THREE.Mesh(rightWallGeo, darkRightWallMat);
+        rightWall.position.set(HALF_SIZE, ROOM_HEIGHT / 2, 0);
+        rightWall.rotation.y = -Math.PI / 2;
+        rightWall.receiveShadow = true;
+        scene.add(rightWall);
+
+        // OPEN DIORAMA ROOF ARCHITECTURE (No dark ceiling slab - completely open & clear)
+        // Architectural Neon Edge Trims defining the wall tops
+        const trimBack = new THREE.Mesh(new THREE.BoxGeometry(ROOM_SIZE, 0.15, 0.2), cyanNeonMat);
+        trimBack.position.set(0, ROOM_HEIGHT - 0.1, -HALF_SIZE + 0.1);
+        scene.add(trimBack);
+
+        const trimWest = new THREE.Mesh(new THREE.BoxGeometry(0.2, 0.15, ROOM_SIZE), cyanNeonMat);
+        trimWest.position.set(-HALF_SIZE + 0.1, ROOM_HEIGHT - 0.1, 0);
+        scene.add(trimWest);
+
+        const trimRight = new THREE.Mesh(new THREE.BoxGeometry(0.2, 0.15, ROOM_SIZE), cyanNeonMat);
+        trimRight.position.set(HALF_SIZE - 0.1, ROOM_HEIGHT - 0.1, 0);
+        scene.add(trimRight);
+
+        // Corner Square Downlights
+        [-HALF_SIZE + 3, HALF_SIZE - 3].forEach(cx => {
+          [-HALF_SIZE + 3, HALF_SIZE - 3].forEach(cz => {
+            const downGeo = new THREE.PlaneGeometry(0.9, 0.9);
+            const downMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
+            const down = new THREE.Mesh(downGeo, downMat);
+            down.rotation.x = Math.PI / 2;
+            down.position.set(cx, ROOM_HEIGHT - 0.05, cz);
+            scene.add(down);
+          });
+        });
+
+        // --- 5. LEFT WALL: ORANGE CIRCUIT PATTERN & AC UNIT ---
+        const circuitGroup = new THREE.Group();
+        // Exact branched lines as seen in reference picture
+        const circuits = [
+          // Top branch
+          { x: -7, y: 11.2, w: 7, rot: 0 },
+          { x: -3.0, y: 11.6, w: 2.2, rot: 0.45 },
+          { x: -0.5, y: 12.0, w: 4.5, rot: 0 },
+
+          // Second line
+          { x: -6, y: 10.2, w: 8.5, rot: 0 },
+          { x: -1.0, y: 9.6, w: 3.5, rot: -0.4 },
+          { x: 1.5, y: 9.2, w: 4.0, rot: 0 },
+
+          // Third line
+          { x: -7.5, y: 8.8, w: 6.5, rot: 0 },
+
+          // Fourth line
+          { x: -6.5, y: 7.6, w: 9.0, rot: 0 },
+          { x: -1.2, y: 7.0, w: 3.8, rot: -0.35 },
+          { x: 1.8, y: 6.5, w: 4.5, rot: 0 },
+
+          // Fifth line (lower branch)
+          { x: -6.0, y: 5.6, w: 7.5, rot: 0 },
+          { x: -1.5, y: 6.2, w: 3.2, rot: 0.4 },
+          { x: 1.0, y: 6.7, w: 3.5, rot: 0 }
+        ];
+
+        circuits.forEach(c => {
+          const cGeo = new THREE.PlaneGeometry(c.w, 0.16);
+          const cMesh = new THREE.Mesh(cGeo, orangeNeonMat);
+          cMesh.position.set(c.x, c.y, -HALF_SIZE + 0.06);
+          cMesh.rotation.z = c.rot;
+          circuitGroup.add(cMesh);
+        });
+        scene.add(circuitGroup);
+
+        // MODERN SPLIT AIR CONDITIONER (AC)
+        const acGroup = new THREE.Group();
+        const acBodyGeo = new THREE.BoxGeometry(4.2, 1.2, 0.9);
+        const acBody = new THREE.Mesh(acBodyGeo, whiteGlossMat);
+        acGroup.add(acBody);
+
+        // AC Vent Flap & Display Ribbon
+        const acVentGeo = new THREE.BoxGeometry(3.9, 0.12, 0.88);
+        const acVent = new THREE.Mesh(acVentGeo, new THREE.MeshStandardMaterial({ color: 0xd1d5db }));
+        acVent.position.set(0, -0.48, 0.05);
+        acGroup.add(acVent);
+
+        // AC Status LED Indicator
+        const acLedGeo = new THREE.PlaneGeometry(0.3, 0.1);
+        const acLed = new THREE.Mesh(acLedGeo, cyanNeonMat);
+        acLed.position.set(1.4, -0.15, 0.46);
+        acGroup.add(acLed);
+
+        acGroup.position.set(-1.5, 13.6, -HALF_SIZE + 0.5);
+        scene.add(acGroup);
+
+        // 4 WALL ART POSTERS (Between circuits and whiteboard)
+        const posterData = [
+          { title: "BATMAN", color: "#1e3a8a", x: 2.2, y: 9.8, w: 1.1, h: 1.6 },
+          { title: "CYBER", color: "#dc2626", x: 3.6, y: 10.4, w: 1.1, h: 1.6 },
+          { title: "WANTED", color: "#b45309", x: 2.2, y: 7.8, w: 1.1, h: 1.5 },
+          { title: "ANIME", color: "#f97316", x: 3.6, y: 8.5, w: 1.1, h: 1.6 }
+        ];
+
+        posterData.forEach(p => {
+          const cvs = document.createElement('canvas');
+          cvs.width = 128;
+          cvs.height = 180;
+          const ctx = cvs.getContext('2d');
+          ctx.fillStyle = p.color;
+          ctx.fillRect(0, 0, 128, 180);
+          ctx.fillStyle = '#ffffff';
+          ctx.font = 'bold 16px Inter, sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillText(p.title, 64, 40);
+          ctx.fillStyle = 'rgba(0,0,0,0.4)';
+          ctx.fillRect(16, 60, 96, 90);
+
+          const tex = new THREE.CanvasTexture(cvs);
+          const pGeo = new THREE.PlaneGeometry(p.w, p.h);
+          const pMat = new THREE.MeshBasicMaterial({ map: tex });
+          const pMesh = new THREE.Mesh(pGeo, pMat);
+          pMesh.position.set(p.x, p.y, -HALF_SIZE + 0.08);
+          scene.add(pMesh);
+        });
+
+        // CORNER DISPLAY SHELVING TOWER (Black & White Etagere)
+        const shelfGroup = new THREE.Group();
+        const shelfFrameGeo = new THREE.BoxGeometry(1.6, 6.0, 1.4);
+        const shelfFrame = new THREE.Mesh(shelfFrameGeo, new THREE.MeshStandardMaterial({
+          color: 0x18181b,
+          roughness: 0.6
+        }));
+        shelfGroup.add(shelfFrame);
+
+        // Shelf Tiers with glowing items
+        [-2.0, 0, 2.0].forEach((sy, idx) => {
+          const tierGeo = new THREE.BoxGeometry(1.8, 0.1, 1.6);
+          const tier = new THREE.Mesh(tierGeo, whiteGlossMat);
+          tier.position.y = sy;
+          shelfGroup.add(tier);
+
+          // Glowing Display Cube on Shelf
+          const cubeGeo = new THREE.BoxGeometry(0.5, 0.5, 0.5);
+          const cubeColor = idx === 0 ? 0x00ff88 : (idx === 1 ? 0xa855f7 : 0x00f0ff);
+          const cube = new THREE.Mesh(cubeGeo, new THREE.MeshBasicMaterial({ color: cubeColor }));
+          cube.position.set(0, sy + 0.35, 0);
+          shelfGroup.add(cube);
+        });
+        shelfGroup.position.set(6.2, 6.8, -HALF_SIZE + 1.0);
+        scene.add(shelfGroup);
+
+        // WALL CLOCK & FLOOR SUBWOOFER (Far Left Flank)
+        // Circular Wall Clock
+        const clockGeo = new THREE.CylinderGeometry(1.4, 1.4, 0.15, 32);
+        const clockMat = new THREE.MeshStandardMaterial({ color: 0x111116 });
+        const clockMesh = new THREE.Mesh(clockGeo, clockMat);
+        clockMesh.rotation.z = Math.PI / 2;
+        clockMesh.position.set(-HALF_SIZE + 0.1, 12.0, -8);
+        scene.add(clockMesh);
+
+        // Clock cyan tick ring
+        const tickGeo = new THREE.RingGeometry(1.0, 1.15, 12);
+        const tickMat = new THREE.MeshBasicMaterial({ color: 0x00f0ff, side: THREE.DoubleSide });
+        const tickMesh = new THREE.Mesh(tickGeo, tickMat);
+        tickMesh.rotation.y = Math.PI / 2;
+        tickMesh.position.set(-HALF_SIZE + 0.2, 12.0, -8);
+        scene.add(tickMesh);
+
+        // Floor Subwoofer / Tower
+        const subGeo = new THREE.BoxGeometry(1.6, 3.2, 1.6);
+        const subMat = new THREE.MeshStandardMaterial({ color: 0x18181b, roughness: 0.5 });
+        const subMesh = new THREE.Mesh(subGeo, subMat);
+        subMesh.position.set(-HALF_SIZE + 1.2, 1.6, -9);
+        scene.add(subMesh);
+
+        // --- 6. WORKSTATION DESK, GAMING PC & CHAIR ---
+        const deskGroup = new THREE.Group();
+
+        // Desktop Surface (Clean White)
+        const deskTopGeo = new THREE.BoxGeometry(7.2, 0.28, 3.6);
+        const deskTop = new THREE.Mesh(deskTopGeo, whiteGlossMat);
+        deskTop.position.set(-5.5, 3.8, -7.5);
+        deskTop.castShadow = true;
+        deskTop.receiveShadow = true;
+        deskGroup.add(deskTop);
+
+        // Left Drawer Unit (3 Drawers with handles)
+        const drawerGeo = new THREE.BoxGeometry(2.4, 3.65, 3.4);
+        const drawerUnit = new THREE.Mesh(drawerGeo, whiteGlossMat);
+        drawerUnit.position.set(-7.8, 1.83, -7.5);
+        drawerUnit.castShadow = true;
+        deskGroup.add(drawerUnit);
+
+        // 3 Drawer Seams & Black Pull Handles
+        for (let i = 0; i < 3; i++) {
+          const seamY = 0.8 + i * 1.1;
+          const handleGeo = new THREE.BoxGeometry(0.8, 0.08, 0.08);
+          const handleMat = new THREE.MeshBasicMaterial({ color: 0x09090e });
+          const handle = new THREE.Mesh(handleGeo, handleMat);
+          handle.position.set(-7.8, seamY, -5.75);
+          deskGroup.add(handle);
+        }
+
+        // Right Desk Leg Panel
+        const legGeo = new THREE.BoxGeometry(0.24, 3.65, 3.4);
+        const rightLeg = new THREE.Mesh(legGeo, whiteGlossMat);
+        rightLeg.position.set(-2.1, 1.83, -7.5);
+        rightLeg.castShadow = true;
+        deskGroup.add(rightLeg);
+
+        // Modesty Back Panel
+        const modestyGeo = new THREE.BoxGeometry(5.2, 1.8, 0.15);
+        const modesty = new THREE.Mesh(modestyGeo, whiteGlossMat);
+        modesty.position.set(-4.9, 2.8, -9.1);
+        deskGroup.add(modesty);
+
+        // Desk Accessories: Mousepad, Keyboard, Mouse, Stress Ball, Purple Note
+        const matGeo = new THREE.PlaneGeometry(3.6, 1.8);
+        const matMesh = new THREE.Mesh(matGeo, blackMatteMat);
+        matMesh.rotation.x = -Math.PI / 2;
+        matMesh.position.set(-5.5, 3.95, -7.2);
+        deskGroup.add(matMesh);
+
+        // White Mechanical Keyboard
+        const kbGeo = new THREE.BoxGeometry(1.8, 0.08, 0.65);
+        const kbMesh = new THREE.Mesh(kbGeo, new THREE.MeshStandardMaterial({ color: 0xf1f5f9 }));
+        kbMesh.position.set(-5.5, 4.02, -7.0);
+        deskGroup.add(kbMesh);
+
+        // White Mouse
+        const mouseGeo = new THREE.BoxGeometry(0.24, 0.08, 0.42);
+        const mouseMesh = new THREE.Mesh(mouseGeo, whiteGlossMat);
+        mouseMesh.position.set(-4.1, 4.02, -7.0);
+        deskGroup.add(mouseMesh);
+
+        // Orange Stress Ball (Front-right of desk, near mouse)
+        const ballGeo = new THREE.SphereGeometry(0.22, 16, 16);
+        const ballMat = new THREE.MeshStandardMaterial({ color: 0xff6b35, roughness: 0.3 });
+        const ballMesh = new THREE.Mesh(ballGeo, ballMat);
+        ballMesh.position.set(-3.5, 4.12, -6.6);
+        deskGroup.add(ballMesh);
+
+        // Purple Notebook
+        const bookGeo = new THREE.BoxGeometry(0.8, 0.08, 1.1);
+        const bookMat = new THREE.MeshStandardMaterial({ color: 0x8b5cf6 });
+        const bookMesh = new THREE.Mesh(bookGeo, bookMat);
+        bookMesh.position.set(-7.0, 4.02, -6.8);
+        deskGroup.add(bookMesh);
+
+        // --- WHITE GAMING PC TOWER WITH 3 RGB FANS ---
+        const pcCaseGeo = new THREE.BoxGeometry(1.2, 2.4, 2.2);
+        const pcCase = new THREE.Mesh(pcCaseGeo, whiteGlossMat);
+        pcCase.position.set(-2.8, 5.15, -7.6);
+        pcCase.castShadow = true;
+        deskGroup.add(pcCase);
+
+        // Glass Side Panel
+        const glassGeo = new THREE.PlaneGeometry(2.0, 2.1);
+        const glassMat = new THREE.MeshPhysicalMaterial({
+          color: 0xffffff,
+          transparent: true,
+          opacity: 0.25,
+          roughness: 0.1,
+          transmission: 0.9
+        });
+        const glass = new THREE.Mesh(glassGeo, glassMat);
+        glass.position.set(-3.41, 5.15, -7.6);
+        glass.rotation.y = -Math.PI / 2;
+        deskGroup.add(glass);
+
+        // 3 Glowing Circular Cyan RGB Intake Fans
+        const fanRings = [];
+        for (let i = 0; i < 3; i++) {
+          const ringGeo = new THREE.RingGeometry(0.18, 0.28, 24);
+          const fanRing = new THREE.Mesh(ringGeo, cyanNeonMat);
+          fanRing.position.set(-3.38, 4.4 + i * 0.72, -8.0);
+          fanRing.rotation.y = -Math.PI / 2;
+          deskGroup.add(fanRing);
+          fanRings.push(fanRing);
+        }
+
+        // --- WHITE CURVED WIDESCREEN MONITOR (INTERACTIVE PC SCREEN) ---
+        const monitorGroup = new THREE.Group();
+        // Stand Leg & Base (Positioned cleanly behind screen)
+        const standBaseGeo = new THREE.BoxGeometry(1.4, 0.05, 0.9);
+        const standBase = new THREE.Mesh(standBaseGeo, blackMatteMat);
+        standBase.position.set(-5.5, 3.965, -8.35);
+        monitorGroup.add(standBase);
+
+        // Vertical stand pillar sits safely behind the monitor screen
+        const standPillarGeo = new THREE.CylinderGeometry(0.065, 0.065, 1.5, 16);
+        const standPillar = new THREE.Mesh(standPillarGeo, blackMatteMat);
+        standPillar.position.set(-5.5, 4.70, -8.45);
+        monitorGroup.add(standPillar);
+
+        // Stand mounting bracket connecting pillar forward to monitor chassis back
+        const standBracketGeo = new THREE.BoxGeometry(0.24, 0.2, 0.35);
+        const standBracket = new THREE.Mesh(standBracketGeo, blackMatteMat);
+        standBracket.position.set(-5.5, 5.35, -8.28);
+        monitorGroup.add(standBracket);
+
+        // Monitor Curved Chassis & Display Screen (Elevated above desk, clean front face)
+        const screenWidth = 3.8;
+        const screenHeight = 1.9;
+        const curveRadius = 8.0;
+        const curveAngle = screenWidth / curveRadius;
+
+        const screenGeo = new THREE.CylinderGeometry(
+          curveRadius,
+          curveRadius,
+          screenHeight,
+          48,
+          1,
+          true,
+          Math.PI - curveAngle / 2,
+          curveAngle
+        );
+
+        // Rear chassis casing (Sits in front of pillar, behind screen glass)
+        const chassisMat = new THREE.MeshStandardMaterial({
+          color: 0x1e2430,
+          roughness: 0.35,
+          metalness: 0.6,
+          side: THREE.DoubleSide
+        });
+        const chassis = new THREE.Mesh(screenGeo, chassisMat);
+        chassis.position.set(-5.5, 5.35, -8.08 + curveRadius);
+        monitorGroup.add(chassis);
+
+        // Dynamic High-Res CRT Terminal Texture Engine for PC Screen (ThreeUI Zion CRT Replica)
+        function initCrtTerminalEngine() {
+          const G = 1024, j = 512;
+          const textCanvas = document.createElement('canvas');
+          textCanvas.width = G;
+          textCanvas.height = j;
+          const t = textCanvas.getContext('2d');
+
+          const dot = (n) => '·'.repeat(n);
+          const s = (txt, col = 'p') => ({ t: txt, c: col });
+          const terminalLines = [
+            [s('ZION MAINFRAME  v9.1.1'), s('   (c) 2199 Nebuchadnezzar', 'd')],
+            [s('CONSTRUCT Broadcast  Rev M  S/N NX-0101-0011', 'd')],
+            [],
+            [s('Hacking Matrix grid nodes '), s(`${dot(14)} `, 'd'), s('OK', 'a')],
+            [s('Neural Jack  0x000-0x0FF '), s(`${dot(11)} `, 'd'), s('ONLINE ', 'p'), s('OK', 'a')],
+            [s('Pinging agent signatures '), s(`${dot(6)} `, 'd'), s('3 found', 'p')],
+            [s('nav0  OPERATOR UPLINK SECURE ', 'd'), s(`${dot(6)} `, 'd'), s('READY', 'a')],
+            [s('vis0  CODE RAIN DECRYPT 256bit ', 'd'), s('READY', 'a')],
+            [s('net0  HARDLINE CONNECTION MAX ', 'd'), s(`${dot(4)} `, 'd'), s('LINK', 'a')],
+            [s('red0  RED PILL EXTRACTION ', 'd'), s(`${dot(4)} `, 'd'), s('READY', 'a')],
+            [s('Mounting /dev/mind -> ROOT: ', 'p'), s(`${dot(6)} `, 'd'), s('OK', 'a')],
+            [s('Loading weapon training program ', 'p'), s(`${dot(4)} `, 'd'), s('OK', 'a')],
+            [s('Starting [ jmp spd str wpn ] ', 'p'), s(`${dot(4)} `, 'd'), s('OK', 'a')],
+            [s('Locating the Oracle sector ', 'p'), s(`${dot(6)} `, 'd'), s('99.9%', 'p')],
+            [],
+            [s('SYSTEM ANOMALY  '), s('detected.', 'h')],
+            [s('subject Thomas A. Anderson   status asleep ', 'd'), s('z', 'd'), s('Z', 'd')],
+            [],
+            [s('wake up: ', 'p')]
+          ];
+
+          const palette = {
+            p: { fill: '#8df0b4', glow: 'rgba(28,236,132,0.95)' },
+            d: { fill: '#4f9a76', glow: 'rgba(28,236,132,0.45)' },
+            a: { fill: '#ffba5e', glow: 'rgba(255,150,52,0.95)' },
+            h: { fill: '#eafff3', glow: 'rgba(120,255,190,0.95)' }
+          };
+
+          const lineLen = (row) => row.reduce((acc, c) => acc + c.t.length, 0);
+          const totalChars = terminalLines.reduce((acc, row) => acc + lineLen(row), 0);
+          const maxLineChars = Math.max(...terminalLines.map(lineLen));
+
+          const fe = j * 0.12;
+          const se = (j * 0.78) / terminalLines.length;
+          const D = Math.max(12, Math.min(se * 0.85, (G * 0.88) / (Math.max(maxLineChars, 1) * 0.62)));
+          t.font = `600 ${D.toFixed(1)}px 'JetBrains Mono', monospace`;
+          const H = t.measureText('M').width || D * 0.6;
+
+          let charProgress = 0;
+          let holdTimer = 0;
+          let lastDrawnChars = -1;
+          let lastBlinkState = false;
+
+          const renderText = (count, blinkOn) => {
+            t.setTransform(1, 0, 0, 1, 0, 0);
+            t.fillStyle = '#03100a';
+            t.fillRect(0, 0, G, j);
+            t.textAlign = 'left';
+            t.textBaseline = 'top';
+            t.font = `600 ${D.toFixed(1)}px 'JetBrains Mono', monospace`;
+
+            let rem = count;
+            let yPos = fe;
+            const startX = Math.floor((G - maxLineChars * H) / 2);
+            let cursorX = startX;
+            let cursorY = fe;
+
+            for (const line of terminalLines) {
+              const len = lineLen(line);
+              const limit = Math.min(rem, len);
+              let curX = startX;
+              let counted = 0;
+
+              for (const chunk of line) {
+                let str = chunk.t;
+                const avail = limit - counted;
+                if (avail <= 0) break;
+                if (avail < str.length) str = str.slice(0, avail);
+
+                if (str.length > 0) {
+                  const pal = palette[chunk.c] || palette.p;
+                  t.fillStyle = pal.fill;
+                  t.shadowColor = pal.glow;
+                  t.shadowBlur = D * 0.38;
+                  t.fillText(str, curX, yPos);
+                  t.shadowBlur = 0;
+                  t.fillText(str, curX, yPos);
+                  curX += H * str.length;
+                }
+                counted += chunk.t.length;
+                if (counted >= limit) break;
+              }
+              cursorX = curX;
+              cursorY = yPos;
+              rem -= limit;
+              yPos += se;
+              if (rem <= 0) break;
+            }
+
+            // Blinking cursor
+            if (blinkOn) {
+              t.shadowColor = palette.p.glow;
+              t.shadowBlur = D * 0.42;
+              t.fillStyle = '#bdf8d2';
+              t.fillRect(cursorX, cursorY + D * 0.08, Math.max(H * 0.92, 4), D * 0.94);
+              t.shadowBlur = 0;
+            }
+          };
+
+          // CRT WebGL Shader Pipeline
+          const crtCanvas = document.createElement('canvas');
+          crtCanvas.width = G;
+          crtCanvas.height = j;
+          const gl = crtCanvas.getContext('webgl', { antialias: false, alpha: false, depth: false });
+
+          let webglReady = false;
+          let prog, aPosLoc, uTexLoc, uResLoc, uTimeLoc, uMotionLoc, uCurveLoc, uScanLoc, uScanDepthLoc;
+          let uTriadLoc, uGrilleLoc, uChromaLoc, uBarLoc, uFlickerLoc, uGrainLoc, uVignetteLoc, uMonoLoc;
+          let uGainLoc, uHaloLoc, uSheenLoc, uRoomLoc, tex;
+
+          if (gl) {
+            try {
+              const vsSource = 'attribute vec2 aPos; void main(){ gl_Position = vec4(aPos, 0.0, 1.0); }';
+              const fsSource = `precision highp float;
+uniform sampler2D uTex;
+uniform vec2 uRes;
+uniform float uTime;
+uniform float uMotion;
+uniform vec2 uCurve;
+uniform float uScan;
+uniform float uScanDepth;
+uniform float uTriad;
+uniform float uGrille;
+uniform float uChroma;
+uniform float uBar;
+uniform float uFlicker;
+uniform float uGrain;
+uniform float uVignette;
+uniform float uMono;
+uniform float uGain;
+uniform float uHalo;
+uniform vec3 uSheen;
+uniform vec3 uRoom;
+
+float hash(vec2 p){ p=fract(p*vec2(123.34,456.21)); p+=dot(p,p+45.32); return fract(p.x*p.y); }
+
+vec2 curve(vec2 uv){
+  uv = uv*2.0-1.0;
+  vec2 o = uv.yx*uv.yx;
+  uv += uv * o * uCurve;
+  uv = uv*0.5+0.5;
+  return uv;
+}
+
+void main(){
+  vec2 fuv = gl_FragCoord.xy / uRes;
+  vec2 uv = curve(fuv);
+  float t = uTime;
+
+  vec2 inb = step(vec2(0.0), uv) * step(uv, vec2(1.0));
+  float inside = inb.x*inb.y;
+  vec2 ed = min(uv, 1.0-uv);
+  inside *= smoothstep(0.0,0.020, min(ed.x,ed.y));
+
+  vec2 dir = uv-0.5;
+  float d2 = dot(dir,dir);
+  vec2 ao = dir * (0.0010 + 0.0075*d2) * uChroma;
+  vec3 col;
+  col.r = texture2D(uTex, uv + ao).r;
+  col.g = texture2D(uTex, uv).g;
+  col.b = texture2D(uTex, uv - ao).b;
+
+  if (uHalo > 0.001){
+    float s = 0.0038;
+    vec3 wide = texture2D(uTex, uv + vec2( s, 0.0)).rgb
+              + texture2D(uTex, uv + vec2(-s, 0.0)).rgb
+              + texture2D(uTex, uv + vec2(0.0,  s)).rgb
+              + texture2D(uTex, uv + vec2(0.0, -s)).rgb
+              + texture2D(uTex, uv + vec2( s,  s)*0.72).rgb
+              + texture2D(uTex, uv + vec2(-s, -s)*0.72).rgb;
+    col += wide * (uHalo / 6.0);
+  }
+
+  float sl = sin(uv.y*3.14159265*uScan + t*4.0*uMotion);
+  col *= mix(1.0 - uScanDepth, 1.0, sl*sl);
+
+  float gx = gl_FragCoord.x * (6.2831853/max(uTriad, 1.0));
+  vec3 grille = (1.0-uGrille) + uGrille*cos(gx + vec3(0.0,2.094,4.188));
+  col *= mix(vec3(1.0), grille, step(0.001, uGrille));
+  col *= uGain;
+
+  float bar = fract(uv.y*0.5 - t*0.07*uMotion);
+  bar = smoothstep(0.0,0.05,bar)*smoothstep(0.18,0.05,bar);
+  col += bar*uBar*uMotion;
+
+  float sheen = smoothstep(0.55,0.0, distance(uv, vec2(0.50,0.15)));
+  col += sheen*0.030*uSheen;
+
+  float vig = smoothstep(0.98,0.30, length((uv-0.5)*vec2(1.05,1.0)));
+  col *= mix(1.0-uVignette, 1.0, vig);
+  col *= 1.0 - uFlicker*uMotion*sin(t*8.0);
+
+  col += (hash(fuv + fract(t*0.37)) - 0.5)*uGrain;
+
+  float luma = dot(col, vec3(0.2126,0.7152,0.0722));
+  col = mix(col, vec3(luma), uMono);
+
+  float spill = smoothstep(0.85,0.18, length(fuv-0.5))*0.05;
+  vec3 room = uRoom + uSheen*spill*0.42;
+  col = mix(room, col, inside);
+  col = max(col, uRoom*0.34);
+  gl_FragColor = vec4(col,1.0);
+}`;
+
+              const compileShader = (type, src) => {
+                const sh = gl.createShader(type);
+                gl.shaderSource(sh, src);
+                gl.compileShader(sh);
+                return sh;
+              };
+
+              const vs = compileShader(gl.VERTEX_SHADER, vsSource);
+              const fs = compileShader(gl.FRAGMENT_SHADER, fsSource);
+              prog = gl.createProgram();
+              gl.attachShader(prog, vs);
+              gl.attachShader(prog, fs);
+              gl.linkProgram(prog);
+
+              gl.useProgram(prog);
+              const buf = gl.createBuffer();
+              gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+              gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 3,-1, -1,3]), gl.STATIC_DRAW);
+              aPosLoc = gl.getAttribLocation(prog, 'aPos');
+              gl.enableVertexAttribArray(aPosLoc);
+              gl.vertexAttribPointer(aPosLoc, 2, gl.FLOAT, false, 0, 0);
+
+              tex = gl.createTexture();
+              gl.bindTexture(gl.TEXTURE_2D, tex);
+              gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+              gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+              gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+              gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+
+              const u = (name) => gl.getUniformLocation(prog, name);
+              uTexLoc = u('uTex');
+              uResLoc = u('uRes');
+              uTimeLoc = u('uTime');
+              uMotionLoc = u('uMotion');
+              uCurveLoc = u('uCurve');
+              uScanLoc = u('uScan');
+              uScanDepthLoc = u('uScanDepth');
+              uTriadLoc = u('uTriad');
+              uGrilleLoc = u('uGrille');
+              uChromaLoc = u('uChroma');
+              uBarLoc = u('uBar');
+              uFlickerLoc = u('uFlicker');
+              uGrainLoc = u('uGrain');
+              uVignetteLoc = u('uVignette');
+              uMonoLoc = u('uMono');
+              uGainLoc = u('uGain');
+              uHaloLoc = u('uHalo');
+              uSheenLoc = u('uSheen');
+              uRoomLoc = u('uRoom');
+
+              gl.uniform1i(uTexLoc, 0);
+              gl.uniform2f(uResLoc, G, j);
+              gl.uniform1f(uMotionLoc, 1.0);
+              gl.uniform2f(uCurveLoc, 0.115, 0.165);
+              gl.uniform1f(uScanLoc, 340.0);
+              gl.uniform1f(uScanDepthLoc, 0.3);
+              gl.uniform1f(uTriadLoc, 3.2);
+              gl.uniform1f(uGrilleLoc, 0.34);
+              gl.uniform1f(uChromaLoc, 1.0);
+              gl.uniform1f(uBarLoc, 0.045);
+              gl.uniform1f(uFlickerLoc, 0.028);
+              gl.uniform1f(uGrainLoc, 0.022);
+              gl.uniform1f(uVignetteLoc, 0.58);
+              gl.uniform1f(uMonoLoc, 0.0);
+              gl.uniform1f(uGainLoc, 1.34);
+              gl.uniform1f(uHaloLoc, 0.1);
+              gl.uniform3f(uSheenLoc, 0.55, 1.0, 0.78);
+              gl.uniform3f(uRoomLoc, 0.012, 0.03, 0.022);
+
+              webglReady = true;
+            } catch(e) {
+              console.warn('WebGL CRT fallback to 2D canvas:', e);
+              webglReady = false;
+            }
+          }
+
+          const outCanvas = webglReady ? crtCanvas : textCanvas;
+          const outputTexture = new THREE.CanvasTexture(outCanvas);
+          outputTexture.wrapS = THREE.RepeatWrapping;
+          outputTexture.repeat.x = -1; // Ensures text displays left-to-right correctly on inner curved face
+          outputTexture.minFilter = THREE.LinearFilter;
+          outputTexture.magFilter = THREE.LinearFilter;
+          outputTexture.generateMipmaps = false;
+
+          // Initial render
+          renderText(0, true);
+          if (webglReady) {
+            gl.bindTexture(gl.TEXTURE_2D, tex);
+            gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+            gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, textCanvas);
+            gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
+            gl.viewport(0, 0, G, j);
+            gl.uniform1f(uTimeLoc, 0);
+            gl.drawArrays(gl.TRIANGLES, 0, 3);
+          }
+          outputTexture.needsUpdate = true;
+
+          return {
+            texture: outputTexture,
+            update(delta, elapsed) {
+              const typingRate = 42;
+              if (charProgress < totalChars) {
+                charProgress = Math.min(totalChars, charProgress + delta * typingRate);
+              } else {
+                holdTimer += delta;
+                if (holdTimer > 4.2) {
+                  charProgress = 0;
+                  holdTimer = 0;
+                }
+              }
+
+              const count = Math.floor(charProgress);
+              const blinkOn = Math.floor(elapsed * 2.6) % 2 === 0;
+
+              const textChanged = (count !== lastDrawnChars) || (blinkOn !== lastBlinkState);
+              if (textChanged) {
+                renderText(count, blinkOn);
+                lastDrawnChars = count;
+                lastBlinkState = blinkOn;
+              }
+
+              if (webglReady) {
+                gl.useProgram(prog);
+                if (textChanged) {
+                  gl.bindTexture(gl.TEXTURE_2D, tex);
+                  gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+                  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, textCanvas);
+                  gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
+                }
+                gl.viewport(0, 0, G, j);
+                gl.uniform1f(uTimeLoc, elapsed);
+                gl.drawArrays(gl.TRIANGLES, 0, 3);
+              }
+
+              outputTexture.needsUpdate = true;
+            }
+          };
+        }
+
+        const crtEngine = initCrtTerminalEngine();
+        window._crtTerminalEngine = crtEngine;
+
+        const screenMat = new THREE.MeshBasicMaterial({
+          map: crtEngine.texture,
+          side: THREE.DoubleSide
+        });
+        const screenMesh = new THREE.Mesh(screenGeo, screenMat);
+        screenMesh.position.set(-5.5, 5.35, -8.05 + curveRadius);
+        screenMesh.name = 'INTERACTIVE_PC';
+        monitorGroup.add(screenMesh);
+
+        deskGroup.add(monitorGroup);
+        scene.add(deskGroup);
+
+        // --- RACING GAMING CHAIR (RED & BLACK) ---
+        const chairGroup = new THREE.Group();
+        // 5-Star Caster Wheel Base
+        for (let i = 0; i < 5; i++) {
+          const ang = (i * Math.PI * 2) / 5;
+          const legGeo = new THREE.CylinderGeometry(0.06, 0.06, 1.4, 8);
+          const leg = new THREE.Mesh(legGeo, blackMatteMat);
+          leg.rotation.z = Math.PI / 2;
+          leg.rotation.y = ang;
+          leg.position.set(Math.cos(ang) * 0.7, 0.22, Math.sin(ang) * 0.7);
+          chairGroup.add(leg);
+        }
+
+        // Center Chrome Lift Piston
+        const pistonGeo = new THREE.CylinderGeometry(0.1, 0.1, 1.2, 16);
+        const pistonMat = new THREE.MeshStandardMaterial({ color: 0x94a3b8, metalness: 0.8 });
+        const piston = new THREE.Mesh(pistonGeo, pistonMat);
+        piston.position.y = 0.8;
+        chairGroup.add(piston);
+
+        // Seat Cushion (Black Leather with Red Side Bolsters)
+        const seatGeo = new THREE.BoxGeometry(2.1, 0.35, 2.1);
+        const seatMat = new THREE.MeshStandardMaterial({ color: 0x18181b, roughness: 0.6 });
+        const seat = new THREE.Mesh(seatGeo, seatMat);
+        seat.position.y = 1.5;
+        chairGroup.add(seat);
+
+        // Red Side Seat Bolsters
+        [-1.0, 1.0].forEach(sx => {
+          const bGeo = new THREE.BoxGeometry(0.25, 0.45, 2.0);
+          const bMat = new THREE.MeshStandardMaterial({ color: 0xdc2626, roughness: 0.4 });
+          const bMesh = new THREE.Mesh(bGeo, bMat);
+          bMesh.position.set(sx, 1.62, 0);
+          chairGroup.add(bMesh);
+        });
+
+        // Ergonomic High Backrest (Black & Red Racing Stripes)
+        const backGeo = new THREE.BoxGeometry(2.0, 3.2, 0.32);
+        const backMesh = new THREE.Mesh(backGeo, seatMat);
+        backMesh.position.set(0, 3.1, -0.9);
+        backMesh.rotation.x = -0.08;
+        chairGroup.add(backMesh);
+
+        // Red Racing Accents on Backrest
+        const stripeGeo = new THREE.BoxGeometry(0.35, 2.8, 0.34);
+        const stripeMat = new THREE.MeshStandardMaterial({ color: 0xdc2626 });
+        [-0.5, 0.5].forEach(sx => {
+          const sMesh = new THREE.Mesh(stripeGeo, stripeMat);
+          sMesh.position.set(sx, 3.1, -0.9);
+          sMesh.rotation.x = -0.08;
+          chairGroup.add(sMesh);
+        });
+
+        // Red Headrest Pillow
+        const pillowGeo = new THREE.BoxGeometry(1.1, 0.45, 0.38);
+        const pillow = new THREE.Mesh(pillowGeo, stripeMat);
+        pillow.position.set(0, 4.3, -0.98);
+        chairGroup.add(pillow);
+
+        // 3D Armrests
+        [-1.15, 1.15].forEach(ax => {
+          const armGeo = new THREE.BoxGeometry(0.25, 0.08, 1.1);
+          const arm = new THREE.Mesh(armGeo, blackMatteMat);
+          arm.position.set(ax, 2.3, -0.1);
+          chairGroup.add(arm);
+
+          const armPillarGeo = new THREE.CylinderGeometry(0.06, 0.06, 0.8, 8);
+          const armPillar = new THREE.Mesh(armPillarGeo, blackMatteMat);
+          armPillar.position.set(ax, 1.9, -0.1);
+          chairGroup.add(armPillar);
+        });
+
+        chairGroup.position.set(-5.5, 0, -4.2);
+        chairGroup.rotation.y = 0.25;
+        scene.add(chairGroup);
+
+        // --- WHITEBOARD & STICKY NOTES STAND ---
+        const wbGroup = new THREE.Group();
+        // Stand Frame (White Legs)
+        const leg1Geo = new THREE.CylinderGeometry(0.06, 0.06, 6.2, 12);
+        const wbLegL = new THREE.Mesh(leg1Geo, whiteGlossMat);
+        wbLegL.position.set(-1.6, 3.1, 0);
+        wbGroup.add(wbLegL);
+
+        const wbLegR = new THREE.Mesh(leg1Geo, whiteGlossMat);
+        wbLegR.position.set(1.6, 3.1, 0);
+        wbGroup.add(wbLegR);
+
+        // Whiteboard Board Canvas (White Frame, Dark Interior with Color Post-its)
+        const boardFrameGeo = new THREE.BoxGeometry(3.6, 2.6, 0.12);
+        const boardFrame = new THREE.Mesh(boardFrameGeo, new THREE.MeshStandardMaterial({ color: 0x334155 }));
+        boardFrame.position.set(0, 4.2, 0);
+        wbGroup.add(boardFrame);
+
+        // Sticky Notes Surface Texture (15 Colorful Post-It Notes arranged in neat grid)
+        const noteCanvas = document.createElement('canvas');
+        noteCanvas.width = 512;
+        noteCanvas.height = 360;
+        const noteCtx = noteCanvas.getContext('2d');
+        noteCtx.fillStyle = '#1e293b';
+        noteCtx.fillRect(0, 0, 512, 360);
+
+        const noteColors = ['#fde047', '#4ade80', '#fb7185', '#fb923c', '#38bdf8'];
+        const noteTitles = [
+          'Microservices', 'Redis Pub/Sub', 'Kafka Stream', 'PostgreSQL DB', 'Docker Compose',
+          'Kubernetes K8s', 'Nginx Proxy', 'CI/CD Pipeline', 'System Design', 'ACID Compliance',
+          'Next.js 15 App', 'React Telemetry', 'RESTful Endpoints', 'Sub-50ms Latency', 'Clean Arch'
+        ];
+
+        for (let row = 0; row < 3; row++) {
+          for (let col = 0; col < 5; col++) {
+            const idx = row * 5 + col;
+            const nx = 20 + col * 98;
+            const ny = 25 + row * 105;
+            noteCtx.fillStyle = noteColors[idx % noteColors.length];
+            noteCtx.fillRect(nx, ny, 82, 85);
+            noteCtx.fillStyle = '#0f172a';
+            noteCtx.font = 'bold 11px Inter, sans-serif';
+            noteCtx.textAlign = 'center';
+            noteCtx.fillText(noteTitles[idx] || 'Sprint Task', nx + 41, ny + 46);
+          }
+        }
+
+        const noteTexture = new THREE.CanvasTexture(noteCanvas);
+        const noteBoardGeo = new THREE.PlaneGeometry(3.35, 2.35);
+        const noteBoardMat = new THREE.MeshBasicMaterial({ map: noteTexture });
+        const noteBoard = new THREE.Mesh(noteBoardGeo, noteBoardMat);
+        noteBoard.position.set(0, 4.2, 0.07);
+        noteBoard.name = 'INTERACTIVE_NOTES';
+        wbGroup.add(noteBoard);
+
+        wbGroup.position.set(2.4, 0, -HALF_SIZE + 1.2);
+        wbGroup.rotation.y = 0.05;
+        scene.add(wbGroup);
+
+        // --- 7. RIGHT WALL: "MY WORKS" ILLUMINATED SIGN & 10 TV DISPLAYS ---
+        const TV_WALL_X = HALF_SIZE - 0.22;
+
+        // "MY WORKS" ILLUMINATED MARQUEE SIGN (Centered above the Primary Master Display)
+        const signCanvas = document.createElement('canvas');
+        signCanvas.width = 512;
+        signCanvas.height = 128;
+        const signCtx = signCanvas.getContext('2d');
+        signCtx.fillStyle = '#090a12';
+        signCtx.fillRect(0, 0, 512, 128);
+        signCtx.strokeStyle = '#00f0ff';
+        signCtx.lineWidth = 8;
+        signCtx.strokeRect(6, 6, 500, 116);
+        signCtx.strokeStyle = '#ff6b35';
+        signCtx.lineWidth = 4;
+        signCtx.beginPath();
+        signCtx.moveTo(40, 108);
+        signCtx.lineTo(472, 108);
+        signCtx.stroke();
+        signCtx.fillStyle = '#00f0ff';
+        signCtx.font = 'bold 58px Syne, sans-serif';
+        signCtx.textAlign = 'center';
+        signCtx.fillText('MY WORKS', 256, 80);
+
+        const signTexture = new THREE.CanvasTexture(signCanvas);
+        const signGeo = new THREE.PlaneGeometry(6.6, 1.65);
+        const signMat = new THREE.MeshBasicMaterial({ map: signTexture });
+        const signMesh = new THREE.Mesh(signGeo, signMat);
+        signMesh.position.set(TV_WALL_X, 12.8, 0.0);
+        signMesh.rotation.y = -Math.PI / 2;
+        scene.add(signMesh);
+
+        // PRIMARY CENTRAL DISPLAY + SATELLITE AMBIENT SCREENS ON THE RIGHT WALL
+        const projectsMatrix = [
+          // ==========================================
+          // 1. PRIMARY CENTRAL MASTER COMMAND DISPLAY
+          // ==========================================
+          {
+            id: 'master',
+            isMaster: true,
+            title: 'Primary Command Display · Master Wall Core',
+            tag: 'CENTRAL COMMAND DISPLAY',
+            desc: 'Main primary ultra-wide display in the center of the wall. Dedicated high-definition surface reserved for future primary showcase, live application streaming, or architectural orchestration interface.',
+            tags: ['Central Display', '4K Ultra-Wide', 'Command Center', 'Awaiting Direct Feed', 'Live Telemetry', 'Primary Core'],
+            bezelColor: '#00f0ff',
+            badgeText: 'PRIMARY COMMAND DISPLAY',
+            bgStyle: 'master_display',
+            x: TV_WALL_X, y: 7.5, z: 0.0, w: 7.2, h: 4.4,
+            demo: 'https://github.com/stl-sahadat', git: 'https://github.com/stl-sahadat'
+          },
+
+          // ==========================================
+          // 2. LEFT FLANK (SATELLITE AMBIENT DISPLAYS)
+          // ==========================================
+          // Outer Left Column (Z = -8.5)
+          {
+            id: 'm1',
+            title: 'Space Corridor — 3D Model',
+            tag: '3D WebGL Platform',
+            desc: 'Real-time interactive 3D WebGL corridor simulation with dynamic volumetric neon lighting and custom GLSL vertex shaders.',
+            tags: ['Three.js', 'WebGL', 'GLSL Shaders', 'GSAP'],
+            bezelColor: '#00f0ff',
+            badgeText: 'SPACE CORRIDOR - 3D MODEL',
+            bgStyle: 'grid',
+            x: TV_WALL_X, y: 10.6, z: -8.5, w: 3.0, h: 1.95,
+            demo: 'https://github.com/stl-sahadat', git: 'https://github.com/stl-sahadat'
+          },
+          {
+            id: 'm4',
+            title: 'Smooth — Frontend Digital Economy',
+            tag: 'Web3 & Fintech',
+            desc: 'High-speed payment and enterprise wallet gateway connecting international cross-border liquidity with zero-knowledge proofs.',
+            tags: ['React', 'TypeScript', 'Tailwind', 'Ethers.js'],
+            bezelColor: '#00f0ff',
+            badgeText: 'SMOOTH - FRONTEND',
+            bgStyle: 'darkui',
+            x: TV_WALL_X, y: 7.5, z: -8.5, w: 3.0, h: 2.2,
+            demo: 'https://github.com/stl-sahadat', git: 'https://github.com/stl-sahadat'
+          },
+          {
+            id: 'm8',
+            title: 'Admin Clone — Multi-Tenant Dashboard',
+            tag: 'SaaS Architecture',
+            desc: 'Modular SaaS administration system with role-based access control, Stripe subscription billing, and multi-tenant database isolation.',
+            tags: ['Next.js 15', 'Prisma ORM', 'PostgreSQL', 'Redis'],
+            bezelColor: '#00f0ff',
+            badgeText: 'ADMIN CLONE',
+            bgStyle: 'adminclone',
+            x: TV_WALL_X, y: 4.3, z: -8.5, w: 3.0, h: 1.95,
+            demo: 'https://github.com/stl-sahadat', git: 'https://github.com/stl-sahadat'
+          },
+          // Inner Left Column (Z = -5.3)
+          {
+            id: 'm2',
+            title: 'Portfolio 2D — Retro Arcade CRT',
+            tag: 'Retro 2D Engine',
+            desc: 'Chunky nostalgic retro arcade television showcasing pixel platformer physics, 8-bit sound synthesis, and vintage scanlines.',
+            tags: ['Canvas API', 'WebAudio', 'Pixel Art', 'Game Loop'],
+            bezelColor: '#dc2626',
+            badgeText: 'PORTFOLIO - 2D',
+            bgStyle: 'arcade',
+            x: TV_WALL_X, y: 10.6, z: -5.3, w: 2.8, h: 1.95,
+            demo: 'https://github.com/stl-sahadat', git: 'https://github.com/stl-sahadat'
+          },
+          {
+            id: 'm5',
+            title: 'Foundation — Architecture Web',
+            tag: 'Luxury Architecture',
+            desc: 'Sleek luxury real estate and architectural design showcase with interactive 360-degree model walkthroughs and client portal.',
+            tags: ['Next.js', 'Framer Motion', 'PostgreSQL', 'AWS S3'],
+            bezelColor: '#10b981',
+            badgeText: 'FOUNDATION - WEB',
+            bgStyle: 'villa',
+            x: TV_WALL_X, y: 4.3, z: -5.3, w: 2.8, h: 1.95,
+            demo: 'https://github.com/stl-sahadat', git: 'https://github.com/stl-sahadat'
+          },
+
+          // ==========================================
+          // 3. RIGHT FLANK (SATELLITE AMBIENT DISPLAYS)
+          // ==========================================
+          // Inner Right Column (Z = 5.3)
+          {
+            id: 'm6',
+            title: 'Yoda — High-Performance Dark UI',
+            tag: 'Minimalist Interface',
+            desc: 'Dark cinematic interface engineered for sub-100ms latency cluster orchestration, real-time node monitoring, and developer tooling.',
+            tags: ['React 19', 'Zustand', 'WebSockets', 'GraphQL'],
+            bezelColor: '#00ff88',
+            badgeText: 'YODA - CORE',
+            bgStyle: 'yoda',
+            x: TV_WALL_X, y: 10.6, z: 5.3, w: 2.8, h: 1.95,
+            demo: 'https://github.com/stl-sahadat', git: 'https://github.com/stl-sahadat'
+          },
+          {
+            id: 'm9',
+            title: 'Agency Corporate Showcase',
+            tag: 'Agency Platform',
+            desc: 'High-conversion corporate agency portal with portfolio filtering, live customer engagement chat, and automated lead capture.',
+            tags: ['React', 'Node.js', 'Express', 'Tailwind'],
+            bezelColor: '#10b981',
+            badgeText: 'AGENCY WEBSITE',
+            bgStyle: 'agency',
+            x: TV_WALL_X, y: 4.3, z: 5.3, w: 2.8, h: 1.95,
+            demo: 'https://github.com/stl-sahadat', git: 'https://github.com/stl-sahadat'
+          },
+          // Outer Right Column (Z = 8.5)
+          {
+            id: 'm3',
+            title: 'Headless E-Commerce Platform',
+            tag: 'E-Commerce Store',
+            desc: 'Sub-millisecond latency multi-vendor marketplace featuring Stripe webhook reconciliation, automated inventory, and Next.js 15.',
+            tags: ['Next.js 15', 'Stripe API', 'PostgreSQL', 'Tailwind'],
+            bezelColor: '#00f0ff',
+            badgeText: 'ECOMMERCE - STORE',
+            bgStyle: 'shop',
+            x: TV_WALL_X, y: 10.6, z: 8.5, w: 3.0, h: 1.95,
+            demo: 'https://github.com/stl-sahadat', git: 'https://github.com/stl-sahadat'
+          },
+          {
+            id: 'm7',
+            title: 'Fjord Estate — Waterfront Frontend',
+            tag: 'Enterprise Portal',
+            desc: 'Modern waterfront property management system featuring interactive map clusters, dynamic booking schedule, and tenant accounts.',
+            tags: ['Vue 3', 'Nuxt.js', 'PostgreSQL', 'Mapbox GL'],
+            bezelColor: '#10b981',
+            badgeText: 'FJORD ESTATE - FRONTEND',
+            bgStyle: 'fjord',
+            x: TV_WALL_X, y: 7.5, z: 8.5, w: 3.0, h: 2.2,
+            demo: 'https://github.com/stl-sahadat', git: 'https://github.com/stl-sahadat'
+          },
+          {
+            id: 'm10',
+            title: 'Admin Analytics — Telemetry Graphs',
+            tag: 'Metrics & Telemetry',
+            desc: 'High-throughput Prometheus cluster telemetry engine rendering real-time streaming queries, connection pool gauges, and error alerts.',
+            tags: ['Chart.js', 'Prometheus', 'Redis Streams', 'Node.js'],
+            bezelColor: '#00f0ff',
+            badgeText: 'ADMIN PANEL - FRONTEND',
+            bgStyle: 'charts',
+            x: TV_WALL_X, y: 4.3, z: 8.5, w: 3.0, h: 1.95,
+            demo: 'https://github.com/stl-sahadat', git: 'https://github.com/stl-sahadat'
+          }
+        ];
+
+        // RENDER MASTER AND SATELLITE MONITORS WITH RETINA CANVASES
+        projectsMatrix.forEach(proj => {
+          const tvGroup = new THREE.Group();
+
+          // Outer Metal Bezel Box
+          const bezelDepth = proj.isMaster ? 0.28 : 0.22;
+          const bezelBevel = proj.isMaster ? 0.45 : 0.35;
+          const bezelGeo = new THREE.BoxGeometry(proj.w + bezelBevel, proj.h + bezelBevel, bezelDepth);
+          const bezelMat = new THREE.MeshStandardMaterial({
+            color: proj.isMaster ? 0x0c0e14 : 0x111318,
+            roughness: proj.isMaster ? 0.2 : 0.3,
+            metalness: proj.isMaster ? 0.9 : 0.8
+          });
+          const bezel = new THREE.Mesh(bezelGeo, bezelMat);
+          tvGroup.add(bezel);
+
+          // Glowing Neon Border Strip around Bezel
+          const borderBevel = proj.isMaster ? 0.6 : 0.45;
+          const borderGeo = new THREE.BoxGeometry(proj.w + borderBevel, proj.h + borderBevel, 0.08);
+          const borderMat = new THREE.MeshBasicMaterial({ color: proj.bezelColor });
+          const border = new THREE.Mesh(borderGeo, borderMat);
+          border.position.z = -0.06;
+          tvGroup.add(border);
+
+          // Screen Canvas
+          const sCanvas = document.createElement('canvas');
+          sCanvas.width = proj.isMaster ? 1024 : 512;
+          sCanvas.height = proj.isMaster ? 620 : 320;
+          const sCtx = sCanvas.getContext('2d');
+
+          // Draw custom screen graphics based on project theme
+          if (proj.bgStyle === 'master_display') {
+            const drawMasterScreen = (rotAngle = 0) => {
+              sCtx.fillStyle = '#060a14';
+              sCtx.fillRect(0, 0, 1024, 620);
+
+              // Subtle tech grid pattern
+              sCtx.strokeStyle = 'rgba(0, 240, 255, 0.06)';
+              sCtx.lineWidth = 1;
+              for (let gx = 0; gx <= 1024; gx += 40) {
+                sCtx.beginPath();
+                sCtx.moveTo(gx, 0);
+                sCtx.lineTo(gx, 620);
+                sCtx.stroke();
+              }
+              for (let gy = 0; gy <= 620; gy += 40) {
+                sCtx.beginPath();
+                sCtx.moveTo(0, gy);
+                sCtx.lineTo(1024, gy);
+                sCtx.stroke();
+              }
+
+              // Top Master Status Bar
+              sCtx.fillStyle = 'rgba(15, 23, 42, 0.88)';
+              sCtx.fillRect(24, 20, 976, 52);
+              sCtx.strokeStyle = 'rgba(0, 240, 255, 0.35)';
+              sCtx.lineWidth = 1.5;
+              sCtx.strokeRect(24, 20, 976, 52);
+
+              // Status badges
+              sCtx.fillStyle = '#00f0ff';
+              sCtx.beginPath();
+              sCtx.arc(48, 46, 6, 0, Math.PI * 2);
+              sCtx.fill();
+
+              sCtx.fillStyle = '#38bdf8';
+              sCtx.font = 'bold 20px "JetBrains Mono", monospace';
+              sCtx.textAlign = 'left';
+              sCtx.fillText('PRIMARY COMMAND DISPLAY · CORE 01', 68, 53);
+
+              sCtx.fillStyle = '#10b981';
+              sCtx.font = 'bold 15px "JetBrains Mono", monospace';
+              sCtx.textAlign = 'right';
+              sCtx.fillText('STANDBY MODE · AWAITING DIRECT FEED · 4K ULTRA-WIDE', 980, 52);
+
+              // Center Holographic Radar / Telemetry Reticle
+              const cx = 512, cy = 295;
+              sCtx.strokeStyle = 'rgba(0, 240, 255, 0.25)';
+              sCtx.lineWidth = 2;
+              sCtx.beginPath();
+              sCtx.arc(cx, cy, 120, 0, Math.PI * 2);
+              sCtx.stroke();
+
+              sCtx.strokeStyle = 'rgba(168, 85, 247, 0.35)';
+              sCtx.lineWidth = 1;
+              sCtx.beginPath();
+              sCtx.arc(cx, cy, 80, 0, Math.PI * 2);
+              sCtx.stroke();
+
+              sCtx.strokeStyle = 'rgba(16, 185, 129, 0.4)';
+              sCtx.setLineDash([6, 6]);
+              sCtx.beginPath();
+              sCtx.arc(cx, cy, 150, 0, Math.PI * 2);
+              sCtx.stroke();
+              sCtx.setLineDash([]);
+
+              // Rotating radar sweep line
+              sCtx.strokeStyle = 'rgba(0, 240, 255, 0.65)';
+              sCtx.lineWidth = 2.5;
+              sCtx.beginPath();
+              sCtx.moveTo(cx, cy);
+              sCtx.lineTo(cx + Math.cos(rotAngle) * 150, cy + Math.sin(rotAngle) * 150);
+              sCtx.stroke();
+
+              // Radar sweep gradient trail
+              const sweepGrad = sCtx.createRadialGradient(cx, cy, 20, cx, cy, 150);
+              sweepGrad.addColorStop(0, 'rgba(0, 240, 255, 0.15)');
+              sweepGrad.addColorStop(1, 'transparent');
+              sCtx.fillStyle = sweepGrad;
+              sCtx.beginPath();
+              sCtx.moveTo(cx, cy);
+              sCtx.arc(cx, cy, 150, rotAngle - 0.45, rotAngle);
+              sCtx.closePath();
+              sCtx.fill();
+
+              // Central Title and Standby Messaging
+              sCtx.textAlign = 'center';
+              sCtx.fillStyle = 'rgba(6, 10, 20, 0.72)';
+              sCtx.fillRect(cx - 320, 246, 640, 114);
+              sCtx.strokeStyle = 'rgba(0, 240, 255, 0.3)';
+              sCtx.lineWidth = 1;
+              sCtx.strokeRect(cx - 320, 246, 640, 114);
+
+              sCtx.shadowColor = 'rgba(0, 240, 255, 0.65)';
+              sCtx.shadowBlur = 10;
+              sCtx.fillStyle = '#ffffff';
+              sCtx.font = 'bold 38px Syne, sans-serif';
+              sCtx.fillText('PRIMARY DISPLAY SURFACE', cx, 284);
+              sCtx.shadowBlur = 0;
+
+              sCtx.fillStyle = '#00f0ff';
+              sCtx.font = 'bold 16px "JetBrains Mono", monospace';
+              sCtx.fillText('STATUS: ONLINE · READY FOR CONTENT INJECTION', cx, 318);
+
+              sCtx.fillStyle = '#94a3b8';
+              sCtx.font = '13px Inter, sans-serif';
+              sCtx.fillText('Reserved for upcoming primary showcase, live application stream, or architecture diagrams.', cx, 344);
+
+              // Left Widget: System Health
+              sCtx.textAlign = 'left';
+              sCtx.fillStyle = 'rgba(15, 23, 42, 0.75)';
+              sCtx.fillRect(36, 175, 240, 260);
+              sCtx.strokeStyle = 'rgba(0, 240, 255, 0.22)';
+              sCtx.strokeRect(36, 175, 240, 260);
+
+              sCtx.fillStyle = '#38bdf8';
+              sCtx.font = 'bold 15px "JetBrains Mono", monospace';
+              sCtx.fillText('CORE METRICS', 52, 205);
+
+              const leftStats = [
+                ['CLUSTER HEALTH', '100% NOMINAL'],
+                ['BANDWIDTH', '10 Gbps FIBER'],
+                ['CORE LATENCY', '0.24ms'],
+                ['ACTIVE NODES', '16 ONLINE'],
+                ['DISPLAY MODE', 'ULTRA-WIDE']
+              ];
+              leftStats.forEach(([k, v], idx) => {
+                sCtx.fillStyle = '#64748b';
+                sCtx.font = '12px "JetBrains Mono", monospace';
+                sCtx.fillText(k, 52, 240 + idx * 38);
+                sCtx.fillStyle = '#10b981';
+                sCtx.font = 'bold 13px "JetBrains Mono", monospace';
+                sCtx.fillText(v, 52, 257 + idx * 38);
+              });
+
+              // Right Widget: Pipeline Telemetry
+              sCtx.fillStyle = 'rgba(15, 23, 42, 0.75)';
+              sCtx.fillRect(748, 175, 240, 260);
+              sCtx.strokeStyle = 'rgba(0, 240, 255, 0.22)';
+              sCtx.strokeRect(748, 175, 240, 260);
+
+              sCtx.fillStyle = '#38bdf8';
+              sCtx.font = 'bold 15px "JetBrains Mono", monospace';
+              sCtx.fillText('PIPELINE TELEMETRY', 764, 205);
+
+              const rightStats = [
+                ['INPUT CHANNEL', 'AWAITING FEED'],
+                ['CONTAINER ENGINE', 'DOCKER ACTIVE'],
+                ['DISTRIBUTED BUS', 'REDIS READY'],
+                ['FRAME BUFFER', '60 FPS STABLE'],
+                ['AUDIO CHANNEL', 'PCM READY']
+              ];
+              rightStats.forEach(([k, v], idx) => {
+                sCtx.fillStyle = '#64748b';
+                sCtx.font = '12px "JetBrains Mono", monospace';
+                sCtx.fillText(k, 764, 240 + idx * 38);
+                sCtx.fillStyle = v.includes('AWAITING') ? '#ffba5e' : '#10b981';
+                sCtx.font = 'bold 13px "JetBrains Mono", monospace';
+                sCtx.fillText(v, 764, 257 + idx * 38);
+              });
+
+              // Bottom status bar
+              sCtx.fillStyle = 'rgba(15, 23, 42, 0.88)';
+              sCtx.fillRect(24, 545, 976, 52);
+              sCtx.strokeStyle = 'rgba(0, 240, 255, 0.35)';
+              sCtx.strokeRect(24, 545, 976, 52);
+
+              sCtx.fillStyle = '#94a3b8';
+              sCtx.font = '13px "JetBrains Mono", monospace';
+              sCtx.fillText('COMMAND_BUS // [ARCHITECT_CORE] · UPLINK ESTABLISHED · HIGH-AVAILABILITY CLUSTER', 44, 576);
+              sCtx.fillStyle = '#10b981';
+              sCtx.textAlign = 'right';
+              sCtx.fillText('READY FOR CONTENT', 980, 576);
+            };
+
+            drawMasterScreen(0);
+            window._masterDisplayUpdate = (angle) => {
+              drawMasterScreen(angle);
+            };
+          } else if (proj.bgStyle === 'arcade') {
+            // Retro 2D CRT TV Theme
+            sCtx.fillStyle = '#0f172a';
+            sCtx.fillRect(0, 0, 512, 320);
+            sCtx.fillStyle = '#fef08a';
+            sCtx.beginPath();
+            sCtx.arc(100, 80, 40, 0, Math.PI * 2);
+            sCtx.fill();
+            sCtx.fillStyle = '#22c55e';
+            sCtx.fillRect(0, 240, 512, 80);
+            sCtx.fillStyle = '#ef4444';
+            sCtx.fillRect(240, 190, 40, 50);
+            sCtx.fillStyle = '#ffffff';
+            sCtx.font = 'bold 22px "JetBrains Mono", monospace';
+            sCtx.fillText('PORTFOLIO - 2D', 180, 50);
+          } else if (proj.bgStyle === 'charts') {
+            // Blue Analytics Graph Theme
+            sCtx.fillStyle = '#060d1a';
+            sCtx.fillRect(0, 0, 512, 320);
+            sCtx.fillStyle = '#1e3a8a';
+            sCtx.fillRect(20, 20, 472, 40);
+            sCtx.fillStyle = '#38bdf8';
+            sCtx.font = 'bold 20px "JetBrains Mono", monospace';
+            sCtx.fillText('CLUSTER TELEMETRY — LIVE METRICS', 40, 48);
+
+            // Draw Bar Chart
+            const bars = [40, 85, 140, 190, 110, 160, 210, 175, 230];
+            bars.forEach((bh, bIdx) => {
+              sCtx.fillStyle = '#0284c7';
+              sCtx.fillRect(40 + bIdx * 48, 280 - bh, 36, bh);
+              sCtx.fillStyle = '#38bdf8';
+              sCtx.fillRect(40 + bIdx * 48, 280 - bh, 36, 6);
+            });
+          } else if (proj.bgStyle === 'yoda') {
+            sCtx.fillStyle = '#050508';
+            sCtx.fillRect(0, 0, 512, 320);
+            sCtx.fillStyle = '#10b981';
+            sCtx.font = 'bold 64px Syne, sans-serif';
+            sCtx.textAlign = 'center';
+            sCtx.fillText('YODA', 256, 170);
+            sCtx.fillStyle = '#6ee7b7';
+            sCtx.font = '16px "JetBrains Mono", monospace';
+            sCtx.fillText('High-Concurrency Node Orchestrator', 256, 215);
+          } else {
+            // High-Tech Web App Interface Preview
+            sCtx.fillStyle = '#090d16';
+            sCtx.fillRect(0, 0, 512, 320);
+            sCtx.fillStyle = '#1e293b';
+            sCtx.fillRect(16, 16, 480, 42);
+            sCtx.fillStyle = '#38bdf8';
+            sCtx.font = 'bold 18px "JetBrains Mono", monospace';
+            sCtx.fillText(proj.badgeText, 32, 44);
+
+            sCtx.fillStyle = 'rgba(255,255,255,0.06)';
+            sCtx.fillRect(24, 75, 220, 130);
+            sCtx.fillRect(268, 75, 220, 130);
+            sCtx.fillStyle = 'rgba(255,255,255,0.04)';
+            sCtx.fillRect(24, 220, 464, 75);
+
+            sCtx.fillStyle = '#94a3b8';
+            sCtx.font = '15px Inter, sans-serif';
+            sCtx.fillText('Enterprise Microservices Pipeline', 36, 120);
+            sCtx.fillStyle = '#00f0ff';
+            sCtx.fillText('● 99.99% Uptime Verified', 36, 150);
+          }
+
+          const sTex = new THREE.CanvasTexture(sCanvas);
+          if (proj.isMaster) {
+            window._masterDisplayTexture = sTex;
+          }
+          const screenGeo = new THREE.PlaneGeometry(proj.w, proj.h);
+          const sMat = new THREE.MeshBasicMaterial({ map: sTex, side: THREE.DoubleSide });
+          const screen = new THREE.Mesh(screenGeo, sMat);
+          screen.position.z = proj.isMaster ? 0.16 : 0.12;
+          screen.name = 'TV_' + proj.id;
+          screen.userData = proj;
+          tvGroup.add(screen);
+
+          // Position Group on Right Wall
+          tvGroup.position.set(proj.x, proj.y, proj.z);
+          tvGroup.rotation.y = -Math.PI / 2;
+          scene.add(tvGroup);
+        });
+
+        // --- 8. CAMERA TWEENING & HUD MODAL LOGIC ---
+        const hudModal = document.getElementById('hud-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDesc = document.getElementById('modal-desc');
+        const modalBadge = document.getElementById('modal-badge');
+        const modalTags = document.getElementById('modal-tags');
+        const modalLinkDemo = document.getElementById('modal-link-demo');
+        const modalLinkGit = document.getElementById('modal-link-git');
+        const modalCloseBtn = document.getElementById('modal-close-btn');
+
+        let preInspectCameraPos = DEFAULT_CAM_POS.clone();
+        let preInspectCameraTarget = DEFAULT_TARGET.clone();
+        let isInspectingTarget = false;
+
+        function openModalWithData(data) {
+          if (!hudModal) return;
+          modalTitle.textContent = data.title;
+          modalBadge.textContent = data.tag || 'PROJECT FOCUS';
+          modalDesc.textContent = data.desc;
+
+          modalTags.innerHTML = '';
+          if (data.tags && Array.isArray(data.tags)) {
+            data.tags.forEach(t => {
+              const span = document.createElement('span');
+              span.className = 'modal-tag';
+              span.textContent = t;
+              modalTags.appendChild(span);
+            });
+          }
+
+          modalLinkDemo.href = data.demo || 'https://github.com/stl-sahadat';
+          modalLinkGit.href = data.git || 'https://github.com/stl-sahadat';
+          hudModal.classList.add('active');
+        }
+
+        function closeModal() {
+          if (hudModal) hudModal.classList.remove('active');
+          if (isInspectingTarget) {
+            isInspectingTarget = false;
+            // Smoothly animate camera back to the exact room view before clicking the TV/PC
+            const returnPos = (preInspectCameraPos && preInspectCameraPos.distanceTo(DEFAULT_CAM_POS) < 35)
+              ? preInspectCameraPos
+              : DEFAULT_CAM_POS;
+            const returnTarget = preInspectCameraTarget ? preInspectCameraTarget : DEFAULT_TARGET;
+
+            moveCamera(returnPos, returnTarget, 1.3);
+          }
+        }
+
+        if (modalCloseBtn) {
+          modalCloseBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            closeModal();
+          });
+        }
+
+        window.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') {
+            closeModal();
+          }
+        });
+
+        function moveCamera(targetPos, lookAtTarget, duration = 1.3) {
+          gsap.killTweensOf(camera.position);
+          gsap.killTweensOf(controls.target);
+
+          controls.enabled = false;
+
+          gsap.to(camera.position, {
+            x: targetPos.x,
+            y: targetPos.y,
+            z: targetPos.z,
+            duration: duration,
+            ease: "power2.inOut"
+          });
+          gsap.to(controls.target, {
+            x: lookAtTarget.x,
+            y: lookAtTarget.y,
+            z: lookAtTarget.z,
+            duration: duration,
+            ease: "power2.inOut",
+            onUpdate: () => controls.update(),
+            onComplete: () => {
+              controls.enabled = true;
+              controls.update();
+            }
+          });
+        }
+        window._three = { camera, controls, scene, moveCamera };
+
+        // --- 9. CAMERA CYCLING CONTROLS (BOTTOM-LEFT BUTTON) ---
+        const cameraViews = [
+          { name: 'overview', pos: DEFAULT_CAM_POS, target: DEFAULT_TARGET },
+          { name: 'tvs', pos: new THREE.Vector3(-3.2, 7.5, 0), target: new THREE.Vector3(TV_WALL_X, 7.5, 0) },
+          { name: 'pc', pos: new THREE.Vector3(-5.5, 5.35, -3.4), target: new THREE.Vector3(-5.5, 5.35, -8.05) },
+          { name: 'notes', pos: new THREE.Vector3(2.4, 4.4, -8.5), target: new THREE.Vector3(2.4, 4.2, -HALF_SIZE + 1.2) }
+        ];
+        let currentViewIdx = 0;
+
+        const btnCameraCycle = document.getElementById('btn-camera-cycle');
+        if (btnCameraCycle) {
+          btnCameraCycle.addEventListener('click', () => {
+            currentViewIdx = (currentViewIdx + 1) % cameraViews.length;
+            const view = cameraViews[currentViewIdx];
+            isInspectingTarget = false;
+            preInspectCameraPos.copy(view.pos);
+            preInspectCameraTarget.copy(view.target);
+            if (hudModal) hudModal.classList.remove('active');
+            moveCamera(view.pos, view.target);
+          });
+        }
+
+        // --- 10. RAYCASTING INTERACTION ---
+        const raycaster = new THREE.Raycaster();
+        const mouse2D = new THREE.Vector2();
+
+        function onCanvasClick(e) {
+          const rect = canvas.getBoundingClientRect();
+          mouse2D.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+          mouse2D.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+
+          raycaster.setFromCamera(mouse2D, camera);
+          const intersects = raycaster.intersectObjects(scene.children, true);
+
+          // Find interactive target along the ray
+          const hitItem = intersects.find(i => 
+            (i.object.name && i.object.name.startsWith('TV_')) ||
+            i.object.name === 'INTERACTIVE_PC' ||
+            i.object.name === 'INTERACTIVE_NOTES'
+          );
+
+          if (hitItem) {
+            let hit = hitItem.object;
+
+            // Clicked any TV Screen (Master or Ambient Satellite)
+            if (hit.name && hit.name.startsWith('TV_')) {
+              const proj = hit.userData;
+              if (proj) {
+                if (!isInspectingTarget) {
+                  preInspectCameraPos.copy(camera.position);
+                  preInspectCameraTarget.copy(controls.target);
+                }
+                isInspectingTarget = true;
+                openModalWithData(proj);
+                // Zoom camera straight in front of this TV screen (Master is larger, so distance is adjusted)
+                const zoomDist = proj.isMaster ? 10.5 : 7.5;
+                moveCamera(
+                  new THREE.Vector3(proj.x - zoomDist, proj.y, proj.z),
+                  new THREE.Vector3(proj.x, proj.y, proj.z),
+                  1.2
+                );
+              }
+            }
+            // Clicked PC Curved Screen
+            else if (hit.name === 'INTERACTIVE_PC') {
+              if (!isInspectingTarget) {
+                preInspectCameraPos.copy(camera.position);
+                preInspectCameraTarget.copy(controls.target);
+              }
+              isInspectingTarget = true;
+              openModalWithData({
+                title: 'Md Sahadat Hossain · Executive Workstation',
+                tag: 'ARCHITECT IDENTITY & PC',
+                desc: 'Lead Software Architect & Full Stack Developer dedicated to high-concurrency microservices, sub-millisecond response latency, and bulletproof web applications.',
+                tags: ['Full Stack', 'System Architecture', 'PostgreSQL', 'Redis', 'Docker', 'Kubernetes'],
+                demo: 'assets/pdf/Md-Sahadat-Hossain-Resume.pdf',
+                git: 'https://github.com/stl-sahadat'
+              });
+              moveCamera(new THREE.Vector3(-5.5, 5.35, -3.4), new THREE.Vector3(-5.5, 5.35, -8.05), 1.2);
+            }
+            // Clicked Whiteboard Notes
+            else if (hit.name === 'INTERACTIVE_NOTES') {
+              if (!isInspectingTarget) {
+                preInspectCameraPos.copy(camera.position);
+                preInspectCameraTarget.copy(controls.target);
+              }
+              isInspectingTarget = true;
+              openModalWithData({
+                title: 'Direct Communication Channels & Notes',
+                tag: 'INSTANT CONNECT',
+                desc: 'Feel free to connect directly for enterprise software architecture consultation, project discussions, or agency collaboration.',
+                tags: ['sahadat.info01@gmail.com', '+880 1944-576159', 'LinkedIn Verified', 'WhatsApp Active'],
+                demo: 'https://wa.me/8801944576159',
+                git: 'https://www.linkedin.com/in/mdsahadatconnact/'
+              });
+              moveCamera(new THREE.Vector3(2.4, 4.4, -8.5), new THREE.Vector3(2.4, 4.2, -HALF_SIZE + 1.2), 1.2);
+            }
+            // Clicked empty space on canvas while modal is active
+            else if (isInspectingTarget) {
+              closeModal();
+            }
+          } else if (isInspectingTarget) {
+            closeModal();
+          }
+        }
+
+        canvas.addEventListener('click', onCanvasClick);
+
+        // Hover cursor pointer detection
+        canvas.addEventListener('mousemove', (e) => {
+          const rect = canvas.getBoundingClientRect();
+          mouse2D.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+          mouse2D.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+
+          raycaster.setFromCamera(mouse2D, camera);
+          const intersects = raycaster.intersectObjects(scene.children, true);
+
+          if (intersects.length > 0) {
+            let hit = intersects[0].object;
+            if (
+              (hit.name && hit.name.startsWith('TV_')) ||
+              hit.name === 'INTERACTIVE_PC' ||
+              hit.name === 'INTERACTIVE_NOTES'
+            ) {
+              canvas.style.cursor = 'pointer';
+              return;
+            }
+          }
+          canvas.style.cursor = 'grab';
+        });
+
+        // Fullscreen Toggle
+        const fsBtn = document.getElementById('btn-fullscreen');
+        if (fsBtn) {
+          fsBtn.addEventListener('click', () => {
+            if (!document.fullscreenElement) {
+              document.documentElement.requestFullscreen().catch(() => {});
+            } else {
+              document.exitFullscreen().catch(() => {});
+            }
+          });
+        }
+
+        // --- 11. ANIMATION RENDER LOOP ---
+        let clock = new THREE.Clock();
+
+        function animate() {
+          requestAnimationFrame(animate);
+          const delta = clock.getDelta();
+          const elapsed = clock.getElapsedTime();
+
+          // Spin PC RGB Fan rings
+          fanRings.forEach((r, idx) => {
+            r.rotation.z += delta * (idx % 2 === 0 ? 4 : -4);
+          });
+
+          // Update dynamic CRT Terminal typing animation on PC Screen
+          if (window._crtTerminalEngine) {
+            window._crtTerminalEngine.update(delta, elapsed);
+          }
+
+          // Update dynamic radar & telemetry sweep on Primary Master Wall Display
+          if (window._masterDisplayUpdate && window._masterDisplayTexture) {
+            window._masterDisplayUpdate(elapsed * 1.5);
+            window._masterDisplayTexture.needsUpdate = true;
+          }
+
+          // Gentle ambient float for AC LED
+          if (acLed) {
+            acLed.material.color.setHSL(0.5 + Math.sin(elapsed * 2) * 0.05, 1, 0.5);
+          }
+
+          controls.update();
+          renderer.render(scene, camera);
+        }
+        animate();
+
+        // Responsive Resizing
+        window.addEventListener('resize', () => {
+          camera.aspect = window.innerWidth / window.innerHeight;
+          camera.updateProjectionMatrix();
+          renderer.setSize(window.innerWidth, window.innerHeight);
+          renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        });
+      })();
+    </script>
+  </body>
+</html>
